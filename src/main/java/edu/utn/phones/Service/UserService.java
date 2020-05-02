@@ -37,7 +37,7 @@ public class UserService {
     }
 
     public List<User> getAll() {
-        System.out.println("Llgue al service");
+
         return this.userRepository.findAll();
     }
 }

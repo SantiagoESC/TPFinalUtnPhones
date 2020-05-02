@@ -36,11 +36,8 @@ public class UserController {
     @GetMapping("/get/{dni}")
     public @ResponseBody User getByDni(@PathVariable Integer dni ){
 
-        System.out.println("El dni es: "+dni);
-        User u = this.userService.getByDni(dni);
-        System.out.println("Volvi de service");
-        System.out.println(u);
-        return u;
+        return this.userService.getByDni(dni);
+
     }
 
 
