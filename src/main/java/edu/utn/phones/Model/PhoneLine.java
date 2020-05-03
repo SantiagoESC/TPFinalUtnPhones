@@ -6,14 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-public class City {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class PhoneLine {
+
     @Id
-    Integer prefix;
-    String nameCity;
+    @GeneratedValue
+    Integer idLine;
+    String  numberLine;
+    String  typeUser;
 }
