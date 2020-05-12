@@ -1,6 +1,5 @@
 package edu.utn.phones.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,22 +7,26 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 
     @Id
     @GeneratedValue
-    Integer dni;
+    Integer id;
+    String dni;
     String userName;
     String password;
     String name;
     String surname;
+
+    @OneToOne
+    City city;
 
 
 

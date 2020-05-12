@@ -18,7 +18,7 @@ public class CityController {
 
     //region ABM
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public void add(@RequestBody City city){
         this.cityService.add(city);
     }
@@ -27,15 +27,15 @@ public class CityController {
 
     //region SELECT
 
-    @GetMapping("/get/{prefix}")
+    @GetMapping("/{id}")
     public @ResponseBody
-    City getByPrefix(@PathVariable Integer prefix ){
+    City getByPrefix(@PathVariable Integer id ){
 
-        return this.cityService.getByPrefix(prefix);
+        return this.cityService.getByPrefix(id);
 
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/")
     public List<City> getAll(){
         return this.cityService.getAll();
     }

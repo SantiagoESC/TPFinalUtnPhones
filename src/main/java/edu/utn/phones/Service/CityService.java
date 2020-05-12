@@ -19,7 +19,7 @@ public class CityService {
 
     public void add(City city){
         this.cityRepository.save(city);
-        System.out.println(city);
+
     }
 
     //endregion
