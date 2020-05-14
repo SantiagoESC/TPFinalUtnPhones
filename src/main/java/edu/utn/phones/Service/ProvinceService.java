@@ -1,5 +1,7 @@
 package edu.utn.phones.Service;
 
+import edu.utn.phones.Exceptions.ProvinceNotExitsException;
+import edu.utn.phones.Exceptions.UserNotExitsException;
 import edu.utn.phones.Model.Province;
 import edu.utn.phones.Repository.IProvinceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +21,9 @@ public class ProvinceService {
 
     }
 
+    public Province getById(Integer id) throws ProvinceNotExitsException {
 
-    public void addSome(List<Province> provinces){
-
-        this.provinceRepository.saveAll(provinces);
-
-    }
-
-    public Province getById(Integer id){
-
-        return this.provinceRepository.getOne(id);
+        return this.provinceRepository.findById(id).orElseThrow( ProvinceNotExitsException::new);
 
     }
 

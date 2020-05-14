@@ -1,6 +1,8 @@
-package edu.utn.phones.Controller;
+package edu.utn.phones.Controller.Model;
 
 
+import edu.utn.phones.Exceptions.ProvinceNotExitsException;
+import edu.utn.phones.Exceptions.UserNotExitsException;
 import edu.utn.phones.Model.Province;
 import edu.utn.phones.Service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +25,8 @@ public class ProvinceController {
 
     }
 
-//    @PostMapping("/addSome")
-//    public void addSome (@RequestBody List<Province> newListProvinces){
-//
-//        this.provinceService.addSome(newListProvinces);
-//
-//    }
-
     @GetMapping("/{id}")
-    public Province getById(@PathVariable Integer id){
+    public Province getById(@PathVariable Integer id) throws ProvinceNotExitsException {
 
         return this.provinceService.getById(id);
 

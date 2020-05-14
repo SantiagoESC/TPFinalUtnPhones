@@ -19,15 +19,11 @@ public class UserService {
     public void add(User user){
 
         this.userRepository.save(user);
-        
-    }
-
-
-    public void addSome(List<User> users){
-
-        this.userRepository.saveAll(users);
 
     }
+
+
+
 
 
     public User getByDni(Integer dni ){

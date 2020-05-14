@@ -1,4 +1,4 @@
-package edu.utn.phones.Controller;
+package edu.utn.phones.Controller.Model;
 
 
 import edu.utn.phones.Model.User;
@@ -26,12 +26,7 @@ public class UserController {
 
     }
 
-//    @PostMapping("/addSome")
-//    public void addSome(@RequestBody List<User> users){
-//
-//        this.userService.addSome(users);
-//
-//    }
+
 
     @GetMapping("/{id}")
     public User getByDni(@PathVariable Integer id ){
