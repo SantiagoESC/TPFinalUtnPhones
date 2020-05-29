@@ -3,14 +3,12 @@ package edu.utn.phones.Service;
 
 import edu.utn.phones.Exceptions.CityNotExistsException;
 import edu.utn.phones.Exceptions.NoContentToShowException;
-import edu.utn.phones.Model.City;
-import edu.utn.phones.Model.User;
+import edu.utn.phones.Model.Temp.City;
 import edu.utn.phones.Repository.ICityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CityService {

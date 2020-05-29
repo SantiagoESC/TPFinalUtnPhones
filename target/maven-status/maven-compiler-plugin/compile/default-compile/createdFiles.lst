@@ -1,9 +1,0 @@
-edu\utn\phones\Model\User.class
-edu\utn\phones\Repository\IUserRepository.class
-edu\utn\phones\Controller\UserController.class
-edu\utn\phones\Controller\ProvinceController.class
-edu\utn\phones\PhonesApplication.class
-edu\utn\phones\Repository\IProvinceRepository.class
-edu\utn\phones\Model\Province.class
-edu\utn\phones\Service\ProvinceService.class
-edu\utn\phones\Service\UserService.class

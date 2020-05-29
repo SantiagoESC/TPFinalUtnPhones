@@ -1,5 +1,6 @@
-package edu.utn.phones.Model;
+package edu.utn.phones.Model.Temp;
 
+import edu.utn.phones.Model.Province;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,17 +11,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "cities")
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer idCity;
-    @Column
     String prefix;
-    @Column
     String nameCity;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "idProvince")
     Province province;
 }

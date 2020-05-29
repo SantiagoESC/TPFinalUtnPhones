@@ -6,39 +6,45 @@ import edu.utn.phones.Exceptions.UserNotExitsException;
 import edu.utn.phones.Model.Province;
 import edu.utn.phones.Service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/province")
+@Controller
 public class ProvinceController {
 
+
+    //region Atributes
     @Autowired
     ProvinceService provinceService;
+    //endregion
 
-    @PostMapping("/")
-    public void add (@RequestBody Province newProvince){
 
-        this.provinceService.add(newProvince);
-
+    //region ABM
+    public Province addProvince(Province newProvince){
+        return this.provinceService.addProvince(newProvince);
     }
 
-    @GetMapping("/{id}")
+
+    //endregion
+
+    //region GET
+
     public Province getById(@PathVariable Integer id) throws ProvinceNotExitsException {
 
         return this.provinceService.getById(id);
 
     }
 
-    @GetMapping("/")
     public List<Province> getAll(){
 
         return this.provinceService.getAll();
 
     }
 
-
+    //endregion
 
 }

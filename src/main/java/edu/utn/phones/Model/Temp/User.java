@@ -1,13 +1,10 @@
-package edu.utn.phones.Model;
+package edu.utn.phones.Model.Temp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 
 @NoArgsConstructor
@@ -17,7 +14,7 @@ import javax.persistence.OneToOne;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     String dni;
     String userName;
@@ -25,7 +22,7 @@ public class User {
     String name;
     String surname;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     City city;
 
 

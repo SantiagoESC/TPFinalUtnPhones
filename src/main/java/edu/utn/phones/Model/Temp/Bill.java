@@ -1,4 +1,4 @@
-package edu.utn.phones.Model;
+package edu.utn.phones.Model.Temp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -15,16 +15,17 @@ import java.util.Date;
 @Data
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Report {
+public class Bill {
 
     @Id
     @GeneratedValue
-    Integer idReport;
-    String  numberOrigin;
-    Integer prefixOrigin;
-    String  numberDestination;
-    Integer prefixDestination;
+    Integer idBill;
+    Integer idLine;         //O object PhoneLine?
+    Integer idUser;         //same
+    Integer quantityCall;
+    Float   priceCost;
     Float   priceTotal;
-    Integer duration;
-    Date    dateCall;
+    Date    dateBill;
+    Date    dateExpiration;
+    Boolean stateBill;
 }

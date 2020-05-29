@@ -15,13 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "provinces")
 public class Province {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer idProvince;
-    @Column
     String nameProvince;
 
 

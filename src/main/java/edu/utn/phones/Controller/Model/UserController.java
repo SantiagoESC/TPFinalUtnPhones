@@ -1,12 +1,11 @@
 package edu.utn.phones.Controller.Model;
 
 
-import edu.utn.phones.Model.User;
+import edu.utn.phones.Model.Temp.User;
 import edu.utn.phones.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
 import java.util.List;
 
 @RestController

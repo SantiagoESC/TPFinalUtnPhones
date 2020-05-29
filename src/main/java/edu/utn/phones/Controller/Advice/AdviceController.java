@@ -16,7 +16,6 @@ public class AdviceController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NoContentToShowException.class)
     public ResponseEntity handleProvinceNotExistException (){
 
-        System.out.println("AAAAAA");
         return ResponseEntity.ok().body("You don't have any object of that type.");
     }
 

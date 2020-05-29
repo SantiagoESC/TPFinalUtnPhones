@@ -3,10 +3,8 @@ package edu.utn.phones.Controller.Model;
 
 import edu.utn.phones.Exceptions.CityNotExistsException;
 import edu.utn.phones.Exceptions.NoContentToShowException;
-import edu.utn.phones.Model.City;
-import edu.utn.phones.Model.Province;
+import edu.utn.phones.Model.Temp.City;
 import edu.utn.phones.Service.CityService;
-import edu.utn.phones.Service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

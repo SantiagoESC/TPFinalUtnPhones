@@ -12,15 +12,29 @@ import java.util.List;
 @Service
 public class ProvinceService {
 
+    //region Atributes
     @Autowired
     IProvinceRepository provinceRepository;
+    //endregion
 
-    public void add(Province province){
+    //region ABM
+    public Province addProvince(Province province){
 
-        this.provinceRepository.save(province);
+       return this.provinceRepository.save(province);
 
     }
 
+    public Province updateProvince(Province updatedProvince){
+        //todo Esto no puede quedar asi dijo german asique habra que hacer un metodo o algo
+        return this.provinceRepository.save(updatedProvince);
+    }
+
+    public void deleteProvince(Integer idProvince){
+        this.provinceRepository.deleteById(idProvince);
+    }
+    //endregion
+
+    //region GET
     public Province getById(Integer id) throws ProvinceNotExitsException {
 
         return this.provinceRepository.findById(id).orElseThrow( ProvinceNotExitsException::new);
@@ -32,6 +46,6 @@ public class ProvinceService {
         return this.provinceRepository.findAll();
 
     }
-
+    //endregion
 
 }
