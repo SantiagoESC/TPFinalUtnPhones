@@ -1,13 +1,11 @@
 package edu.utn.phones.Controller.Web;
 
 import edu.utn.phones.Controller.Model.ProvinceController;
+import edu.utn.phones.Exceptions.ModelExceptions.ProvinceNotExitsException;
 import edu.utn.phones.Model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -17,8 +15,16 @@ import java.net.URI;
 public class ProvinceWebController {
 
     //region Atributes
+
+    private final ProvinceController provinceController;
+    //endregion
+
+
+    //region Constructor
     @Autowired
-    ProvinceController provinceController;
+    public ProvinceWebController(ProvinceController provinceController) {
+        this.provinceController = provinceController;
+    }
     //endregion
 
     //region ABM
@@ -28,6 +34,24 @@ public class ProvinceWebController {
         return ResponseEntity.created(this.getLocationProvince(p)).build();
 
     }
+
+    @PutMapping("/")
+    public ResponseEntity updateProvince(@RequestBody Province updatedProvince){
+        this.provinceController.updateProvince(updatedProvince);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{idProvince}")
+    public ResponseEntity deleteProvince(@PathVariable Integer idProvince) throws ProvinceNotExitsException {
+            Province p = this.provinceController.getById(idProvince);
+            this.provinceController.deleteProvince(p);
+        return ResponseEntity.ok().build();
+    }
+
+
+
+
+
     //endregion
 
     //region EXTRA

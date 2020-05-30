@@ -1,8 +1,8 @@
 package edu.utn.phones.Controller.Model;
 
 
-import edu.utn.phones.Exceptions.CityNotExistsException;
-import edu.utn.phones.Exceptions.NoContentToShowException;
+import edu.utn.phones.Exceptions.ModelExceptions.CityNotExistsException;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Model.Temp.City;
 import edu.utn.phones.Service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;

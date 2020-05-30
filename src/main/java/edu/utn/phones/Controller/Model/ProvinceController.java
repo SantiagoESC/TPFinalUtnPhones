@@ -1,14 +1,11 @@
 package edu.utn.phones.Controller.Model;
 
 
-import edu.utn.phones.Exceptions.ProvinceNotExitsException;
-import edu.utn.phones.Exceptions.UserNotExitsException;
+import edu.utn.phones.Exceptions.ModelExceptions.ProvinceNotExitsException;
 import edu.utn.phones.Model.Province;
 import edu.utn.phones.Service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -18,8 +15,14 @@ public class ProvinceController {
 
 
     //region Atributes
+    private final ProvinceService provinceService ;
+    //endregion
+
+    //region Constructor
     @Autowired
-    ProvinceService provinceService;
+    public ProvinceController(ProvinceService provinceService) {
+        this.provinceService = provinceService;
+    }
     //endregion
 
 
@@ -28,20 +31,27 @@ public class ProvinceController {
         return this.provinceService.addProvince(newProvince);
     }
 
+    public void updateProvince(Province updatedProvince){
+        this.provinceService.updateProvince(updatedProvince);
+    }
+
+    public void deleteProvince(Province idProvince){
+        this.provinceService.deleteProvince(idProvince);
+    }
 
     //endregion
 
     //region GET
 
-    public Province getById(@PathVariable Integer id) throws ProvinceNotExitsException {
+    public Province getById(Integer id) throws ProvinceNotExitsException {
 
         return this.provinceService.getById(id);
 
     }
 
-    public List<Province> getAll(){
+    public List<Province> getAll(String nameProvince){
 
-        return this.provinceService.getAll();
+        return this.provinceService.getAll(nameProvince);
 
     }
 

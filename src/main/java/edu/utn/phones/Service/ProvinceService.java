@@ -1,7 +1,6 @@
 package edu.utn.phones.Service;
 
-import edu.utn.phones.Exceptions.ProvinceNotExitsException;
-import edu.utn.phones.Exceptions.UserNotExitsException;
+import edu.utn.phones.Exceptions.ModelExceptions.ProvinceNotExitsException;
 import edu.utn.phones.Model.Province;
 import edu.utn.phones.Repository.IProvinceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,15 @@ import java.util.List;
 public class ProvinceService {
 
     //region Atributes
+    private final IProvinceRepository provinceRepository;
+    //endregion
+
+    //region Constructor
     @Autowired
-    IProvinceRepository provinceRepository;
+    public ProvinceService(IProvinceRepository provinceRepository) {
+
+        this.provinceRepository = provinceRepository;
+    }
     //endregion
 
     //region ABM
@@ -29,21 +35,24 @@ public class ProvinceService {
         return this.provinceRepository.save(updatedProvince);
     }
 
-    public void deleteProvince(Integer idProvince){
-        this.provinceRepository.deleteById(idProvince);
+    public void deleteProvince(Province idProvince){
+        this.provinceRepository.delete(idProvince);
     }
     //endregion
 
     //region GET
     public Province getById(Integer id) throws ProvinceNotExitsException {
 
-        return this.provinceRepository.findById(id).orElseThrow( ProvinceNotExitsException::new);
+        return this.provinceRepository.findById(id).orElseThrow(ProvinceNotExitsException::new);
 
     }
 
-    public List<Province> getAll(){
+    public List<Province> getAll(String nameProvince){
 
-        return this.provinceRepository.findAll();
+        if (nameProvince != null)
+            return this.provinceRepository.findByNameProvince(nameProvince);
+        else
+            return this.provinceRepository.findAll();
 
     }
     //endregion
