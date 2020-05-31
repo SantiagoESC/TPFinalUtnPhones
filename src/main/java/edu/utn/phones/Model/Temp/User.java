@@ -1,5 +1,6 @@
 package edu.utn.phones.Model.Temp;
 
+import edu.utn.phones.Model.City;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

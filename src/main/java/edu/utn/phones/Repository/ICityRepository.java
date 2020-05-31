@@ -1,6 +1,6 @@
 package edu.utn.phones.Repository;
 
-import edu.utn.phones.Model.Temp.City;
+import edu.utn.phones.Model.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

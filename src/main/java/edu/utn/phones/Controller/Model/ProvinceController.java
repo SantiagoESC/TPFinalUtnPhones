@@ -31,12 +31,12 @@ public class ProvinceController {
         return this.provinceService.addProvince(newProvince);
     }
 
-    public void updateProvince(Province updatedProvince){
-        this.provinceService.updateProvince(updatedProvince);
+    public Province updateProvince(Province updatedProvince){
+        return this.provinceService.updateProvince(updatedProvince);
     }
 
-    public void deleteProvince(Province idProvince){
-        this.provinceService.deleteProvince(idProvince);
+    public void deleteProvince(Province provinceToDelete) {
+        this.provinceService.deleteProvince(provinceToDelete);
     }
 
     //endregion

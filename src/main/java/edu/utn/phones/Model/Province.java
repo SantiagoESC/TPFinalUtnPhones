@@ -22,5 +22,9 @@ public class Province {
     Integer idProvince;
     String nameProvince;
 
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "province")
+    @JsonBackReference
+    List<City> cities;
+
 
 }

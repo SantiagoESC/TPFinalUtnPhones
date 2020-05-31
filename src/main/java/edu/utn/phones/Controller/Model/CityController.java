@@ -2,45 +2,49 @@ package edu.utn.phones.Controller.Model;
 
 
 import edu.utn.phones.Exceptions.ModelExceptions.CityNotExistsException;
-import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
-import edu.utn.phones.Model.Temp.City;
+import edu.utn.phones.Model.City;
 import edu.utn.phones.Service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/city")
+@Controller
 public class CityController {
 
+    //region Atributes
+    private final CityService cityService;
+    //endregion
+
+    //region Contructor
     @Autowired
-    CityService cityService;
-
-
-    //region ABM
-
-    @PostMapping("/")
-    public void add(@RequestBody City city){
-        this.cityService.add(city);
+    public CityController(CityService cityService) {
+        this.cityService = cityService;
     }
+
 
     //endregion
 
-    //region SELECT
 
-    @GetMapping("/{id}")
-    public City getByPrefix(@PathVariable Integer id ) throws CityNotExistsException {
 
-        return this.cityService.getById(id);
-
+    public City addCity(City newCity) {
+        return this.cityService.addCity(newCity);
     }
 
-    @GetMapping("/")
-    public List<City> getAll() throws NoContentToShowException {
+    public City updateCity(City updatedCity){
+        return this.cityService.updateCity(updatedCity);
+    }
+    //region GET
+    public City getCityById(Integer idCity) throws CityNotExistsException {
+        return this.cityService.getCityById(idCity);
+    }
+
+    public List<City> getAll() {
         return this.cityService.getAll();
     }
 
-
+    public void deleteCity(City cityToDelete) {
+        this.cityService.deleteCity(cityToDelete);
+    }
     //endregion
 }
