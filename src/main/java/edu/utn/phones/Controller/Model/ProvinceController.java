@@ -1,60 +1,31 @@
 package edu.utn.phones.Controller.Model;
 
 
-import edu.utn.phones.Exceptions.ModelExceptions.ProvinceNotExitsException;
+import edu.utn.phones.Abstract.AbstractController;
+import edu.utn.phones.Abstract.AbstractService;
 import edu.utn.phones.Model.Province;
 import edu.utn.phones.Service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-
 import java.util.List;
 
 @Controller
-public class ProvinceController {
+public class ProvinceController extends AbstractController<Province> {
 
-
-    //region Atributes
-    private final ProvinceService provinceService ;
-    //endregion
-
-    //region Constructor
+    private final ProvinceService provinceService;
     @Autowired
-    public ProvinceController(ProvinceService provinceService) {
-        this.provinceService = provinceService;
-    }
-    //endregion
-
-
-    //region ABM
-    public Province addProvince(Province newProvince){
-        return this.provinceService.addProvince(newProvince);
+    public ProvinceController(ProvinceService service) {
+        super(service);
+        this.provinceService =  service;
     }
 
-    public Province updateProvince(Province updatedProvince){
-        return this.provinceService.updateProvince(updatedProvince);
+
+    @Override
+    public <String> List<Province> getAll(String filter) {
+        return this.service.getAll(filter);
     }
 
-    public void deleteProvince(Province provinceToDelete) {
-        this.provinceService.deleteProvince(provinceToDelete);
-    }
-
-    //endregion
-
-    //region GET
-
-    public Province getById(Integer id) throws ProvinceNotExitsException {
-
-        return this.provinceService.getById(id);
-
-    }
-
-    public List<Province> getAll(String nameProvince){
-
-        return this.provinceService.getAll(nameProvince);
-
-    }
-
-    //endregion
 
 }
+

@@ -1,61 +1,27 @@
 package edu.utn.phones.Service;
 
-import edu.utn.phones.Exceptions.ModelExceptions.ProvinceNotExitsException;
+import edu.utn.phones.Abstract.AbstractService;
 import edu.utn.phones.Model.Province;
 import edu.utn.phones.Repository.IProvinceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class ProvinceService {
+public class ProvinceService extends AbstractService<Province> {
 
-    //region Atributes
     private final IProvinceRepository provinceRepository;
-    //endregion
 
-    //region Constructor
     @Autowired
-    public ProvinceService(IProvinceRepository provinceRepository) {
-
-        this.provinceRepository = provinceRepository;
-    }
-    //endregion
-
-    //region ABM
-    public Province addProvince(Province province){
-
-       return this.provinceRepository.save(province);
-
+    public ProvinceService(IProvinceRepository repository) {
+        super(repository);
+        this.provinceRepository =  repository;
     }
 
-    public Province updateProvince(Province updatedProvince){
-        //todo Esto no puede quedar asi dijo german asique habra que hacer un metodo o algo
-        return this.provinceRepository.save(updatedProvince);
+    @Override
+    public <String> List<Province> getAll(String filter) {
+
+        return this.provinceRepository.findByNameProvince(filter);
     }
-
-    public void deleteProvince(Province provinceToDelete){
-        this.provinceRepository.delete(provinceToDelete);
-    }
-    //endregion
-
-    //region GET
-    public Province getById(Integer id) throws ProvinceNotExitsException {
-
-        return this.provinceRepository.findById(id).orElseThrow(ProvinceNotExitsException::new);
-
-    }
-
-    public List<Province> getAll(String nameProvince){
-
-        if (nameProvince != null)
-            return this.provinceRepository.findByNameProvince(nameProvince);
-        else
-            return this.provinceRepository.findAll();
-
-    }
-    //endregion
-
 }

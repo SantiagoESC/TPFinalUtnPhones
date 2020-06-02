@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface IProvinceRepository extends JpaRepository<Province, Integer> {
 
-    List<Province> findByNameProvince(String nameProvince);
+    <String>List<Province> findByNameProvince(String filter);
 }
