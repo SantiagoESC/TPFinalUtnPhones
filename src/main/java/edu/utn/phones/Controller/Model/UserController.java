@@ -9,27 +9,23 @@ import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@Controller
-public class UserController extends AbstractController<User> {
 
-    //region Atributes
-    private final UserService userService;
-    //endregion
+@Controller
+public class UserController extends AbstractController<User, UserService> {
+
 
     //region Contructor
     @Autowired
     public UserController(UserService userService) {
         super(userService);
-        this.userService = userService;
     }
     //endregion
+
+
     @Override
     public <F> List<User> getAll(F filter) {
         return null;
     }
-
-
-
 
 
 

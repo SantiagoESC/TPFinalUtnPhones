@@ -3,6 +3,7 @@ package edu.utn.phones.Model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.utn.phones.Abstract.Iterfaces.IAbstractWebCrud;
 import edu.utn.phones.Abstract.Iterfaces.IUriInterface;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ public class Province implements IUriInterface {
 
 
     @Override
+    @JsonIgnore
     public Integer getId() {
         return idProvince;
     }

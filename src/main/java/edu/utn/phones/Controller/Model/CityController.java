@@ -12,19 +12,14 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-public class CityController extends AbstractController<City> {
-
-    //region Atributes
-    private final CityService cityService;
-    //endregion
+public class CityController extends AbstractController<City, CityService> {
 
     //region Contructor
     @Autowired
     public CityController(CityService cityService) {
         super(cityService);
-        this.cityService = cityService;
     }
-
+    //endregion
 
     @Override
     public <F> List<City> getAll(F filter) {

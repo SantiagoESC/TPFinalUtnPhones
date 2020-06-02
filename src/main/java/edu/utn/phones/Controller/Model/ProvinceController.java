@@ -11,13 +11,12 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-public class ProvinceController extends AbstractController<Province> {
+public class ProvinceController extends AbstractController<Province, ProvinceService> {
 
-    private final ProvinceService provinceService;
+
     @Autowired
     public ProvinceController(ProvinceService service) {
         super(service);
-        this.provinceService =  service;
     }
 
 

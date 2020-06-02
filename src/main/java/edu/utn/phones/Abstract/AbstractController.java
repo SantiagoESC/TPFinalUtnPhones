@@ -6,15 +6,15 @@ import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 
 import java.util.List;
 
-public abstract class AbstractController<T> implements IAbstractCrud<T>{
+public abstract class AbstractController<T, S extends   IAbstractCrud<T>> implements IAbstractCrud<T>{
 
     //region Atributes
-    protected final AbstractService<T> service;
+    protected final S service;
     //endregion
 
 
     //region Contructor
-    public AbstractController(AbstractService<T> service) {
+    public AbstractController( S service) {
         this.service = service;
     }
     //endregion

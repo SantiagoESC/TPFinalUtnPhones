@@ -11,39 +11,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RateService extends AbstractService<Rate> {
+public class RateService extends AbstractService<Rate, IRateRepository> {
 
-    //region Atributes
-    private final IRateRepository rateRepository;
-    //endregion
 
     //region Contructor
     @Autowired
     public RateService(IRateRepository rateRepository) {
         super(rateRepository);
-        this.rateRepository = rateRepository;
     }
     //endregion
 
 
     public List<Rate> getAll(City cityOrigin, City cityDestination){
 
-            if (cityOrigin == null && cityOrigin == null){
-                return this.rateRepository.findAll();
-            }else{
-
-               if (cityOrigin != null && cityOrigin != null){
-                   return this.rateRepository.findByCityOriginAndCityDestination(cityOrigin,cityDestination);
-               }else{
-                   if (cityOrigin != null && cityOrigin == null){
-                       return this.rateRepository.findByCityOrigin(cityOrigin);
-                   }else{
-                       return this.rateRepository.findByCityDestination(cityDestination);
-                   }
-               }
-
-            }
-
+        return this.repository.findAll();
 
     }
 
@@ -51,5 +32,5 @@ public class RateService extends AbstractService<Rate> {
     public <F> List<Rate> getAll(F filter) {
         return null;
     }
-    //endregion
+
 }

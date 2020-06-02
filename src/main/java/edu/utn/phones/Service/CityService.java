@@ -12,25 +12,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CityService extends AbstractService<City> {
+public class CityService extends AbstractService<City, ICityRepository> {
 
-    //region Atributes
-    private final ICityRepository cityRepository;
-    //endregion
 
 
     //region Constructor
     @Autowired
     public CityService(ICityRepository cityRepository) {
         super(cityRepository);
-        this.cityRepository = cityRepository;
     }
+    //endregion
+
 
     @Override
     public <F> List<City> getAll(F filter) {
         return null;
     }
-    //endregion
 
 
 

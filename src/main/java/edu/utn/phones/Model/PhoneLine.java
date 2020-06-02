@@ -1,7 +1,8 @@
 package edu.utn.phones.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.utn.phones.Abstract.Iterfaces.IUriInterface;
+import edu.utn.phones.Model.Enums.LineStatus;
 import edu.utn.phones.Model.Enums.LineType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,12 +28,19 @@ public class PhoneLine implements IUriInterface {
     @Enumerated(EnumType.STRING)
     LineType typeLine;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    LineStatus statusLine;
+
+
     @ManyToOne(fetch = FetchType.EAGER,optional = false)
     @NotNull
     User ownerLine;
 
 
+
     @Override
+    @JsonIgnore
     public Integer getId() {
         return idLine;
     }

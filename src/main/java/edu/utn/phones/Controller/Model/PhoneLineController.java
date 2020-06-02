@@ -11,21 +11,22 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-public class PhoneLineController extends AbstractController<PhoneLine> {
+public class PhoneLineController extends AbstractController<PhoneLine, PhoneLineService> {
 
-    private final PhoneLineService phoneLineService;
+
 
     @Autowired
-    public PhoneLineController(AbstractService<PhoneLine> service, PhoneLineService phoneLineService) {
+    public PhoneLineController(PhoneLineService service) {
         super(service);
-        this.phoneLineService = phoneLineService;
     }
+
+
 
 
 
 
     @Override
     public <F> List<PhoneLine> getAll(F filter) {
-        return null;
+        return this.service.getAll(filter);
     }
 }

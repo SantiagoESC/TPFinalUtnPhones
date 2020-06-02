@@ -11,11 +11,10 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-public class RateController extends AbstractController<Rate> {
+public class RateController extends AbstractController<Rate, RateService> {
 
 
     //region Atributes
-    private final RateService rateService;
     private final CityController cityController;
     //endregion
 
@@ -23,15 +22,14 @@ public class RateController extends AbstractController<Rate> {
     @Autowired
     public RateController(RateService rateService, CityController cityController) {
         super(rateService);
-        this.rateService = rateService;
         this.cityController = cityController;
     }
-
+    //endregion
 
 
     public List<Rate> getAll(City  cityOrigin,City cityDestination) {
 
-            return this.rateService.getAll(cityOrigin,cityDestination);
+            return this.service.getAll(cityOrigin,cityDestination);
 
     }
 

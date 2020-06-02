@@ -9,19 +9,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProvinceService extends AbstractService<Province> {
+public class ProvinceService extends AbstractService<Province, IProvinceRepository> {
 
-    private final IProvinceRepository provinceRepository;
+
 
     @Autowired
     public ProvinceService(IProvinceRepository repository) {
         super(repository);
-        this.provinceRepository =  repository;
     }
 
     @Override
     public <String> List<Province> getAll(String filter) {
 
-        return this.provinceRepository.findByNameProvince(filter);
+        return this.repository.findByNameProvince(filter);
     }
 }

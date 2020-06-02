@@ -1,5 +1,6 @@
 package edu.utn.phones.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import edu.utn.phones.Abstract.Iterfaces.IUriInterface;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class Rate implements IUriInterface {
     Float   priceMinute;
 
     @Override
+    @JsonIgnore
     public Integer getId() {
         return idRate;
     }

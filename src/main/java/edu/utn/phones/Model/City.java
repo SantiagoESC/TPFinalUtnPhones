@@ -1,5 +1,6 @@
 package edu.utn.phones.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import edu.utn.phones.Abstract.Iterfaces.IUriInterface;
 import edu.utn.phones.Model.Province;
@@ -31,6 +32,7 @@ public class City  implements IUriInterface {
     Province province;
 
     @Override
+    @JsonIgnore
     public Integer getId() {
         return idCity;
     }

@@ -2,18 +2,18 @@ package edu.utn.phones.Abstract;
 
 import edu.utn.phones.Abstract.Iterfaces.IAbstractCrud;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
-import edu.utn.phones.Repository.IProvinceRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public abstract class AbstractService<T> implements IAbstractCrud<T> {
+public abstract class AbstractService<T, R extends JpaRepository<T,Integer>> implements IAbstractCrud<T> {
 
 
-    protected final JpaRepository<T,Integer> repository;
+    protected final R repository;
 
-    public AbstractService(JpaRepository repository) {
+    public AbstractService(R repository) {
         this.repository =  repository;
+
     }
 
 

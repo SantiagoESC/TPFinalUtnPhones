@@ -8,9 +8,6 @@ import edu.utn.phones.Model.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 import java.util.List;
 
 
@@ -33,7 +30,6 @@ public class CityWebController implements IAbstractWebCrud<City> {
 
     @PostMapping("/")
     public ResponseEntity add(@RequestBody City newCity){
-        System.out.println(newCity);
         City c =  this.cityController.add(newCity);
         return  ResponseEntity.created(Configuration.getLocation(c)).build();
     }
