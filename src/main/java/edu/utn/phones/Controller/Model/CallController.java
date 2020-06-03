@@ -18,4 +18,7 @@ public class CallController extends AbstractController<Call, CallService> {
     }
 
 
+    public List<Call> getCallsWithPrefixBetween(String minPrefix, String maxPrefix) {
+        return this.service.getCallsWithPrefixBetween(minPrefix,maxPrefix);
+    }
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class CallService extends AbstractService<Call, ICallRepository> {
@@ -18,4 +20,16 @@ public class CallService extends AbstractService<Call, ICallRepository> {
     }
 
 
+    public List<Call> getCallsWithPrefixBetween(String minPrefix, String maxPrefix) {
+
+        List<Call>  listOrigin = this.repository.findByCityOriginCallPrefixBetween(minPrefix,maxPrefix);
+
+        listOrigin.addAll( this.repository.findByCityDestinationCallPrefixBetween(minPrefix,maxPrefix));
+
+
+
+
+
+        return listOrigin;
+    }
 }

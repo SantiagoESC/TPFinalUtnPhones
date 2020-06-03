@@ -68,11 +68,21 @@ public class CallWebController implements IAbstractWebCrud<Call> {
 
 
     @GetMapping("/")
-    public ResponseEntity<List<Call>> getAll(@RequestParam(required = false) String nameCall){
+    public ResponseEntity<List<Call>> getAll(){
         List<Call> list = this.callController.getAll();
         return ResponseEntity.ok().body(list);
     }
     //endregion
+
+
+    @GetMapping("/special")                                        /*Lo podria mandar por parametro si querais hacerlo variable*/
+    public ResponseEntity<List<Call>> getCallsWithPrefixBetween (/*@String minPrefix, String maxPrefix*/){
+
+        List<Call> list = this.callController.getCallsWithPrefixBetween("50", "700");
+
+
+        return ResponseEntity.ok().body(list);
+    }
 
 
 

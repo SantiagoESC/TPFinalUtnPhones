@@ -33,16 +33,18 @@ public class Call implements IUriInterface {
     @NotNull
     String  numberDestinationCall;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     City cityOriginCall;
-
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     City cityDestinationCall;
-
+    @NotNull
     Float   priceMinuteCall;
     @NotNull
     Integer durationSegCall;
 
+    @NotNull
     Float   priceTotalCall;
 
     @NotNull
