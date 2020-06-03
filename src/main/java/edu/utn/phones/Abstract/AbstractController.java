@@ -39,6 +39,11 @@ public abstract class AbstractController<T, S extends   IAbstractCrud<T>> implem
         return this.service.getById(id);
     }
 
+    public S getService(){
+        return this.service;
+    }
+
+
     @Override
     public List<T> getAll() {
         return this.service.getAll();

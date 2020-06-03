@@ -3,12 +3,18 @@ package edu.utn.phones.Controller.Web;
 import edu.utn.phones.Abstract.Iterfaces.IAbstractWebCrud;
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.CallController;
+import edu.utn.phones.Controller.Model.ErrorResponse;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
+import edu.utn.phones.Exceptions.ModelExceptions.CallNotExistException;
+import edu.utn.phones.Exceptions.ModelExceptions.UserTypeNotExistsException;
 import edu.utn.phones.Model.Call;
+import edu.utn.phones.Projection.CallProjection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -38,7 +44,7 @@ public class CallWebController implements IAbstractWebCrud<Call> {
     public ResponseEntity update(@RequestBody Call updatedCall, @PathVariable Integer idCall) throws ResourceNotFoundException {
 
         Call u = this.callController.getById(idCall);
-        updatedCall.setIdCall(u.getIdCall());
+       // updatedCall.setIdCall(u.getIdCall());
         this.callController.update(updatedCall);
         return  ResponseEntity.ok().build();
 
@@ -74,7 +80,42 @@ public class CallWebController implements IAbstractWebCrud<Call> {
     }
     //endregion
 
+    //region Pruebas
 
 
+    @GetMapping("/GetAllCallById")
+    public ResponseEntity<List<Call>> GetAllCallById(@RequestParam Integer idUser) throws UserTypeNotExistsException {
+        List<Call> calls = callController.GetAllCallById(idUser);
+        if(calls.size() > 0){
+            return ResponseEntity.ok().body(calls);
+        }else{
+            throw new UserTypeNotExistsException("");
+        }
+    }
+
+    //endregion
+
+    //region ENDPOINT PARCIAL
+    //endpoint que devuelva listado de las llamadas de la fecha actual
+
+
+    @GetMapping("/now")
+    public ResponseEntity<List<Call>> GetCallByNow()  {
+        try{
+            List<Call> calls = callController.GetCallByNow();
+            if (calls.size() == 0) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            } else {
+                return ResponseEntity.ok().body(calls);
+            }
+        } catch(CallNotExistException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+    }
+    //ENDREGION
 }
+
+
+
 
