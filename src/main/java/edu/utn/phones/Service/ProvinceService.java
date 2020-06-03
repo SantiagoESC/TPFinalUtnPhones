@@ -18,9 +18,5 @@ public class ProvinceService extends AbstractService<Province, IProvinceReposito
         super(repository);
     }
 
-    @Override
-    public <String> List<Province> getAll(String filter) {
 
-        return this.repository.findByNameProvince(filter);
-    }
 }

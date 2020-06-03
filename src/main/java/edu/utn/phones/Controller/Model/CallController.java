@@ -17,8 +17,5 @@ public class CallController extends AbstractController<Call, CallService> {
         super(service);
     }
 
-    @Override
-    public <F> List<Call> getAll(F filter) {
-        return null;
-    }
+
 }

@@ -20,10 +20,7 @@ public class ProvinceController extends AbstractController<Province, ProvinceSer
     }
 
 
-    @Override
-    public <String> List<Province> getAll(String filter) {
-        return this.service.getAll(filter);
-    }
+
 
 
 }

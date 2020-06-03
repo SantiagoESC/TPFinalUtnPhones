@@ -17,8 +17,5 @@ public class CallService extends AbstractService<Call, ICallRepository> {
 
     }
 
-    @Override
-    public <F> List<Call> getAll(F filter) {
-        return null;
-    }
+
 }

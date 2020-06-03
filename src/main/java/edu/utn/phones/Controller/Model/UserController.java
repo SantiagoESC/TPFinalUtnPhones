@@ -22,10 +22,7 @@ public class UserController extends AbstractController<User, UserService> {
     //endregion
 
 
-    @Override
-    public <F> List<User> getAll(F filter) {
-        return null;
-    }
+
 
 
 

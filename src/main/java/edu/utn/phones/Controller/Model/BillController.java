@@ -16,8 +16,5 @@ public class BillController extends AbstractController<Bill, BillService> {
         super(service);
     }
 
-    @Override
-    public <F> List<Bill> getAll(F filter) {
-        return null;
-    }
+
 }

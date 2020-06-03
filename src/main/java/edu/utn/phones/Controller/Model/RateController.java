@@ -34,8 +34,5 @@ public class RateController extends AbstractController<Rate, RateService> {
     }
 
 
-    @Override
-    public <F> List<Rate> getAll(F filter) {
-        return null;
-    }
+
 }

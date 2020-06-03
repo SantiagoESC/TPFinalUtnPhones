@@ -25,8 +25,5 @@ public class PhoneLineController extends AbstractController<PhoneLine, PhoneLine
 
 
 
-    @Override
-    public <F> List<PhoneLine> getAll(F filter) {
-        return this.service.getAll(filter);
-    }
+
 }

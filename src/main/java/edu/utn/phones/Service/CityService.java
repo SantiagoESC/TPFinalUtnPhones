@@ -24,13 +24,6 @@ public class CityService extends AbstractService<City, ICityRepository> {
     //endregion
 
 
-    @Override
-    public <F> List<City> getAll(F filter) {
-        return null;
-    }
-
-
-
 
 
 }

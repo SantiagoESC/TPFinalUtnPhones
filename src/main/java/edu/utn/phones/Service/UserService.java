@@ -19,10 +19,7 @@ public class UserService extends AbstractService<User, IUserRepository> {
     //endregion
 
 
-    @Override
-    public <F> List<User> getAll(F filter) {
-        return null;
-    }
+
 
 
 }

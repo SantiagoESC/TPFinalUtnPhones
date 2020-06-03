@@ -68,8 +68,8 @@ public class UserWebController implements IAbstractWebCrud<User> {
 
 
     @GetMapping("/")
-    public ResponseEntity<List<User>> getAll(@RequestParam(required = false) String nameUser){
-        List<User> list = this.userController.getAll(nameUser);
+    public ResponseEntity<List<User>> getAll(){
+        List<User> list = this.userController.getAll();
         return ResponseEntity.ok().body(list);
     }
     //endregion

@@ -28,9 +28,6 @@ public class RateService extends AbstractService<Rate, IRateRepository> {
 
     }
 
-    @Override
-    public <F> List<Rate> getAll(F filter) {
-        return null;
-    }
+
 
 }

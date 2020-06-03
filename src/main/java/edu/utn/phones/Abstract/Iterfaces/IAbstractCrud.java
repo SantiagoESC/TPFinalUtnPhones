@@ -16,7 +16,7 @@ public interface IAbstractCrud <T> {
 
     public List<T> getAll();
 
-    public <F> List<T> getAll(F filter);
+
 
 
 }

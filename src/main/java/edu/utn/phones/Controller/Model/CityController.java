@@ -21,8 +21,4 @@ public class CityController extends AbstractController<City, CityService> {
     }
     //endregion
 
-    @Override
-    public <F> List<City> getAll(F filter) {
-        return null;
-    }
 }

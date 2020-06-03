@@ -17,8 +17,5 @@ public class BillService extends AbstractService<Bill, IBillRepository> {
         super(repository);
     }
 
-    @Override
-    public <F> List<Bill> getAll(F filter) {
-        return null;
-    }
+
 }

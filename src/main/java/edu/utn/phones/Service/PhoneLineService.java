@@ -19,8 +19,4 @@ public class PhoneLineService extends AbstractService<PhoneLine, IPhoneLineRepos
 
     }
 
-    @Override
-    public <F> List<PhoneLine> getAll(F filter) {
-        return null;
-    }
 }
