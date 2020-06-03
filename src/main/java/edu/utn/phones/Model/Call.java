@@ -48,6 +48,10 @@ public class Call implements IUriInterface {
     @NotNull
     Date    dateCall;
 
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    PhoneLine lineCall;
+
     @Override
     @JsonIgnore
     public Integer getId() {
