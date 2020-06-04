@@ -3,7 +3,6 @@ package edu.utn.phones.Controller.Model;
 import edu.utn.phones.Model.Call;
 import edu.utn.phones.Model.City;
 import edu.utn.phones.Service.CallService;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
