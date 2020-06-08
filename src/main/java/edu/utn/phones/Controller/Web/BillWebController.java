@@ -1,7 +1,7 @@
 package edu.utn.phones.Controller.Web;
 
 
-import edu.utn.phones.Abstract.Iterfaces.IAbstractWebCrud;
+import edu.utn.phones.Iterfaces.IAbstractWebCrud;
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.BillController;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;

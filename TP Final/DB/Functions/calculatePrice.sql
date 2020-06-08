@@ -7,6 +7,7 @@ NOT DETERMINISTIC READS SQL DATA
 BEGIN
     
     DECLARE vPrice FLOAT;
+    
 
     IF EXISTS (SELECT 1 FROM rates r WHERE r.idCityOrigin = pIdOrigin AND r.idCityDestination = pIdDestination ) THEN
 

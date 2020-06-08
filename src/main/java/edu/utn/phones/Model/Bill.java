@@ -1,10 +1,7 @@
 package edu.utn.phones.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import edu.utn.phones.Abstract.Iterfaces.IUriInterface;
-import edu.utn.phones.Model.PhoneLine;
-import edu.utn.phones.Model.User;
+import edu.utn.phones.Iterfaces.IUriInterface;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

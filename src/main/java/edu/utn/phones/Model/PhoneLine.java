@@ -1,7 +1,7 @@
 package edu.utn.phones.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import edu.utn.phones.Abstract.Iterfaces.IUriInterface;
+import edu.utn.phones.Iterfaces.IUriInterface;
 import edu.utn.phones.Model.Enums.LineStatus;
 import edu.utn.phones.Model.Enums.LineType;
 import lombok.AllArgsConstructor;

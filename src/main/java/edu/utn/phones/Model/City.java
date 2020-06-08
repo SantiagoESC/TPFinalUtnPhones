@@ -1,9 +1,7 @@
 package edu.utn.phones.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import edu.utn.phones.Abstract.Iterfaces.IUriInterface;
-import edu.utn.phones.Model.Province;
+import edu.utn.phones.Iterfaces.IUriInterface;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

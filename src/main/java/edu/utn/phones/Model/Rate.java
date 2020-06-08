@@ -1,8 +1,7 @@
 package edu.utn.phones.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import edu.utn.phones.Abstract.Iterfaces.IUriInterface;
+import edu.utn.phones.Iterfaces.IUriInterface;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,6 +35,5 @@ public class Rate implements IUriInterface {
     public Integer getId() {
         return idRate;
     }
-//    @NotNull
-//    Boolean isActive;
+
 }

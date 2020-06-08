@@ -1,4 +1,4 @@
-package edu.utn.phones.Abstract.Iterfaces;
+package edu.utn.phones.Iterfaces;
 
 public interface IUriInterface {
     Integer getId();

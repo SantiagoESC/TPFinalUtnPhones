@@ -1,18 +1,15 @@
 package edu.utn.phones.Controller.Web;
 
-import edu.utn.phones.Abstract.Iterfaces.IAbstractWebCrud;
+import edu.utn.phones.Iterfaces.IAbstractWebCrud;
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.CityController;
 import edu.utn.phones.Controller.Model.RateController;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
-import edu.utn.phones.Model.City;
 import edu.utn.phones.Model.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
