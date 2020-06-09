@@ -31,7 +31,9 @@ public class BillWebController implements IAbstractWebCrud<Bill> {
     @PostMapping("/")
     public ResponseEntity add(@RequestBody Bill newBill){
 
-        System.out.println(newBill);
+        /*traer el usuario logeado*/
+        /**/
+
         Bill ut = this.billController.add(newBill);
 
         return ResponseEntity.created(Configuration.getLocation(ut)).build() ;
