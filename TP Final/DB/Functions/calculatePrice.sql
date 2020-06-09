@@ -6,15 +6,15 @@ RETURNS INTEGER
 NOT DETERMINISTIC READS SQL DATA
 BEGIN
     
-    DECLARE vPrice FLOAT;
+    DECLARE vPrice FLOAT DEFAULT 0;
     
 
-    IF EXISTS (SELECT 1 FROM rates r WHERE r.idCityOrigin = pIdOrigin AND r.idCityDestination = pIdDestination ) THEN
+   
 
         SELECT pricePerMinute FROM rates r WHERE r.idCityOrigin = pIdOrigin AND r.idCityDestination = pIdDestination
         INTO vPrice;
 
-    ELSE
+    IF (vPrice = 0) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error finding price', MYSQL_ERRNO = '1';
     END IF;
 

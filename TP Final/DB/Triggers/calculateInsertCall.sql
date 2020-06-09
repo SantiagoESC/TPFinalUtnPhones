@@ -7,7 +7,7 @@ BEGIN
 
     SET NEW.idCityOrigin = fCalculateCity(NEW.numberOrigin);
     SET NEW.idCityDestination = fCalculateCity(NEW.numberDestination);
-    SET NEW.priceMinute = fCalculatePrice(NEW.idCityOrigin, NEW.idCityDestination);
+    SET NEW.pricePerMinute = fCalculatePrice(NEW.idCityOrigin, NEW.idCityDestination);
     SET NEW.priceTotal = (NEW.duration/60)*NEW.priceMinute; 
 
 
