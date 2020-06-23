@@ -10,5 +10,5 @@ import java.util.List;
 public interface ICallRepository extends JpaRepository<Call, Integer> {
 
 
-    List<Call> findTop3ByLineCallOwnerLineOrderByDateCallDesc(User u);
+
 }

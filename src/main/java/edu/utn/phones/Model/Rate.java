@@ -15,19 +15,25 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @Builder
+@Table(name = "rates")
 public class Rate implements IUriInterface {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     Integer idRate;
 
     @NotNull
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCityOrigin")
     City cityOrigin;
     @NotNull
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCityDestination")
     City cityDestination;
+
     @NotNull
+    @Column
     Float   priceMinute;
 
     @Override

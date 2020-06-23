@@ -9,37 +9,49 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Builder
+@Table(name = "bills")
 public class Bill implements IUriInterface {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     Integer idBill;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER,optional = false)
+    @JoinColumn(name = "idLine")
     PhoneLine lineBill;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idUser")
     User userBill;
+
     @NotNull
-    Integer quantityCall;
+    @Column
+    Integer quantityOfCalls;
+
     @NotNull
-    Float   priceCost;
+    @Column
+    Float   costPerMinute;
     @NotNull
-    Float   priceTotal;
+    @Column
+    Float   pricePerMinute;
     @NotNull
-    Date    dateBill;
+    @Column
+    LocalDateTime    dateBill;
     @NotNull
-    Date    dateExpiration;
+    @Column
+    LocalDateTime dateExpiration;
     @NotNull
+    @Column
     boolean isPaidBill;
 
     @Override

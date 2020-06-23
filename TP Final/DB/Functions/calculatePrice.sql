@@ -15,7 +15,7 @@ BEGIN
         INTO vPrice;
 
     IF (vPrice = 0) THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error finding price', MYSQL_ERRNO = '1';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error finding price per minute to apply to new call', MYSQL_ERRNO = '1';
     END IF;
 
     RETURN vPrice;

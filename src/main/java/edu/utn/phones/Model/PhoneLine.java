@@ -17,24 +17,32 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @Builder
+@Table(name = "phoneLines")
 public class PhoneLine implements IUriInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     Integer idLine;
+
+    @Column
     @NotNull
     String  numberLine;
+
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('RESIDENTIAL', 'MOVILE')")
     LineType typeLine;
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('ACTIVE', 'SUSPENDED')")
     LineStatus statusLine;
 
 
     @ManyToOne(fetch = FetchType.EAGER,optional = false)
     @NotNull
+    @JoinColumn(name = "idUser")
     User ownerLine;
 
 

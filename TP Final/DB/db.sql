@@ -8,7 +8,6 @@ USE test;
 SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS provinces; 
-
 CREATE TABLE IF NOT EXISTS provinces (
     idProvince INTEGER AUTO_INCREMENT,
     nameProvince VARCHAR(50) NOT NULL,
@@ -58,7 +57,7 @@ CREATE TABLE IF NOT EXISTS users (
     idCity INTEGER NOT NULL, 
 
 
-    CONSTRAINT pk_users PRIMARY KEY (idCity),
+    CONSTRAINT pk_users PRIMARY KEY (idUser),
     CONSTRAINT unq_username UNIQUE(username),
     CONSTRAINT unq_dni UNIQUE(dni),
     CONSTRAINT fk_cities_rates FOREIGN KEY (idCity) REFERENCES cities(idCity)
@@ -74,7 +73,7 @@ CREATE TABLE IF NOT EXISTS phoneLines (
     statusLine ENUM('ACTIVE', 'SUSPENDED') NOT NULL DEFAULT 'ACTIVE', 
     idUser INTEGER NOT NULL,
 
-    CONSTRAINT pk_phonelines PRIMARY KEY (idLine),
+    CONSTRAINT pk_phonelines PRIMARY KEY (idLine),      
     CONSTRAINT unq_numberLine UNIQUE (numberLine),
     CONSTRAINT fk_user_phoneLines FOREIGN KEY (idUser) REFERENCES users(idUser)  
 );
@@ -85,23 +84,29 @@ DROP TABLE IF EXISTS bills;
 CREATE TABLE IF NOT EXISTS bills (
     idBill INTEGER AUTO_INCREMENT,
     idUser INTEGER NOT NULL,
+    idLine INTEGER NOT NULL,
     quantityOfCalls INTEGER NOT NULL,
-    costPerMinute FLOAT NOT NULL DEFAULT 0.5,
-    pricePerMinute FLOAT NOT NULL,
+    totalCost FLOAT NOT NULL,
+    totalPrice FLOAT NOT NULL,
     dateBill DATETIME NOT NULL DEFAULT NOW(),
     dateExpiration DATETIME NOT NULL DEFAULT (CURRENT_DATE + INTERVAL 15 DAY),
+    isPaidBill BOOLEAN NOT NULL DEFAULT FALSE,
+
 
     CONSTRAINT pk_bills PRIMARY KEY (idBill),
-    CONSTRAINT fk_users_bills FOREIGN KEY(idUser) REFERENCES users(idUser)
+    CONSTRAINT fk_users_bills FOREIGN KEY(idUser) REFERENCES users(idUser),
+    CONSTRAINT fk_line_bills FOREIGN KEY(idLine) REFERENCES phoneLines(idLine)
 );
 
 
 DROP TABLE IF EXISTS calls;
 CREATE TABLE IF NOT EXISTS calls (
     idCall INTEGER AUTO_INCREMENT,
-    idBill INTEGER NOT NULL,
+    idBill INTEGER ,
     numberOrigin VARCHAR(15) NOT NULL,
     numberDestination  VARCHAR(15) NOT NULL,
+    idLineOrigin INTEGER NOT NULL,
+    idLineDestination INTEGER NOT NULL,
     idCityOrigin INTEGER NOT NULL,
     idCityDestination INTEGER NOT NULL,
     durationInSeconds INTEGER NOT NULL,
@@ -113,7 +118,9 @@ CREATE TABLE IF NOT EXISTS calls (
     CONSTRAINT pk_calls PRIMARY KEY (idCall),
     CONSTRAINT fk_bills_calls FOREIGN KEY (idBill) REFERENCES bills(idBill),
     CONSTRAINT fk_origin_cities_calls FOREIGN KEY (idCityOrigin) REFERENCES cities(idCity),
-    CONSTRAINT fk_destination_cities_calls FOREIGN KEY (idCityDestination) REFERENCES cities(idCity)
+    CONSTRAINT fk_destination_cities_calls FOREIGN KEY (idCityDestination) REFERENCES cities(idCity),
+    CONSTRAINT fk_line_calls FOREIGN KEY (idLineOrigin) REFERENCES phoneLines(idLine),
+    CONSTRAINT fk_line_calls FOREIGN KEY (idLineDestination) REFERENCES phoneLines(idLine)  
 
 );
 

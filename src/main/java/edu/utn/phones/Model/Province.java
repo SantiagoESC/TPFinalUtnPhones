@@ -18,14 +18,17 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @Builder
+@Table(name = "provinces")
 public class Province implements IUriInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     Integer idProvince;
 
 
     @NotNull
+    @Column
     String nameProvince;
 
 

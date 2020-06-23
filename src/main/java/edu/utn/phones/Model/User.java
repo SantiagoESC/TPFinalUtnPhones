@@ -17,30 +17,40 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @Builder
+@Table(name = "users")
 public class User implements IUriInterface {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     Integer idUser;
 
 
     @NotNull
-    String userName;
+    @Column
+    String username;
     @NotNull
+    @Column
     String password;
     @NotNull
-    String name;
+    @Column
+    String firstName;
+
     @NotNull
+    @Column
     String lastName;
+    @Column
     @NotNull
     String dni;
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('CLIENT','EMPLOYEE')")
     UserType userType;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idCity")
     City city;
 
 

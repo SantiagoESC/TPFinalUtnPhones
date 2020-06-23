@@ -1,12 +1,14 @@
-package edu.utn.phones.Controller;
+package edu.utn.phones.Controller.Model;
 
 import edu.utn.phones.Iterfaces.IAbstractCrud;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
+import edu.utn.phones.Service.AbstractService;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import java.util.List;
 
-public abstract class AbstractController<T, S extends   IAbstractCrud<T>> implements IAbstractCrud<T>{
+public class AbstractController<T, S extends   IAbstractCrud<T>> implements IAbstractCrud<T>{
 
     //region Atributes
     protected final S service;

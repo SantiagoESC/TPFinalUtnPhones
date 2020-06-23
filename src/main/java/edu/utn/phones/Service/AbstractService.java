@@ -4,9 +4,10 @@ import edu.utn.phones.Iterfaces.IAbstractCrud;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 
-public abstract class AbstractService<T, R extends JpaRepository<T,Integer>> implements IAbstractCrud<T> {
+public  class AbstractService<T, R extends JpaRepository<T,Integer>> implements IAbstractCrud<T>  {
 
 
     protected final R repository;
@@ -18,8 +19,8 @@ public abstract class AbstractService<T, R extends JpaRepository<T,Integer>> imp
 
 
     @Override
-    public T add(T newT) {
-        return this.repository.save(newT);
+    public T add(T newT)  {
+        return  this.repository.save(newT);
     }
 
     @Override

@@ -15,18 +15,24 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @Builder
+@Table(name = "cities")
 public class City  implements IUriInterface {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     Integer idCity;
 
     @NotNull
+    @Column
     String prefix;
 
     @NotNull
+    @Column
     String nameCity;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idProvince")
     Province province;
 
     @Override

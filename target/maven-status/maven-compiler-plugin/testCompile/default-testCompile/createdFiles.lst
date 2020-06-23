@@ -1,2 +1,4 @@
-edu\utn\phones\Controller\Model\ProvinceControllerTest.class
 edu\utn\phones\PhonesApplicationTests.class
+edu\utn\phones\Service\AbstractServiceTest.class
+edu\utn\phones\Controller\Model\ProvinceControllerTest.class
+edu\utn\phones\Controller\Model\AbstractControllerTest.class

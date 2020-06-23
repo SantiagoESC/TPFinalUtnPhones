@@ -9,45 +9,64 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Builder
+@Table(name = "calls")
 public class Call implements IUriInterface {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     Integer idCall;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idBill")
     Bill billCall;
 
     @NotNull
-    String  numberOriginCall;
+    @Column
+    String  numberOrigin;
     @NotNull
-    String  numberDestinationCall;
+    @Column
+    String  numberDestination;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    City cityOriginCall;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idCityOrigin")
+    City cityOrigin;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    City cityDestinationCall;
-
-    Float   priceMinuteCall;
-    @NotNull
-    Integer durationSegCall;
-
-    Float   priceTotalCall;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idCityDestination")
+    City cityDestination;
 
     @NotNull
-    Date    dateCall;
+    @Column
+    Integer durationInSeconds;
+
+
+    @Column
+    Float   pricePerMinute;
+
+
+    @Column
+    Float   costPerMinute;
+
+
+    @Column
+    Float   priceTotal;
+
+    @NotNull
+    @Column
+    LocalDateTime dateCall;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idLineOrigin")
     PhoneLine lineCall;
 
     @Override

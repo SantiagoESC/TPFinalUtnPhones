@@ -13,6 +13,12 @@ public class UserService extends AbstractService<User, IUserRepository> {
     public UserService(IUserRepository userRepository) {
         super(userRepository);
     }
+
+    public User login(String username, String password) {
+        User u = this.repository.findByUsernameAndPassword(username, password);
+        System.out.println(u);
+        return u;
+    }
     //endregion
 
 

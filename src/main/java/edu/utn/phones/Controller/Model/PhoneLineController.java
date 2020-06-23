@@ -1,7 +1,6 @@
 package edu.utn.phones.Controller.Model;
 
 
-import edu.utn.phones.Controller.AbstractController;
 import edu.utn.phones.Model.PhoneLine;
 import edu.utn.phones.Service.PhoneLineService;
 import org.springframework.beans.factory.annotation.Autowired;

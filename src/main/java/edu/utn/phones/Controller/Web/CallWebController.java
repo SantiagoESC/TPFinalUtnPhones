@@ -28,10 +28,13 @@ public class CallWebController implements IAbstractWebCrud<Call> {
 
     //region ABM
     @PostMapping("/")
-    public ResponseEntity add(@RequestBody Call newCall){
-        Call ut = this.callController.add(newCall);
 
-        return ResponseEntity.created(Configuration.getLocation(ut)).build() ;
+    public ResponseEntity add(@RequestBody Call newCall) {
+           Call ut = this.callController.add(newCall);
+
+           return ResponseEntity.created(Configuration.getLocation(ut)).build() ;
+
+
     }
 
     @PutMapping("/{idCall}")

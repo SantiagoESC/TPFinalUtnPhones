@@ -1,6 +1,5 @@
 package edu.utn.phones.Controller.Model;
 
-import edu.utn.phones.Controller.AbstractController;
 import edu.utn.phones.Model.City;
 import edu.utn.phones.Model.Rate;
 import edu.utn.phones.Service.RateService;

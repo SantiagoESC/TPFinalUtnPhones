@@ -28,6 +28,7 @@ public class ProvinceWebController implements IAbstractWebCrud<Province> {
     //region ABM
     @PostMapping("/")
     public ResponseEntity add(@RequestBody Province newProvince){
+
         Province p = this.provinceController.add(newProvince);
         return ResponseEntity.created(Configuration.getLocation(p)).build();
 

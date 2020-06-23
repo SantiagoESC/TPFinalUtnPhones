@@ -29,7 +29,7 @@ BEGIN
                 ;
 
         IF (vIdCity = 0) THEN
-            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error finding city', MYSQL_ERRNO = '1';
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error finding city to match prefix of number', MYSQL_ERRNO = '1';
         END IF;
 
 RETURN vIdCity;
