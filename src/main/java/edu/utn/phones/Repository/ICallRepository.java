@@ -16,6 +16,8 @@ public interface ICallRepository extends JpaRepository<Call, Integer> {
         /*Se supone las llamadas se ingresan con solo unos pocos datos pero en la base de datos se calculan
         * por lo que la ciudad ya estara cargada al momento de lleerla*/
     List<Call> findByCityDestinationCallPrefixBetween(String minPrefix, String maxPrefix);
-
     List<Call> findByCityOriginCallPrefixBetween(String minPrefix, String maxPrefix);
+
+    //Los primeros 2 son city origin, y los otros dos para city destination, en el service se pasa a ambos los mismos
+    List<Call> findByCityOriginCallPrefixBetweenAndCityDestinationCallPrefixBetween(String minPrefix, String maxPrefix, String min2, String max2);
 }

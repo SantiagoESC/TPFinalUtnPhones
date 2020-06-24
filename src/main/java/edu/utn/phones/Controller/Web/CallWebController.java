@@ -3,6 +3,7 @@ package edu.utn.phones.Controller.Web;
 import edu.utn.phones.Abstract.Iterfaces.IAbstractWebCrud;
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.CallController;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Model.Call;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,10 +77,14 @@ public class CallWebController implements IAbstractWebCrud<Call> {
 
 
     @GetMapping("/special")                                        /*Lo podria mandar por parametro si querais hacerlo variable*/
-    public ResponseEntity<List<Call>> getCallsWithPrefixBetween (/*@String minPrefix, String maxPrefix*/){
+    public ResponseEntity<List<Call>> getCallsWithPrefixBetween (/*@String minPrefix, String maxPrefix*/) throws NoContentToShowException {
+
 
         List<Call> list = this.callController.getCallsWithPrefixBetween("50", "700");
 
+        if (list.size() == 0) {
+            throw new NoContentToShowException();
+        }
 
         return ResponseEntity.ok().body(list);
     }

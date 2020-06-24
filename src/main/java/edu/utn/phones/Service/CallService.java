@@ -22,14 +22,15 @@ public class CallService extends AbstractService<Call, ICallRepository> {
 
     public List<Call> getCallsWithPrefixBetween(String minPrefix, String maxPrefix) {
 
-        List<Call>  listOrigin = this.repository.findByCityOriginCallPrefixBetween(minPrefix,maxPrefix);
+        /*Lo de antes*/
+//        List<Call>  listOrigin = this.repository.findByCityOriginCallPrefixBetween(minPrefix,maxPrefix);
+//
+//        listOrigin.addAll( this.repository.findByCityDestinationCallPrefixBetween(minPrefix,maxPrefix));
+//
 
-        listOrigin.addAll( this.repository.findByCityDestinationCallPrefixBetween(minPrefix,maxPrefix));
+        List<Call> list = this.repository.findByCityOriginCallPrefixBetweenAndCityDestinationCallPrefixBetween(minPrefix, maxPrefix,minPrefix,maxPrefix);
 
 
-
-
-
-        return listOrigin;
+        return list;
     }
 }
