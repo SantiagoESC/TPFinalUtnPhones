@@ -83,11 +83,11 @@ CREATE TABLE IF NOT EXISTS phoneLines (
 DROP TABLE IF EXISTS bills;
 CREATE TABLE IF NOT EXISTS bills (
     idBill INTEGER AUTO_INCREMENT,
-    idUser INTEGER NOT NULL,
+    idUser INTEGER NOT NULL ,
     idLine INTEGER NOT NULL,
-    quantityOfCalls INTEGER NOT NULL,
-    totalCost FLOAT NOT NULL,
-    totalPrice FLOAT NOT NULL,
+    quantityOfCalls INTEGER NOT NULL DEFAULT 0,
+    totalCost FLOAT NOT NULL DEFAULT 0,
+    totalPrice FLOAT NOT NULL DEFAULT 0,
     dateBill DATETIME NOT NULL DEFAULT NOW(),
     dateExpiration DATETIME NOT NULL DEFAULT (CURRENT_DATE + INTERVAL 15 DAY),
     isPaidBill BOOLEAN NOT NULL DEFAULT FALSE,
@@ -119,8 +119,8 @@ CREATE TABLE IF NOT EXISTS calls (
     CONSTRAINT fk_bills_calls FOREIGN KEY (idBill) REFERENCES bills(idBill),
     CONSTRAINT fk_origin_cities_calls FOREIGN KEY (idCityOrigin) REFERENCES cities(idCity),
     CONSTRAINT fk_destination_cities_calls FOREIGN KEY (idCityDestination) REFERENCES cities(idCity),
-    CONSTRAINT fk_line_calls FOREIGN KEY (idLineOrigin) REFERENCES phoneLines(idLine),
-    CONSTRAINT fk_line_calls FOREIGN KEY (idLineDestination) REFERENCES phoneLines(idLine)  
+    CONSTRAINT fk_line_origin_calls FOREIGN KEY (idLineOrigin) REFERENCES phoneLines(idLine),
+    CONSTRAINT fk_line_destination_calls FOREIGN KEY (idLineDestination) REFERENCES phoneLines(idLine)  
 
 );
 

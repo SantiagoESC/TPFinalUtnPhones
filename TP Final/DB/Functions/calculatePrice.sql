@@ -7,9 +7,6 @@ NOT DETERMINISTIC READS SQL DATA
 BEGIN
     
     DECLARE vPrice FLOAT DEFAULT 0;
-    
-
-   
 
         SELECT pricePerMinute FROM rates r WHERE r.idCityOrigin = pIdOrigin AND r.idCityDestination = pIdDestination
         INTO vPrice;
