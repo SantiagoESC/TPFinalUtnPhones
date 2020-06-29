@@ -21,9 +21,10 @@ import javax.validation.constraints.NotNull;
 @Table(name = "provinces")
 public class Province implements IUriInterface {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     Integer idProvince;
 
 

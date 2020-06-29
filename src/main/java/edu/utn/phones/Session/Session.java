@@ -9,7 +9,7 @@ import java.util.Date;
 public class Session {
 
     String token;
-        User loggedUser;
+    User loggedUser;
     Date lastAction;
 
     public Session(String token, User loggedUser, Date lastAction) {
