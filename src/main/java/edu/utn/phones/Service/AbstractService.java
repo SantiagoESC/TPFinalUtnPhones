@@ -1,11 +1,13 @@
 package edu.utn.phones.Service;
 
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Iterfaces.IAbstractCrud;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public  class AbstractService<T, R extends JpaRepository<T,Integer>> implements IAbstractCrud<T>  {
 
@@ -39,7 +41,11 @@ public  class AbstractService<T, R extends JpaRepository<T,Integer>> implements 
     }
 
     @Override
-    public List<T> getAll() {
-        return repository.findAll();
+    public List<T> getAll()  {
+         List<T> list= repository.findAll();
+        if(list.size() == 0){
+            throw new NoContentToShowException();
+        }
+         return list;
     }
 }

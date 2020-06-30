@@ -36,6 +36,17 @@ public class Call implements IUriInterface {
     @Column
     String  numberDestination;
 
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idLineOrigin")
+    PhoneLine lineOrigin;
+
+
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idLineDestination")
+    PhoneLine lineDestination;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "idCityOrigin")
     City cityOrigin;
@@ -64,10 +75,7 @@ public class Call implements IUriInterface {
     @Column
     LocalDateTime dateCall;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "idLineOrigin")
-    PhoneLine lineCall;
+
 
     @Override
     @JsonIgnore

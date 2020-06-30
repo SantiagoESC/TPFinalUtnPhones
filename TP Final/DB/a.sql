@@ -128,7 +128,6 @@ CREATE TABLE IF NOT EXISTS calls (
 
 SET FOREIGN_KEY_CHECKS = 1;
 
-
 DROP FUNCTION IF EXISTS fGetCostPerMinute;
 
 
@@ -139,7 +138,7 @@ RETURNS FLOAT
 DETERMINISTIC
 BEGIN
 
-    RETURN 0.5;
+    RETURN 1;
 
 END//
 
@@ -166,7 +165,7 @@ BEGIN
 
                 GROUP BY
 
-                    c.idCity
+                    c.idCity,c.prefix  
 
                 ORDER BY
                     LENGTH(c.prefix) DESC
@@ -194,12 +193,11 @@ NOT DETERMINISTIC READS SQL DATA
 BEGIN
 
     DECLARE vIdLine INTEGER DEFAULT 0;
-    DECLARE vNumber VARCHAR(25) DEFAULT '';
 
 
     SELECT
 
-        idLine, numberLine
+        idLine
 
     FROM
 
@@ -209,9 +207,13 @@ BEGIN
 
         pl.numberLine = pNumberLine
 
+    GROUP BY
+
+        idLine, numberLine
+
     INTO
 
-        vIdLine, vNumber
+        vIdLine
 
     ;
 
@@ -238,7 +240,20 @@ BEGIN
     
     DECLARE vPrice FLOAT DEFAULT 0;
 
-        SELECT pricePerMinute FROM rates r WHERE r.idCityOrigin = pIdOrigin AND r.idCityDestination = pIdDestination
+        SELECT 
+            r.pricePerMinute 
+            
+        FROM 
+                rates r 
+                
+        WHERE
+        
+         r.idCityOrigin = pIdOrigin AND r.idCityDestination = pIdDestination
+
+        GROUP BY
+
+            r.pricePerMinute
+
         INTO vPrice;
 
     IF (vPrice = 0) THEN
@@ -259,12 +274,11 @@ RETURNS INTEGER
 NOT DETERMINISTIC READS SQL DATA
 BEGIN
 
-   DECLARE vIdUser INTEGER DEFAULT 0;
-   DECLARE vIdLine INTEGER DEFAULT 0;
+    DECLARE vIdUser INTEGER DEFAULT 0;
 
     SELECT
 
-        idUser, idLine
+        pl.idUser
 
     FROM
 
@@ -274,11 +288,14 @@ BEGIN
 
         pl.idLine = pIdLine
 
+    GROUP BY
+
+        pl.idUser
+
 
     INTO
 
-        vIdUser, vIdLine
-
+        vIdUser
     ;
 
     IF(vIdUser = 0) THEN
@@ -292,6 +309,7 @@ BEGIN
 END//
 
 DELIMITER ;
+
 
 DROP TRIGGER IF EXISTS tbiCalculateInsertCall;
 
@@ -314,37 +332,7 @@ END//
 
 DELIMITER ;
 
-
-INSERT INTO provinces VALUES (NULL, 'Buenos Aires');
-INSERT INTO provinces VALUES (NULL, 'Cordoba');
-
-INSERT INTO cities VALUES (NULL, 'Mar del Plata', '223', 1); 
-INSERT INTO cities VALUES (NULL, 'Miramar ', '2234', 1); 
-INSERT INTO cities VALUES(NULL, 'CABA', '11', 1); 
-INSERT INTO cities VALUES (NULL, 'Cordoba', '543', 2);
-
-
-INSERT INTO rates
-SELECT NULL, O.idCity, D.idCity, 10
-from cities as O, cities as D;
-
-INSERT INTO users VALUES (null, 'abulzomi', '1234', 'Agustin', 'Bulzomi', '42587965', 'EMPLOYEE',1);
-INSERT INTO users VALUES (null, 'sescribas', '1234', 'Santiago', 'Escribas', '40256492', 'EMPLOYEE',1);
-
-INSERT INTO phoneLines VALUES (null, '2235863779', 'MOVILE', 'ACTIVE', 1);
-
-INSERT INTO phoneLines VALUES (null, '2234211434', 'MOVILE', 'ACTIVE', 2);
-
-INSERT INTO calls (numberOrigin, numberDestination, durationInseconds, dateCall)
-VALUES  ('2235863779', '2234211434', 180, NOW()),
-        ('2234211434','2235863779',  240, NOW()),
-        ('2235863779', '2234211434', 60, NOW()),
-        ('2235863779', '2234211434', 120, NOW());
-
-
-
-
-        DROP PROCEDURE IF EXISTS pliquidateLine ;
+DROP PROCEDURE IF EXISTS pliquidateLine ;
 #CREAR bill CURSORES
 DELIMITER //
 
@@ -420,5 +408,45 @@ END//
 DELIMITER ;
 
 
+DROP EVENT IF EXISTS eLiquidateActiveLines ;
 
- 
+CREATE EVENT eLiquidateActiveLines
+ON SCHEDULE EVERY 10 MINUTE
+STARTS CURRENT_TIMESTAMP
+ENDS CURRENT_TIMESTAMP + INTERVAL 48 HOUR
+ON COMPLETION PRESERVE
+DO
+
+    call pliquidateActiveLines();
+
+
+
+
+INSERT INTO provinces (nameProvince) VALUES ('Buenos Aires');
+INSERT INTO provinces (nameProvince) VALUES ('Cordoba');
+
+INSERT INTO cities (nameCity, prefix, idProvince) VALUES ( 'Mar del Plata', '223', 1),
+ ( 'Miramar ', '2234', 1),
+ ( 'CABA', '11', 1),
+ ( 'Cordoba', '543', 2);
+
+
+INSERT INTO rates (idCityOrigin, idCityDestination, pricePerMinute)
+SELECT  O.idCity, D.idCity, 10
+from cities as O, cities as D;
+
+INSERT INTO users (username, password, firstName,lastName, dni, userType,idCity) VALUES ('abulzomi', '1234', 'Agustin', 'Bulzomi', '42587965', 'EMPLOYEE',1),
+( 'sescribas', '1234', 'Santiago', 'Escribas', '40256492', 'EMPLOYEE',1);
+
+INSERT INTO phoneLines (numberLine, typeLine,statusLine, idUser) VALUES ( '2235863779', 'MOVILE', 'ACTIVE', 1),
+( '2234211434', 'MOVILE', 'ACTIVE', 2);
+
+
+
+
+INSERT INTO calls (numberOrigin, numberDestination, durationInseconds, dateCall)
+VALUES  ('2235863779', '2234211434', 180, NOW()),
+        ('2234211434','2235863779',  240, NOW()),
+        ('2235863779', '2234211434', 60, NOW()),
+        ('2235863779', '2234211434', 120, NOW());
+        

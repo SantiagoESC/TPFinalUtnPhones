@@ -7,12 +7,11 @@ RETURNS INTEGER
 NOT DETERMINISTIC READS SQL DATA
 BEGIN
 
-   DECLARE vIdUser INTEGER DEFAULT 0;
-   DECLARE vIdLine INTEGER DEFAULT 0;
+    DECLARE vIdUser INTEGER DEFAULT 0;
 
     SELECT
 
-        idUser, idLine
+        pl.idUser
 
     FROM
 
@@ -22,11 +21,14 @@ BEGIN
 
         pl.idLine = pIdLine
 
+    GROUP BY
+
+        pl.idUser
+
 
     INTO
 
-        vIdUser, vIdLine
-
+        vIdUser
     ;
 
     IF(vIdUser = 0) THEN

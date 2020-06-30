@@ -1,5 +1,6 @@
 package edu.utn.phones.Controller;
 
+import edu.utn.phones.Exceptions.GeneralExceptions.LoginException;
 import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,7 +19,7 @@ public class AdviceController extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ExceptionHandler(NoContentToShowException.class)
     public ResponseEntity handleNoContentToShowException (Exception ex){
-        return ResponseEntity.ok().body(ex.getCause());
+        return ResponseEntity.ok().body("No content to show");
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -40,4 +41,9 @@ public class AdviceController extends ResponseEntityExceptionHandler {
         return ResponseEntity.badRequest().body(ex.getCause().getCause().getMessage());
     }
 
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(LoginException.class)
+    public ResponseEntity handleLoginException(){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
 }

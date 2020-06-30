@@ -8,12 +8,11 @@ NOT DETERMINISTIC READS SQL DATA
 BEGIN
 
     DECLARE vIdLine INTEGER DEFAULT 0;
-    DECLARE vNumber VARCHAR(25) DEFAULT '';
 
 
     SELECT
 
-        idLine, numberLine
+        idLine
 
     FROM
 
@@ -23,9 +22,13 @@ BEGIN
 
         pl.numberLine = pNumberLine
 
+    GROUP BY
+
+        idLine, numberLine
+
     INTO
 
-        vIdLine, vNumber
+        vIdLine
 
     ;
 

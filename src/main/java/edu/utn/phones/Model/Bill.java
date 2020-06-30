@@ -25,14 +25,16 @@ public class Bill implements IUriInterface {
     Integer idBill;
 
     @NotNull
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idUser")
+    User userBill;
+
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "idLine")
     PhoneLine lineBill;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "idUser")
-    User userBill;
+
 
     @NotNull
     @Column
@@ -40,10 +42,10 @@ public class Bill implements IUriInterface {
 
     @NotNull
     @Column
-    Float   costPerMinute;
+    Float   totalCost;
     @NotNull
     @Column
-    Float   pricePerMinute;
+    Float   totalPrice;
     @NotNull
     @Column
     LocalDateTime    dateBill;

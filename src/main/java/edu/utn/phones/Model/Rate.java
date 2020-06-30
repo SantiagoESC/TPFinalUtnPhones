@@ -34,7 +34,7 @@ public class Rate implements IUriInterface {
 
     @NotNull
     @Column
-    Float   priceMinute;
+    Float   pricePerMinute;
 
     @Override
     @JsonIgnore

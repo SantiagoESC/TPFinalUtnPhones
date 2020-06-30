@@ -1,5 +1,8 @@
 package edu.utn.phones.Controller.Model;
 
+import edu.utn.phones.Exceptions.GeneralExceptions.LoginException;
+import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
+import edu.utn.phones.Exceptions.ModelExceptions.UserNotExistsException;
 import edu.utn.phones.Model.User;
 import edu.utn.phones.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,7 @@ public class UserController extends AbstractController<User, UserService> {
         super(userService);
     }
 
-    public User login(String username, String password) {
+    public User login(String username, String password) throws LoginException {
         return this.service.login(username,password);
     }
     //endregion

@@ -18,7 +18,7 @@ BEGIN
 
                 GROUP BY
 
-                    c.idCity
+                    c.idCity,c.prefix  
 
                 ORDER BY
                     LENGTH(c.prefix) DESC

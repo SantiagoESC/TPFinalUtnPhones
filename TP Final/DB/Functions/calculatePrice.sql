@@ -8,7 +8,20 @@ BEGIN
     
     DECLARE vPrice FLOAT DEFAULT 0;
 
-        SELECT pricePerMinute FROM rates r WHERE r.idCityOrigin = pIdOrigin AND r.idCityDestination = pIdDestination
+        SELECT 
+            r.pricePerMinute 
+            
+        FROM 
+                rates r 
+                
+        WHERE
+        
+         r.idCityOrigin = pIdOrigin AND r.idCityDestination = pIdDestination
+
+        GROUP BY
+
+            r.pricePerMinute
+
         INTO vPrice;
 
     IF (vPrice = 0) THEN

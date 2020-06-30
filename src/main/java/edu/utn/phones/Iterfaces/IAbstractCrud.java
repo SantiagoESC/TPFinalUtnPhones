@@ -1,5 +1,6 @@
 package edu.utn.phones.Iterfaces;
 
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface IAbstractCrud <T> {
 
     public T getById(Integer id) throws ResourceNotFoundException;
 
-    public List<T> getAll();
+    public List<T> getAll() throws NoContentToShowException;
 
 
 
