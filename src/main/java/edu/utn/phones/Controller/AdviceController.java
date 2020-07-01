@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.text.ParseException;
+
 @RestControllerAdvice
 public class AdviceController extends ResponseEntityExceptionHandler {
 
@@ -45,5 +47,11 @@ public class AdviceController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(LoginException.class)
     public ResponseEntity handleLoginException(){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ParseException.class)
+    public ResponseEntity  handleParseException() {
+        return ResponseEntity.badRequest().build();
     }
 }

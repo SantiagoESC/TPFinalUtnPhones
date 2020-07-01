@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">phones</a> &gt; <a href="index.source.html" class="el_package">edu.utn.phones.Service</a> &gt; <span class="el_source">AbstractService.java</span></div><h1>AbstractService.java</h1><pre class="source lang-java linenums">package edu.utn.phones.Service;
+
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
+import edu.utn.phones.Iterfaces.IAbstractCrud;
+import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
+public  class AbstractService&lt;T, R extends JpaRepository&lt;T,Integer&gt;&gt; implements IAbstractCrud&lt;T&gt;  {
+
+
+    protected final R repository;
+
+<span class="fc" id="L17">    public AbstractService(R repository) {</span>
+<span class="fc" id="L18">        this.repository =  repository;</span>
+
+<span class="fc" id="L20">    }</span>
+
+
+    @Override
+    public T add(T newT)  {
+<span class="nc" id="L25">        return  this.repository.save(newT);</span>
+    }
+
+    @Override
+    public T update(T updatedT) {
+<span class="nc" id="L30">        return this.repository.save(updatedT);</span>
+    }
+
+    @Override
+    public void delete(T ToDelete) {
+<span class="nc" id="L35">        this.repository.delete(ToDelete);</span>
+<span class="nc" id="L36">    }</span>
+
+    @Override
+    public T getById(Integer id) throws ResourceNotFoundException {
+<span class="nc" id="L40">        return this.repository.findById(id).orElseThrow(ResourceNotFoundException::new);</span>
+    }
+
+    @Override
+    public List&lt;T&gt; getAll()  {
+<span class="nc" id="L45">         List&lt;T&gt; list= repository.findAll();</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if(list.size() == 0){</span>
+<span class="nc" id="L47">            throw new NoContentToShowException();</span>
+        }
+<span class="nc" id="L49">         return list;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -35,7 +35,7 @@ INSERT INTO phoneLines (numberLine, typeLine,statusLine, idUser) VALUES ( '22358
 
 
 INSERT INTO calls (numberOrigin, numberDestination, durationInseconds, dateCall)
-VALUES  ('2235863779', '2234211434', 180, NOW()),
+VALUES  ('2235863779', '2234211434', 180, '2020-03-15'),
         ('2234211434','2235863779',  240, NOW()),
         ('2235863779', '2234211434', 60, NOW()),
         ('2235863779', '2234211434', 120, NOW());

@@ -8,7 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -28,10 +33,12 @@ public class CallWebController {
 
     /*Consulta de llamadas del usuario logueado por rango de fechas.*/
     @GetMapping("/")
-    public ResponseEntity<List<Call>> getCallsBetweenDates(@RequestHeader("Authorization") String token, @RequestParam(required = false) LocalDateTime from, @RequestParam(required = false) LocalDateTime to){
+    public ResponseEntity<List<Call>> getCallsBetweenDates(@RequestHeader("Authorization") String token, @RequestParam(required = false, value = "from") String from, @RequestParam(required = false, value = "to") String to) throws ParseException {
         User loggedUser = this.sessionManager.getCurrentUser(token);
-
-        List<Call> calls = this.callController.getAll(loggedUser, from,to);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime fromDate = LocalDateTime.parse(from, formatter);
+        LocalDateTime toDate = LocalDateTime.parse(to, formatter);
+        List<Call> calls = this.callController.getAll(loggedUser, fromDate,toDate);
 
         return ResponseEntity.ok(calls);
     }
