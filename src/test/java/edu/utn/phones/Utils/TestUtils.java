@@ -6,8 +6,10 @@ import edu.utn.phones.Domain.Enums.UserType;
 import edu.utn.phones.Domain.Province;
 import edu.utn.phones.Domain.User;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestUtils {
@@ -32,6 +34,10 @@ public class TestUtils {
         City c = City.builder().idCity(1).nameCity("Mar del Plata").prefix("223").province(createProvince()).build();
         return c;
     }
+    public static City createCity2(){
+        City c = City.builder().idCity(1).nameCity("Mar del Plata").prefix("224").province(createProvince()).build();
+        return c;
+    }
 
     public static City createCityNoId(){
         City c = City.builder().nameCity("Mar del Plata").prefix("223").province(createProvince()).build();
@@ -49,8 +55,17 @@ public class TestUtils {
     }
 
 
+    public static List<City> createCityList(){
+        ArrayList<City> list = new ArrayList<>();
+        for (int i = 0; i < 3 ; i++) {
+            list.add(createCity());
+        }
+        return list;
+    }
+
+
     public static List<Call> createCallList(){
-        return null;
+        return new ArrayList<Call>();
     }
 
 

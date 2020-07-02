@@ -2,6 +2,7 @@
 
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.UserController;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,26 +21,26 @@ public class UserBackofficeController   {
 
     //region Constructor
     @Autowired
-<span class="nc" id="L23">    public UserBackofficeController(UserController userController) {</span>
-<span class="nc" id="L24">        this.userController = userController;</span>
-<span class="nc" id="L25">    }</span>
+<span class="nc" id="L24">    public UserBackofficeController(UserController userController) {</span>
+<span class="nc" id="L25">        this.userController = userController;</span>
+<span class="nc" id="L26">    }</span>
     //endregion
 
     //region ABM
     @PostMapping(&quot;/&quot;)
     public ResponseEntity add(@RequestBody User newUser){
-<span class="nc" id="L31">        User ut = this.userController.add(newUser);</span>
+<span class="nc" id="L32">        User ut = this.userController.add(newUser);</span>
 
-<span class="nc" id="L33">        return ResponseEntity.created(Configuration.getLocation(ut)).build() ;</span>
+<span class="nc" id="L34">        return ResponseEntity.created(Configuration.getLocation(ut)).build() ;</span>
     }
 
     @PutMapping(&quot;/{idUser}&quot;)
     public ResponseEntity update(@RequestBody User updatedUser, @PathVariable Integer idUser) throws ResourceNotFoundException {
 
-<span class="nc" id="L39">        User u = this.userController.getById(idUser);</span>
-<span class="nc" id="L40">        updatedUser.setIdUser(u.getIdUser());</span>
-<span class="nc" id="L41">        this.userController.update(updatedUser);</span>
-<span class="nc" id="L42">        return  ResponseEntity.ok().build();</span>
+<span class="nc" id="L40">        User u = this.userController.getById(idUser);</span>
+<span class="nc" id="L41">        updatedUser.setIdUser(u.getIdUser());</span>
+<span class="nc" id="L42">        this.userController.update(updatedUser);</span>
+<span class="nc" id="L43">        return  ResponseEntity.ok().build();</span>
 
 
     }
@@ -47,9 +48,9 @@ public class UserBackofficeController   {
 
     @DeleteMapping(&quot;/{idUser}&quot;)
     public ResponseEntity delete(@PathVariable Integer idUser) throws ResourceNotFoundException {
-<span class="nc" id="L50">        User p = this.userController.getById(idUser);</span>
-<span class="nc" id="L51">        this.userController.delete(p);</span>
-<span class="nc" id="L52">        return ResponseEntity.ok().build();</span>
+<span class="nc" id="L51">        User p = this.userController.getById(idUser);</span>
+<span class="nc" id="L52">        this.userController.delete(p);</span>
+<span class="nc" id="L53">        return ResponseEntity.ok().build();</span>
 
     }
     //endregion
@@ -58,8 +59,8 @@ public class UserBackofficeController   {
     @GetMapping(&quot;/{idUser}&quot;)
     public ResponseEntity&lt;User&gt; getById(@PathVariable Integer idUser) throws ResourceNotFoundException {
 
-<span class="nc" id="L61">        User ut = this.userController.getById(idUser);</span>
-<span class="nc" id="L62">        return ResponseEntity.ok().body(ut);</span>
+<span class="nc" id="L62">        User ut = this.userController.getById(idUser);</span>
+<span class="nc" id="L63">        return ResponseEntity.ok().body(ut);</span>
 
 
     }
@@ -67,9 +68,9 @@ public class UserBackofficeController   {
 
 
     @GetMapping(&quot;/&quot;)
-    public ResponseEntity&lt;List&lt;User&gt;&gt; getAll(){
-<span class="nc" id="L71">        List&lt;User&gt; list = this.userController.getAll();</span>
-<span class="nc" id="L72">        return ResponseEntity.ok().body(list);</span>
+    public ResponseEntity&lt;List&lt;User&gt;&gt; getAll() throws NoContentToShowException {
+<span class="nc" id="L72">        List&lt;User&gt; list = this.userController.getAll();</span>
+<span class="nc" id="L73">        return ResponseEntity.ok().body(list);</span>
     }
     //endregion
 

@@ -5,6 +5,7 @@ import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.BillController;
 import edu.utn.phones.Controller.Model.UserController;
 import edu.utn.phones.Domain.User;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.Bill;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,10 @@ public class BillBackofficeController {
 
     //region Constructor
     @Autowired
-<span class="nc" id="L27">    public BillBackofficeController(BillController billController, UserController userController) {</span>
-<span class="nc" id="L28">        this.billController = billController;</span>
-<span class="nc" id="L29">        this.userController = userController;</span>
-<span class="nc" id="L30">    }</span>
+<span class="nc" id="L28">    public BillBackofficeController(BillController billController, UserController userController) {</span>
+<span class="nc" id="L29">        this.billController = billController;</span>
+<span class="nc" id="L30">        this.userController = userController;</span>
+<span class="nc" id="L31">    }</span>
     //endregion
 
     //region ABM
@@ -37,18 +38,18 @@ public class BillBackofficeController {
         /*traer el usuario logeado*/
         /**/
 
-<span class="nc" id="L40">        Bill ut = this.billController.add(newBill);</span>
+<span class="nc" id="L41">        Bill ut = this.billController.add(newBill);</span>
 
-<span class="nc" id="L42">        return ResponseEntity.created(Configuration.getLocation(ut)).build() ;</span>
+<span class="nc" id="L43">        return ResponseEntity.created(Configuration.getLocation(ut)).build() ;</span>
     }
 
     @PutMapping(&quot;/{idBill}&quot;)
     public ResponseEntity update(@RequestBody Bill updatedBill, @PathVariable Integer idBill) throws ResourceNotFoundException {
 
-<span class="nc" id="L48">        Bill u = this.billController.getById(idBill);</span>
-<span class="nc" id="L49">        updatedBill.setIdBill(u.getIdBill());</span>
-<span class="nc" id="L50">        this.billController.update(updatedBill);</span>
-<span class="nc" id="L51">        return  ResponseEntity.ok().build();</span>
+<span class="nc" id="L49">        Bill u = this.billController.getById(idBill);</span>
+<span class="nc" id="L50">        updatedBill.setIdBill(u.getIdBill());</span>
+<span class="nc" id="L51">        this.billController.update(updatedBill);</span>
+<span class="nc" id="L52">        return  ResponseEntity.ok().build();</span>
 
 
     }
@@ -56,9 +57,9 @@ public class BillBackofficeController {
 
     @DeleteMapping(&quot;/{idBill}&quot;)
     public ResponseEntity delete(@PathVariable Integer idBill) throws ResourceNotFoundException {
-<span class="nc" id="L59">        Bill p = this.billController.getById(idBill);</span>
-<span class="nc" id="L60">        this.billController.delete(p);</span>
-<span class="nc" id="L61">        return ResponseEntity.ok().build();</span>
+<span class="nc" id="L60">        Bill p = this.billController.getById(idBill);</span>
+<span class="nc" id="L61">        this.billController.delete(p);</span>
+<span class="nc" id="L62">        return ResponseEntity.ok().build();</span>
 
     }
     //endregion
@@ -67,8 +68,8 @@ public class BillBackofficeController {
     @GetMapping(&quot;/{idBill}&quot;)
     public ResponseEntity&lt;Bill&gt; getById(@PathVariable Integer idBill) throws ResourceNotFoundException {
 
-<span class="nc" id="L70">        Bill ut = this.billController.getById(idBill);</span>
-<span class="nc" id="L71">        return ResponseEntity.ok().body(ut);</span>
+<span class="nc" id="L71">        Bill ut = this.billController.getById(idBill);</span>
+<span class="nc" id="L72">        return ResponseEntity.ok().body(ut);</span>
 
 
     }
@@ -76,16 +77,16 @@ public class BillBackofficeController {
 
 
     @GetMapping(&quot;/&quot;)
-    public ResponseEntity&lt;List&lt;Bill&gt;&gt; getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException {
+    public ResponseEntity&lt;List&lt;Bill&gt;&gt; getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException, NoContentToShowException {
         List&lt;Bill&gt; list;
-<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (idUser == null){</span>
-<span class="nc" id="L82">            User u = this.userController.getById(idUser);</span>
-<span class="nc" id="L83">            list = this.billController.getAll(u);</span>
-<span class="nc" id="L84">        }else {</span>
-<span class="nc" id="L85">            list=this.billController.getAll();</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (idUser == null){</span>
+<span class="nc" id="L83">            User u = this.userController.getById(idUser);</span>
+<span class="nc" id="L84">            list = this.billController.getAll(u);</span>
+<span class="nc" id="L85">        }else {</span>
+<span class="nc" id="L86">            list=this.billController.getAll();</span>
         }
 
-<span class="nc" id="L88">        return ResponseEntity.ok().body(list);</span>
+<span class="nc" id="L89">        return ResponseEntity.ok().body(list);</span>
     }
     //endregion
 

@@ -20,7 +20,7 @@ public class CallService extends AbstractService<Call, ICallRepository> {
     }
 
 
-    public List<Call> getAll(User loggedUser, LocalDateTime from, LocalDateTime to) {
+    public List<Call> getAll(User loggedUser, LocalDateTime from, LocalDateTime to) throws NoContentToShowException {
         List<Call> list;
         if (from == null && to == null){
            list = this.repository.findByLineOriginOwnerLine(loggedUser);
@@ -35,7 +35,7 @@ public class CallService extends AbstractService<Call, ICallRepository> {
         return list;
     }
 
-    public List<Call> getAllByUser(User u) {
+    public List<Call> getAllByUser(User u) throws NoContentToShowException {
         List<Call> list= this.repository.findByUser(u.getIdUser());
         if (list.size() == 0){
             throw new NoContentToShowException();

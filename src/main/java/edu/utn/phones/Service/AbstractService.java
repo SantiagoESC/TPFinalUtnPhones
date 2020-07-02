@@ -41,7 +41,7 @@ public  class AbstractService<T, R extends JpaRepository<T,Integer>> implements 
     }
 
     @Override
-    public List<T> getAll()  {
+    public List<T> getAll() throws NoContentToShowException {
          List<T> list= repository.findAll();
         if(list.size() == 0){
             throw new NoContentToShowException();

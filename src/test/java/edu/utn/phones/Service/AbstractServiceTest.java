@@ -1,5 +1,6 @@
 package edu.utn.phones.Service;
 
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.Province;
 import edu.utn.phones.Repository.IProvinceRepository;
@@ -91,7 +92,7 @@ public class AbstractServiceTest {
 
 
     @Test
-    public void testGetAll(){
+    public void testGetAll() throws NoContentToShowException {
         List<Province> list = new ArrayList<Province>();
         Province p = Province.builder().idProvince(1).nameProvince("Buenos Aires").build();
         Province p2 = Province.builder().idProvince(2).nameProvince("Cordoba").build();
@@ -110,6 +111,12 @@ public class AbstractServiceTest {
         assertEquals(expected,actual);
     }
 
+
+    @Test(expected = NoContentToShowException.class)
+    public void testGetAllNoContentToShowException() throws NoContentToShowException {
+        when(this.repository.findAll()).thenReturn(new ArrayList<Province>());
+        List<Province> list =  this.abstractService.getAll();
+    }
 
 
 

@@ -3,6 +3,7 @@ package edu.utn.phones.Controller.BackOffice;
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.CityController;
 import edu.utn.phones.Controller.Model.RateController;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,13 @@ public class RateBackofficeController {
 
     //region Atributes
     private final RateController rateController;
-    private final CityController cityController;
+
     //endregion
 
     //region Constructor
     @Autowired
-    public RateBackofficeController(RateController rateController, CityController cityController) {
+    public RateBackofficeController(RateController rateController) {
         this.rateController = rateController;
-        this.cityController = cityController;
     }
     //endregion
 
@@ -69,7 +69,7 @@ public class RateBackofficeController {
 
 
     @GetMapping("/")
-    public ResponseEntity<List<Rate>> getAll(@RequestParam(required = false) Integer idCityOrigin, @RequestParam(required = false) Integer idCityDestination) throws ResourceNotFoundException {
+    public ResponseEntity<List<Rate>> getAll() throws ResourceNotFoundException, NoContentToShowException {
 
         List<Rate> list = this.rateController.getAll();
 

@@ -15,33 +15,33 @@ public class CallService extends AbstractService&lt;Call, ICallRepository&gt; {
 
     @Autowired
     public CallService(ICallRepository repository) {
-<span class="nc" id="L18">        super(repository);</span>
+<span class="fc" id="L18">        super(repository);</span>
 
-<span class="nc" id="L20">    }</span>
+<span class="fc" id="L20">    }</span>
 
 
-    public List&lt;Call&gt; getAll(User loggedUser, LocalDateTime from, LocalDateTime to) {
+    public List&lt;Call&gt; getAll(User loggedUser, LocalDateTime from, LocalDateTime to) throws NoContentToShowException {
         List&lt;Call&gt; list;
-<span class="nc bnc" id="L25" title="All 4 branches missed.">        if (from == null &amp;&amp; to == null){</span>
-<span class="nc" id="L26">           list = this.repository.findByLineOriginOwnerLine(loggedUser);</span>
+<span class="pc bpc" id="L25" title="1 of 4 branches missed.">        if (from == null &amp;&amp; to == null){</span>
+<span class="fc" id="L26">           list = this.repository.findByLineOriginOwnerLine(loggedUser);</span>
         }else {
-<span class="nc" id="L28">            list = this.repository.findByLineOriginOwnerLineAndDateCallBetween(loggedUser,from,to );</span>
+<span class="fc" id="L28">            list = this.repository.findByLineOriginOwnerLineAndDateCallBetween(loggedUser,from,to );</span>
         }
 
-<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (list.size() == 0){</span>
-<span class="nc" id="L32">            throw new NoContentToShowException();</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (list.size() == 0){</span>
+<span class="fc" id="L32">            throw new NoContentToShowException();</span>
         }
 
-<span class="nc" id="L35">        return list;</span>
+<span class="fc" id="L35">        return list;</span>
     }
 
-    public List&lt;Call&gt; getAllByUser(User u) {
-<span class="nc" id="L39">        List&lt;Call&gt; list= this.repository.findByUser(u.getIdUser());</span>
-<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (list.size() == 0){</span>
-<span class="nc" id="L41">            throw new NoContentToShowException();</span>
+    public List&lt;Call&gt; getAllByUser(User u) throws NoContentToShowException {
+<span class="fc" id="L39">        List&lt;Call&gt; list= this.repository.findByUser(u.getIdUser());</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (list.size() == 0){</span>
+<span class="fc" id="L41">            throw new NoContentToShowException();</span>
 
         }
-<span class="nc" id="L44">        return list;</span>
+<span class="fc" id="L44">        return list;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

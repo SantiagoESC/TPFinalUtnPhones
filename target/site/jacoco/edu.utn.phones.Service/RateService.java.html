@@ -15,16 +15,12 @@ public class RateService extends AbstractService&lt;Rate, IRateRepository&gt; {
     //region Contructor
     @Autowired
     public RateService(IRateRepository rateRepository) {
-<span class="nc" id="L18">        super(rateRepository);</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L18">        super(rateRepository);</span>
+<span class="fc" id="L19">    }</span>
     //endregion
 
 
-    public List&lt;Rate&gt; getAll(City cityOrigin, City cityDestination){
 
-<span class="nc" id="L25">        return this.repository.findAll();</span>
-
-    }
 
 
 

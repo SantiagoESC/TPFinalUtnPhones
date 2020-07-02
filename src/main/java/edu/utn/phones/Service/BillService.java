@@ -22,7 +22,7 @@ public class BillService extends AbstractService<Bill, IBillRepository> {
     }
 
 
-    public List<Bill> getAll(User loggedUser, LocalDateTime fromDate, LocalDateTime toDate) {
+    public List<Bill> getAll(User loggedUser, LocalDateTime fromDate, LocalDateTime toDate) throws NoContentToShowException {
 
 
         List<Bill>list = this.repository.findByUserBillAndDateBillBetween(loggedUser,fromDate,toDate );
@@ -36,7 +36,7 @@ public class BillService extends AbstractService<Bill, IBillRepository> {
         return list;
     }
 
-    public List<Bill> getAll(User loggedUser) {
+    public List<Bill> getAll(User loggedUser) throws NoContentToShowException {
         List<Bill>list = this.repository.findByUserBill(loggedUser);
         if (list.size() == 0){
             throw new NoContentToShowException();

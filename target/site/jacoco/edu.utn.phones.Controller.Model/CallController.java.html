@@ -2,6 +2,7 @@
 
 import edu.utn.phones.Domain.Call;
 import edu.utn.phones.Domain.User;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Service.CallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,17 +16,17 @@ public class CallController extends AbstractController&lt;Call, CallService&gt; 
 
     @Autowired
     public CallController(CallService service) {
-<span class="nc" id="L18">        super(service);</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L19">        super(service);</span>
+<span class="fc" id="L20">    }</span>
 
 
-    public List&lt;Call&gt; getAll(User loggedUser, LocalDateTime from, LocalDateTime to) {
+    public List&lt;Call&gt; getAll(User loggedUser, LocalDateTime from, LocalDateTime to) throws NoContentToShowException {
 
-<span class="nc" id="L24">        return this.service.getAll( loggedUser,  from,  to);</span>
+<span class="fc" id="L25">        return this.service.getAll( loggedUser,  from,  to);</span>
     }
 
-    public List&lt;Call&gt; getAllByUser(User u) {
-<span class="nc" id="L28">        return this.service.getAllByUser(u);</span>
+    public List&lt;Call&gt; getAllByUser(User u) throws NoContentToShowException {
+<span class="fc" id="L29">        return this.service.getAllByUser(u);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

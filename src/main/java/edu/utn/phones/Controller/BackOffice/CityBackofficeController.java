@@ -2,6 +2,7 @@ package edu.utn.phones.Controller.BackOffice;
 
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.CityController;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.City;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,7 @@ public class CityBackofficeController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<City>> getAll() {
+    public ResponseEntity<List<City>> getAll() throws NoContentToShowException {
         List<City> cities = this.cityController.getAll();
 
         return ResponseEntity.ok().body(cities);

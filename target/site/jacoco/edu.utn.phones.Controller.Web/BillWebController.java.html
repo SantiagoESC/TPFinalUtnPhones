@@ -4,6 +4,7 @@ import edu.utn.phones.Controller.Model.BillController;
 import edu.utn.phones.Domain.Bill;
 import edu.utn.phones.Domain.Call;
 import edu.utn.phones.Domain.User;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,26 +23,26 @@ public class BillWebController {
     private final SessionManager sessionManager;
 
     @Autowired
-<span class="nc" id="L25">    public BillWebController(BillController billController, SessionManager sessionManager) {</span>
-<span class="nc" id="L26">        this.billController = billController;</span>
-<span class="nc" id="L27">        this.sessionManager = sessionManager;</span>
-<span class="nc" id="L28">    }</span>
+<span class="fc" id="L26">    public BillWebController(BillController billController, SessionManager sessionManager) {</span>
+<span class="fc" id="L27">        this.billController = billController;</span>
+<span class="fc" id="L28">        this.sessionManager = sessionManager;</span>
+<span class="fc" id="L29">    }</span>
 
     @GetMapping(&quot;/&quot;)
-    public ResponseEntity&lt;List&lt;Bill&gt;&gt; getCallsBetweenDates(@RequestHeader(&quot;Authorization&quot;) String token, @RequestParam(required = false, value = &quot;from&quot;) String from, @RequestParam(required = false, value = &quot;to&quot;) String to) throws ParseException {
-<span class="nc" id="L32">        User loggedUser = this.sessionManager.getCurrentUser(token);</span>
+    public ResponseEntity&lt;List&lt;Bill&gt;&gt; getCallsBetweenDates(@RequestHeader(&quot;Authorization&quot;) String token, @RequestParam(required = false, value = &quot;from&quot;) String from, @RequestParam(required = false, value = &quot;to&quot;) String to) throws ParseException, NoContentToShowException {
+<span class="fc" id="L33">        User loggedUser = this.sessionManager.getCurrentUser(token);</span>
         List&lt;Bill&gt; bills;
-<span class="nc bnc" id="L34" title="All 4 branches missed.">        if (from != null &amp;&amp; to != null) {</span>
-<span class="nc" id="L35">            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
-<span class="nc" id="L36">            LocalDateTime fromDate = LocalDateTime.parse(from, formatter);</span>
-<span class="nc" id="L37">            LocalDateTime toDate = LocalDateTime.parse(to, formatter);</span>
-<span class="nc" id="L38">            bills = this.billController.getAll(loggedUser, fromDate, toDate);</span>
+<span class="pc bpc" id="L35" title="1 of 4 branches missed.">        if (from != null &amp;&amp; to != null) {</span>
+<span class="fc" id="L36">            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="fc" id="L37">            LocalDateTime fromDate = LocalDateTime.parse(from, formatter);</span>
+<span class="fc" id="L38">            LocalDateTime toDate = LocalDateTime.parse(to, formatter);</span>
+<span class="fc" id="L39">            bills = this.billController.getAll(loggedUser, fromDate, toDate);</span>
 
-<span class="nc" id="L40">        } else {</span>
-<span class="nc" id="L41">            bills = this.billController.getAll(loggedUser);</span>
+<span class="fc" id="L41">        } else {</span>
+<span class="fc" id="L42">            bills = this.billController.getAll(loggedUser);</span>
         }
 
-<span class="nc" id="L44">        return ResponseEntity.ok(bills);</span>
+<span class="fc" id="L45">        return ResponseEntity.ok(bills);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

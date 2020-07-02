@@ -2,6 +2,7 @@ package edu.utn.phones.Controller.BackOffice;
 
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.PhoneLineController;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.PhoneLine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class PhoneLineBackofficeController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<PhoneLine>> getAll() {
+    public ResponseEntity<List<PhoneLine>> getAll() throws NoContentToShowException {
         List<PhoneLine> list = this.phoneLineController.getAll();
         return ResponseEntity.ok().body(list);
     }

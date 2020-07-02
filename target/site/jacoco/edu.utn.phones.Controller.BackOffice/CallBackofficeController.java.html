@@ -4,6 +4,7 @@ import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.CallController;
 import edu.utn.phones.Controller.Model.UserController;
 import edu.utn.phones.Domain.User;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.Call;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,10 @@ public class CallBackofficeController {
 
     //region Constructor
     @Autowired
-<span class="nc" id="L26">    public CallBackofficeController(CallController callController, UserController userController) {</span>
-<span class="nc" id="L27">        this.callController = callController;</span>
-<span class="nc" id="L28">        this.userController = userController;</span>
-<span class="nc" id="L29">    }</span>
+<span class="nc" id="L27">    public CallBackofficeController(CallController callController, UserController userController) {</span>
+<span class="nc" id="L28">        this.callController = callController;</span>
+<span class="nc" id="L29">        this.userController = userController;</span>
+<span class="nc" id="L30">    }</span>
     //endregion
 
     //region ABM
@@ -35,10 +36,10 @@ public class CallBackofficeController {
     @PutMapping(&quot;/{idCall}&quot;)
     public ResponseEntity update(@RequestBody Call updatedCall, @PathVariable Integer idCall) throws ResourceNotFoundException {
 
-<span class="nc" id="L38">        Call u = this.callController.getById(idCall);</span>
-<span class="nc" id="L39">        updatedCall.setIdCall(u.getIdCall());</span>
-<span class="nc" id="L40">        this.callController.update(updatedCall);</span>
-<span class="nc" id="L41">        return ResponseEntity.ok().build();</span>
+<span class="nc" id="L39">        Call u = this.callController.getById(idCall);</span>
+<span class="nc" id="L40">        updatedCall.setIdCall(u.getIdCall());</span>
+<span class="nc" id="L41">        this.callController.update(updatedCall);</span>
+<span class="nc" id="L42">        return ResponseEntity.ok().build();</span>
 
 
     }
@@ -46,9 +47,9 @@ public class CallBackofficeController {
 
     @DeleteMapping(&quot;/{idCall}&quot;)
     public ResponseEntity delete(@PathVariable Integer idCall) throws ResourceNotFoundException {
-<span class="nc" id="L49">        Call p = this.callController.getById(idCall);</span>
-<span class="nc" id="L50">        this.callController.delete(p);</span>
-<span class="nc" id="L51">        return ResponseEntity.ok().build();</span>
+<span class="nc" id="L50">        Call p = this.callController.getById(idCall);</span>
+<span class="nc" id="L51">        this.callController.delete(p);</span>
+<span class="nc" id="L52">        return ResponseEntity.ok().build();</span>
 
     }
     //endregion
@@ -57,24 +58,24 @@ public class CallBackofficeController {
     @GetMapping(&quot;/{idCall}&quot;)
     public ResponseEntity&lt;Call&gt; getById(@PathVariable Integer idCall) throws ResourceNotFoundException {
 
-<span class="nc" id="L60">        Call ut = this.callController.getById(idCall);</span>
-<span class="nc" id="L61">        return ResponseEntity.ok().body(ut);</span>
+<span class="nc" id="L61">        Call ut = this.callController.getById(idCall);</span>
+<span class="nc" id="L62">        return ResponseEntity.ok().body(ut);</span>
 
 
     }
 
 
     @GetMapping(&quot;/&quot;)
-    public ResponseEntity&lt;List&lt;Call&gt;&gt; getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException {
+    public ResponseEntity&lt;List&lt;Call&gt;&gt; getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException, NoContentToShowException {
         List&lt;Call&gt; list;
-<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (idUser == null){</span>
-<span class="nc" id="L71">            list= this.callController.getAll();</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (idUser == null){</span>
+<span class="nc" id="L72">            list= this.callController.getAll();</span>
         }else{
-<span class="nc" id="L73">            User u = this.userController.getById(idUser);</span>
-<span class="nc" id="L74">            list= this.callController.getAllByUser(u);</span>
+<span class="nc" id="L74">            User u = this.userController.getById(idUser);</span>
+<span class="nc" id="L75">            list= this.callController.getAllByUser(u);</span>
         }
 
-<span class="nc" id="L77">        return ResponseEntity.ok().body(list);</span>
+<span class="nc" id="L78">        return ResponseEntity.ok().body(list);</span>
     }
     //endregion
 

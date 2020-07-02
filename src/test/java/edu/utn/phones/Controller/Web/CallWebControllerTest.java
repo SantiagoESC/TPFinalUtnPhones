@@ -38,7 +38,7 @@ public class CallWebControllerTest {
     }
 
     @Test
-    public void getCallsBetweenDatesOkNoParameters() throws ParseException {
+    public void getCallsBetweenDatesOkNoParameters() throws ParseException, NoContentToShowException {
         User test = TestUtils.createUser();
         List<Call> listCall = TestUtils.createCallList();
         when(this.sessionManager.getCurrentUser(any())).thenReturn(test);
@@ -55,7 +55,7 @@ public class CallWebControllerTest {
 
 
     @Test
-    public void getCallsBetweenDatesOkWithParameters() throws ParseException {
+    public void getCallsBetweenDatesOkWithParameters() throws ParseException, NoContentToShowException {
         User user = TestUtils.createUser();
         List<Call> listCall = TestUtils.createCallList();
         String from = "2020-10-10 00:00:00";
@@ -71,7 +71,7 @@ public class CallWebControllerTest {
     }
 
     @Test(expected = NoContentToShowException.class)
-    public void getCallsBetweenDatesNoParametersNoContentToShowException() throws ParseException {
+    public void getCallsBetweenDatesNoParametersNoContentToShowException() throws ParseException, NoContentToShowException {
         User user = TestUtils.createUser();
         when(this.sessionManager.getCurrentUser(any())).thenReturn(user);
         when(this.callController.getAllByUser(any())).thenThrow(new NoContentToShowException());
@@ -80,7 +80,7 @@ public class CallWebControllerTest {
 
 
     @Test(expected = NoContentToShowException.class)
-    public void getCallsBetweenDatesWithParametersNoContentToShowException() throws ParseException {
+    public void getCallsBetweenDatesWithParametersNoContentToShowException() throws ParseException, NoContentToShowException {
         User user = TestUtils.createUser();
         String from = "2020-10-10 00:00:00";
         String to = "2020-10-15 00:00:00";
@@ -90,7 +90,7 @@ public class CallWebControllerTest {
     }
 
     @Test(expected = DateTimeParseException.class)
-    public void getCallsBetweenDatesWithParametersParseException() throws ParseException {
+    public void getCallsBetweenDatesWithParametersParseException() throws ParseException, NoContentToShowException {
         User user = TestUtils.createUser();
         when(this.sessionManager.getCurrentUser(any())).thenReturn(user);
         ResponseEntity responseEntity = this.callWebController.getCallsBetweenDates("Hola", "Esto es una fecha", "esto tambien");

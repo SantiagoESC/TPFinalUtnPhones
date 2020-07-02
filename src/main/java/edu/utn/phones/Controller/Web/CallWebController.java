@@ -3,6 +3,7 @@ package edu.utn.phones.Controller.Web;
 import edu.utn.phones.Controller.Model.CallController;
 import edu.utn.phones.Domain.Call;
 import edu.utn.phones.Domain.User;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class CallWebController {
 
     /*Consulta de llamadas del usuario logueado por rango de fechas.*/
     @GetMapping("/")
-    public ResponseEntity<List<Call>> getCallsBetweenDates(@RequestHeader("Authorization") String token, @RequestParam(required = false, value = "from") String from, @RequestParam(required = false, value = "to") String to) throws ParseException {
+    public ResponseEntity<List<Call>> getCallsBetweenDates(@RequestHeader("Authorization") String token, @RequestParam(required = false, value = "from") String from, @RequestParam(required = false, value = "to") String to) throws ParseException, NoContentToShowException {
         List<Call> calls;
 
         User loggedUser = this.sessionManager.getCurrentUser(token);

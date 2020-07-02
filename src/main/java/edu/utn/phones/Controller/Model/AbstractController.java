@@ -1,5 +1,6 @@
 package edu.utn.phones.Controller.Model;
 
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Iterfaces.IAbstractCrud;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Service.AbstractService;
@@ -42,7 +43,7 @@ public class AbstractController<T, S extends   IAbstractCrud<T>> implements IAbs
     }
 
     @Override
-    public List<T> getAll() {
+    public List<T> getAll() throws NoContentToShowException {
         return this.service.getAll();
     }
 

@@ -1,5 +1,6 @@
 package edu.utn.phones.Controller.Model;
 
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.Province;
 import edu.utn.phones.Repository.IProvinceRepository;
@@ -91,7 +92,7 @@ public class AbstractControllerTest {
     }
 
     @Test
-    public void testGetAll(){
+    public void testGetAll() throws NoContentToShowException {
         List<Province> list = new ArrayList<Province>();
         Province p = Province.builder().idProvince(1).nameProvince("Buenos Aires").build();
         Province p2 = Province.builder().idProvince(2).nameProvince("Cordoba").build();

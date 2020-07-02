@@ -4,6 +4,7 @@ import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.CallController;
 import edu.utn.phones.Controller.Model.UserController;
 import edu.utn.phones.Domain.User;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.Call;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ public class CallBackofficeController {
 
 
     @GetMapping("/")
-    public ResponseEntity<List<Call>> getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException {
+    public ResponseEntity<List<Call>> getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException, NoContentToShowException {
         List<Call> list;
         if (idUser == null){
             list= this.callController.getAll();

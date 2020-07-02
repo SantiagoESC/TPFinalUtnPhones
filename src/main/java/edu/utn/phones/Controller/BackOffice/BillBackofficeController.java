@@ -5,6 +5,7 @@ import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.BillController;
 import edu.utn.phones.Controller.Model.UserController;
 import edu.utn.phones.Domain.User;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.Bill;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,7 @@ public class BillBackofficeController {
 
 
     @GetMapping("/")
-    public ResponseEntity<List<Bill>> getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException {
+    public ResponseEntity<List<Bill>> getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException, NoContentToShowException {
         List<Bill> list;
         if (idUser == null){
             User u = this.userController.getById(idUser);

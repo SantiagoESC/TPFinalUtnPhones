@@ -3,6 +3,7 @@
 import edu.utn.phones.Domain.Bill;
 import edu.utn.phones.Domain.Call;
 import edu.utn.phones.Domain.User;
+import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,17 +16,17 @@ public class BillController extends AbstractController&lt;Bill, BillService&gt; 
 
     @Autowired
     public BillController(BillService service) {
-<span class="nc" id="L18">        super(service);</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L19">        super(service);</span>
+<span class="fc" id="L20">    }</span>
 
 
-    public List&lt;Bill&gt; getAll(User loggedUser, LocalDateTime fromDate, LocalDateTime toDate) {
+    public List&lt;Bill&gt; getAll(User loggedUser, LocalDateTime fromDate, LocalDateTime toDate) throws NoContentToShowException {
 
-<span class="nc" id="L24">        return this.service.getAll(loggedUser, fromDate,toDate);</span>
+<span class="fc" id="L25">        return this.service.getAll(loggedUser, fromDate,toDate);</span>
     }
 
-    public List&lt;Bill&gt; getAll(User loggedUser) {
-<span class="nc" id="L28">        return  this.service.getAll(loggedUser);</span>
+    public List&lt;Bill&gt; getAll(User loggedUser) throws NoContentToShowException {
+<span class="fc" id="L29">        return  this.service.getAll(loggedUser);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

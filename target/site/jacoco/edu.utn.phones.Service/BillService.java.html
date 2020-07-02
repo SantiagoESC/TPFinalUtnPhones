@@ -17,31 +17,31 @@ public class BillService extends AbstractService&lt;Bill, IBillRepository&gt; {
 
     @Autowired
     public BillService(IBillRepository repository) {
-<span class="nc" id="L20">        super(repository);</span>
+<span class="fc" id="L20">        super(repository);</span>
 
-<span class="nc" id="L22">    }</span>
-
-
-    public List&lt;Bill&gt; getAll(User loggedUser, LocalDateTime fromDate, LocalDateTime toDate) {
+<span class="fc" id="L22">    }</span>
 
 
-<span class="nc" id="L28">        List&lt;Bill&gt;list = this.repository.findByUserBillAndDateBillBetween(loggedUser,fromDate,toDate );</span>
+    public List&lt;Bill&gt; getAll(User loggedUser, LocalDateTime fromDate, LocalDateTime toDate) throws NoContentToShowException {
+
+
+<span class="fc" id="L28">        List&lt;Bill&gt;list = this.repository.findByUserBillAndDateBillBetween(loggedUser,fromDate,toDate );</span>
 
 
 
-<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (list.size() == 0){</span>
-<span class="nc" id="L33">            throw new NoContentToShowException();</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (list.size() == 0){</span>
+<span class="fc" id="L33">            throw new NoContentToShowException();</span>
         }
 
-<span class="nc" id="L36">        return list;</span>
+<span class="fc" id="L36">        return list;</span>
     }
 
-    public List&lt;Bill&gt; getAll(User loggedUser) {
-<span class="nc" id="L40">        List&lt;Bill&gt;list = this.repository.findByUserBill(loggedUser);</span>
-<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (list.size() == 0){</span>
-<span class="nc" id="L42">            throw new NoContentToShowException();</span>
+    public List&lt;Bill&gt; getAll(User loggedUser) throws NoContentToShowException {
+<span class="fc" id="L40">        List&lt;Bill&gt;list = this.repository.findByUserBill(loggedUser);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (list.size() == 0){</span>
+<span class="fc" id="L42">            throw new NoContentToShowException();</span>
         }
-<span class="nc" id="L44">        return list;</span>
+<span class="fc" id="L44">        return list;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
