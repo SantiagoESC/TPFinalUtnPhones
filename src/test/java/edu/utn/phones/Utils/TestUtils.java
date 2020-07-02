@@ -1,10 +1,7 @@
 package edu.utn.phones.Utils;
 
-import edu.utn.phones.Domain.Call;
-import edu.utn.phones.Domain.City;
+import edu.utn.phones.Domain.*;
 import edu.utn.phones.Domain.Enums.UserType;
-import edu.utn.phones.Domain.Province;
-import edu.utn.phones.Domain.User;
 
 import java.lang.reflect.Array;
 import java.time.LocalDate;
@@ -69,6 +66,33 @@ public class TestUtils {
     }
 
 
+    public static List<Rate> createRateList() {
+        return new ArrayList<>();
+    }
 
+    public static Rate createRate() {
+        return Rate.builder()
+                .idRate(1)
+                .cityOrigin(createCity())
+                .cityDestination(createCity())
+                .pricePerMinute((float) 10)
+                .build();
+    }
 
+    public static Rate createRate2() {
+        return Rate.builder()
+                .idRate(1)
+                .cityOrigin(createCity())
+                .cityDestination(createCity())
+                .pricePerMinute((float) 15)
+                .build();
+    }
+
+    public static Rate createRateNoId() {
+        return Rate.builder()
+                .cityOrigin(createCity())
+                .cityDestination(createCity())
+                .pricePerMinute((float) 10)
+                .build();
+    }
 }
