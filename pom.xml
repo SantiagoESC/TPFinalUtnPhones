@@ -130,6 +130,7 @@
 					<excludes>
 						<exclude>**/Domain/**</exclude>
 						<exclude>**/Dto/**</exclude>
+						<exclude>**/Controller/Advice/**</exclude>
 						<exclude>**/Session/**</exclude>
 						<exclude>**/Configuration/**</exclude>
 						<exclude>**/Exceptions/**</exclude>

@@ -49,9 +49,11 @@ public class AdviceController extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
+
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ParseException.class)
-    public ResponseEntity  handleParseException() {
-        return ResponseEntity.badRequest().build();
+    public  ResponseEntity handleParseException(){
+        return ResponseEntity.badRequest().body("Bad format of dates");
     }
 }

@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.net.URI;
 
+import static org.mockito.Mockito.mock;
+
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Configuration.class)
@@ -46,4 +48,11 @@ public class CityBackofficeControllerTest {
         ResponseEntity response = this.cityBackofficeController.add(preAdd);
 
     }
+
+    @Test
+    public void testContruct(){
+        CityBackofficeController c = new CityBackofficeController(mock(CityController.class));
+    }
+
+
 }
