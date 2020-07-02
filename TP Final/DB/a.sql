@@ -287,3 +287,217 @@ phoneLines (numberLine ) USING HASH;
 
 CREATE  INDEX idxCallDate ON calls(dateCall) USING BTREE;
 
+
+DROP PROCEDURE IF EXISTS pliquidateLine;
+
+
+DELIMITER// 
+
+CREATE PROCEDURE pliquidateLine (pIdline int) BEGIN DECLARE vTotal float;
+
+DECLARE vTotalCost float;
+
+DECLARE vIdbill int;
+
+DECLARE vIdcall int;
+
+DECLARE vCant int DEFAULT 0;
+
+DECLARE vFinished int DEFAULT 0;
+
+DECLARE vSuma float DEFAULT 0;
+
+DECLARE vSumaCost float DEFAULT 0;
+
+DECLARE vDummy int;
+
+DECLARE curbill CURSOR FOR
+SELECT
+    idCall,
+    priceTotal,
+    (costPerMinute * durationInSeconds / 60) AS costTotal
+FROM
+    calls c
+    INNER JOIN phoneLines pl ON c.numberOrigin = pl.numberLine
+WHERE
+    idBill IS NULL & & pl.idLine = pIdline
+GROUP BY
+    idCall,
+    priceTotal;
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND
+SET
+    vFinished = 1;
+
+
+INSERT INTO
+    bills(idLine, dateBill, idUser, totalPrice)
+VALUES
+    (pIdline, NOW(), fCalculateUser(pIdline), 0);
+
+#Se toma el idbill
+SET
+    vIdbill = LAST_INSERT_ID();
+
+OPEN curbill;
+
+FETCH curbill INTO vIdcall,
+vTotal,
+vTotalCost;
+
+WHILE (vFinished = 0) DO
+SET
+    vSumaCost = vSumaCost + vTotalCost;
+
+SET
+    vSuma = vSuma + vTotal;
+
+SET
+    vCant = vCant + 1;
+
+UPDATE
+    calls
+SET
+    idBill = vIdbill
+WHERE
+    idCall = vIdcall;
+
+FETCH curbill INTO vIdcall,
+vTotal,
+vTotalCost;
+
+END WHILE;
+
+UPDATE
+    bills
+SET
+    quantityOfCalls = vCant,
+    totalPrice = vSuma,
+    totalCost = vSumaCost
+WHERE
+    idbill = vIdbill;
+
+CLOSE curbill;
+
+END // 
+DELIMITER;
+
+
+DROP PROCEDURE IF EXISTS pliquidateActiveLines;
+DELIMITER//
+CREATE PROCEDURE  pliquidateActiveLines ()
+BEGIN
+    
+    DECLARE vIdLine INTEGER;
+    DECLARE vFinished INTEGER DEFAULT 0;
+    DECLARE curLines CURSOR FOR SELECT idLine FROM phoneLines pl WHERE pl.statusLine ='ACTIVE' GROUP BY idLine ;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET vFinished = 1;
+ 
+
+    OPEN curLines;
+    FETCH curLines INTO vIdLine ;
+    WHILE (vFinished=0) DO
+        START TRANSACTION;
+            CALL pliquidateLine(vIdLine);
+        COMMIT;
+        FETCH curLines INTO vIdLine;
+    END WHILE;
+
+    CLOSE curLines;
+END//
+
+DELIMITER ;
+
+INSERT INTO
+    provinces (nameProvince)
+VALUES
+    ('Buenos Aires');
+
+INSERT INTO
+    provinces (nameProvince)
+VALUES
+    ('Cordoba');
+
+INSERT INTO
+    cities (nameCity, prefix, idProvince)
+VALUES
+    ('Mar del Plata', '223', 1),
+    ('Miramar ', '2234', 1),
+    ('CABA', '11', 1),
+    ('Cordoba', '543', 2);
+
+INSERT INTO
+    rates (idCityOrigin, idCityDestination, pricePerMinute)
+SELECT
+    O.idCity,
+    D.idCity,
+    10
+FROM
+    cities AS O,
+    cities AS D;
+
+INSERT INTO
+    users (
+        username,
+        PASSWORD,
+        firstName,
+        lastName,
+        dni,
+        userType,
+        idCity
+    )
+VALUES
+    (
+        'abulzomi',
+        '1234',
+        'Agustin',
+        'Bulzomi',
+        '42587965',
+        'EMPLOYEE',
+        1
+    ),
+    (
+        'sescribas',
+        '1234',
+        'Santiago',
+        'Escribas',
+        '40256492',
+        'EMPLOYEE',
+        1
+    );
+
+INSERT INTO
+    phoneLines (numberLine, typeLine, statusLine, idUser)
+VALUES
+    ('2235863779', 'MOVILE', 'ACTIVE', 1),
+    ('2234211434', 'MOVILE', 'ACTIVE', 2);
+
+INSERT INTO
+    calls (
+        numberOrigin,
+        numberDestination,
+        durationInseconds,
+        dateCall
+    )
+VALUES
+    ('2235863779', '2234211434', 180, '2020-03-15'),
+    ('2234211434', '2235863779', 240, NOW()),
+    ('2235863779', '2234211434', 60, NOW()),
+    ('2235863779', '2234211434', 120, NOW());
+
+
+DROP VIEW  IF EXISTS vCallReport;
+CREATE VIEW vCallReport AS
+SELECT
+    ca.numberOrigin, co.nameCity as cityOrigin, ca.numberDestination, cd.nameCity as cityDestination,
+    ca.priceTotal, ca.durationInSeconds as DurationCall, ca.dateCall, pl.idUser
+FROM
+calls ca INNER JOIN cities co ON ca.idCityOrigin = co.idCity 
+    INNER JOIN cities cd ON ca.idCityDestination = cd.idCity
+    INNER JOIN phoneLines pl ON pl.numberLine = ca.numberOrigin
+;
+
+
+
+
+

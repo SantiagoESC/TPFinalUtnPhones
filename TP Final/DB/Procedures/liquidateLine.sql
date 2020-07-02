@@ -87,4 +87,5 @@ WHERE
 
 CLOSE curbill;
 
-END / / DELIMITER;
+END // 
+DELIMITER;

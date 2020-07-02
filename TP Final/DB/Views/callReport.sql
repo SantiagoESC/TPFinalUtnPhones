@@ -1,4 +1,4 @@
-DROP VIEW vCallReport;
+DROP VIEW  IF EXISTS vCallReport;
 CREATE VIEW vCallReport AS
 SELECT
     ca.numberOrigin, co.nameCity as cityOrigin, ca.numberDestination, cd.nameCity as cityDestination,
