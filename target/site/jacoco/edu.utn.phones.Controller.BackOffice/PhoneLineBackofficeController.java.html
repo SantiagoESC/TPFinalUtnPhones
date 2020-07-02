@@ -19,49 +19,49 @@ public class PhoneLineBackofficeController {
     private final PhoneLineController phoneLineController;
 
     @Autowired
-<span class="nc" id="L22">    public PhoneLineBackofficeController(PhoneLineController phoneLineController) {</span>
-<span class="nc" id="L23">        this.phoneLineController = phoneLineController;</span>
-<span class="nc" id="L24">    }</span>
+<span class="fc" id="L22">    public PhoneLineBackofficeController(PhoneLineController phoneLineController) {</span>
+<span class="fc" id="L23">        this.phoneLineController = phoneLineController;</span>
+<span class="fc" id="L24">    }</span>
 
     @PostMapping(&quot;/&quot;)
 
     public ResponseEntity add(@RequestBody PhoneLine newPhoneLine) {
 
 
-<span class="nc" id="L31">        PhoneLine pl = this.phoneLineController.add(newPhoneLine);</span>
+<span class="fc" id="L31">        PhoneLine pl = this.phoneLineController.add(newPhoneLine);</span>
 
-<span class="nc" id="L33">        return ResponseEntity.created(Configuration.getLocation(pl)).build();</span>
+<span class="fc" id="L33">        return ResponseEntity.created(Configuration.getLocation(pl)).build();</span>
     }
 
     @PutMapping(&quot;/{idPhoneLine}&quot;)
     public ResponseEntity update(@RequestBody PhoneLine updatedPhoneLine, @PathVariable Integer idPhoneLine) throws ResourceNotFoundException {
 
-<span class="nc" id="L39">        PhoneLine line = this.phoneLineController.getById(idPhoneLine);</span>
-<span class="nc" id="L40">        updatedPhoneLine.setIdLine(line.getIdLine());</span>
-<span class="nc" id="L41">        PhoneLine pl = this.phoneLineController.update(updatedPhoneLine);</span>
-<span class="nc" id="L42">        return ResponseEntity.ok().build();</span>
+<span class="fc" id="L39">        PhoneLine line = this.phoneLineController.getById(idPhoneLine);</span>
+<span class="fc" id="L40">        updatedPhoneLine.setIdLine(line.getIdLine());</span>
+<span class="fc" id="L41">        PhoneLine pl = this.phoneLineController.update(updatedPhoneLine);</span>
+<span class="fc" id="L42">        return ResponseEntity.ok().build();</span>
     }
 
     @DeleteMapping(&quot;/{idPhoneLine}&quot;)
 
     public ResponseEntity delete(@PathVariable Integer idPhoneLine) throws ResourceNotFoundException {
 
-<span class="nc" id="L49">        PhoneLine pl = this.phoneLineController.getById(idPhoneLine);</span>
-<span class="nc" id="L50">        this.phoneLineController.delete(pl);</span>
-<span class="nc" id="L51">        return ResponseEntity.ok().build();</span>
+<span class="fc" id="L49">        PhoneLine pl = this.phoneLineController.getById(idPhoneLine);</span>
+<span class="fc" id="L50">        this.phoneLineController.delete(pl);</span>
+<span class="fc" id="L51">        return ResponseEntity.ok().build();</span>
     }
 
     @GetMapping(&quot;/{idPhoneLine}&quot;)
 
     public ResponseEntity&lt;PhoneLine&gt; getById(@PathVariable Integer id) throws ResourceNotFoundException {
-<span class="nc" id="L57">        PhoneLine pl = this.phoneLineController.getById(id);</span>
-<span class="nc" id="L58">        return ResponseEntity.ok().body(pl);</span>
+<span class="fc" id="L57">        PhoneLine pl = this.phoneLineController.getById(id);</span>
+<span class="fc" id="L58">        return ResponseEntity.ok().body(pl);</span>
     }
 
     @GetMapping(&quot;/&quot;)
     public ResponseEntity&lt;List&lt;PhoneLine&gt;&gt; getAll() throws NoContentToShowException {
-<span class="nc" id="L63">        List&lt;PhoneLine&gt; list = this.phoneLineController.getAll();</span>
-<span class="nc" id="L64">        return ResponseEntity.ok().body(list);</span>
+<span class="fc" id="L63">        List&lt;PhoneLine&gt; list = this.phoneLineController.getAll();</span>
+<span class="fc" id="L64">        return ResponseEntity.ok().body(list);</span>
     }
 
 

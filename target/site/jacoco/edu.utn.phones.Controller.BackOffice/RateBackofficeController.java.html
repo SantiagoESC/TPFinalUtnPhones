@@ -18,32 +18,31 @@ public class RateBackofficeController {
 
     //region Atributes
     private final RateController rateController;
-    private final CityController cityController;
+
     //endregion
 
     //region Constructor
     @Autowired
-<span class="nc" id="L26">    public RateBackofficeController(RateController rateController, CityController cityController) {</span>
-<span class="nc" id="L27">        this.rateController = rateController;</span>
-<span class="nc" id="L28">        this.cityController = cityController;</span>
-<span class="nc" id="L29">    }</span>
+<span class="fc" id="L26">    public RateBackofficeController(RateController rateController) {</span>
+<span class="fc" id="L27">        this.rateController = rateController;</span>
+<span class="fc" id="L28">    }</span>
     //endregion
 
     //region ABM
     @PostMapping(&quot;/&quot;)
     public ResponseEntity add(@RequestBody Rate newRate) {
-<span class="nc" id="L35">        Rate ut = this.rateController.add(newRate);</span>
+<span class="fc" id="L34">        Rate ut = this.rateController.add(newRate);</span>
 
-<span class="nc" id="L37">        return ResponseEntity.created(Configuration.getLocation(ut)).build();</span>
+<span class="fc" id="L36">        return ResponseEntity.created(Configuration.getLocation(ut)).build();</span>
     }
 
     @PutMapping(&quot;/{idRate}&quot;)
     public ResponseEntity update(@RequestBody Rate updatedRate, @PathVariable Integer idRate) throws ResourceNotFoundException {
 
-<span class="nc" id="L43">        Rate u = this.rateController.getById(idRate);</span>
-<span class="nc" id="L44">        updatedRate.setIdRate(u.getIdRate());</span>
-<span class="nc" id="L45">        this.rateController.update(updatedRate);</span>
-<span class="nc" id="L46">        return ResponseEntity.ok().build();</span>
+<span class="fc" id="L42">        Rate u = this.rateController.getById(idRate);</span>
+<span class="fc" id="L43">        updatedRate.setIdRate(u.getIdRate());</span>
+<span class="fc" id="L44">        this.rateController.update(updatedRate);</span>
+<span class="fc" id="L45">        return ResponseEntity.ok().build();</span>
 
 
     }
@@ -51,9 +50,9 @@ public class RateBackofficeController {
 
     @DeleteMapping(&quot;/{idRate}&quot;)
     public ResponseEntity delete(@PathVariable Integer idRate) throws ResourceNotFoundException {
-<span class="nc" id="L54">        Rate p = this.rateController.getById(idRate);</span>
-<span class="nc" id="L55">        this.rateController.delete(p);</span>
-<span class="nc" id="L56">        return ResponseEntity.ok().build();</span>
+<span class="fc" id="L53">        Rate p = this.rateController.getById(idRate);</span>
+<span class="fc" id="L54">        this.rateController.delete(p);</span>
+<span class="fc" id="L55">        return ResponseEntity.ok().build();</span>
 
     }
     //endregion
@@ -62,19 +61,19 @@ public class RateBackofficeController {
     @GetMapping(&quot;/{idRate}&quot;)
     public ResponseEntity&lt;Rate&gt; getById(@PathVariable Integer idRate) throws ResourceNotFoundException {
 
-<span class="nc" id="L65">        Rate ut = this.rateController.getById(idRate);</span>
-<span class="nc" id="L66">        return ResponseEntity.ok().body(ut);</span>
+<span class="fc" id="L64">        Rate ut = this.rateController.getById(idRate);</span>
+<span class="fc" id="L65">        return ResponseEntity.ok().body(ut);</span>
 
 
     }
 
 
     @GetMapping(&quot;/&quot;)
-    public ResponseEntity&lt;List&lt;Rate&gt;&gt; getAll(@RequestParam(required = false) Integer idCityOrigin, @RequestParam(required = false) Integer idCityDestination) throws ResourceNotFoundException, NoContentToShowException {
+    public ResponseEntity&lt;List&lt;Rate&gt;&gt; getAll() throws ResourceNotFoundException, NoContentToShowException {
 
-<span class="nc" id="L75">        List&lt;Rate&gt; list = this.rateController.getAll();</span>
+<span class="fc" id="L74">        List&lt;Rate&gt; list = this.rateController.getAll();</span>
 
-<span class="nc" id="L77">        return ResponseEntity.ok().body(list);</span>
+<span class="fc" id="L76">        return ResponseEntity.ok().body(list);</span>
     }
     //endregion
 

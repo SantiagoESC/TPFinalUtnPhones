@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="edu.utn.phones.Service.CallServiceTest" time="0.059" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="1.352" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -60,10 +60,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="getAllByUserException" classname="edu.utn.phones.Service.CallServiceTest" time="0.054"/>
-  <testcase name="getAll" classname="edu.utn.phones.Service.CallServiceTest" time="0.002"/>
-  <testcase name="getAllByUser" classname="edu.utn.phones.Service.CallServiceTest" time="0.001"/>
-  <testcase name="getAllException" classname="edu.utn.phones.Service.CallServiceTest" time="0"/>
-  <testcase name="getAllElse" classname="edu.utn.phones.Service.CallServiceTest" time="0.001"/>
-  <testcase name="testConstruct" classname="edu.utn.phones.Service.CallServiceTest" time="0"/>
+  <testcase name="testContruct" classname="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="1.094"/>
+  <testcase name="testGetAllOk" classname="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="0.115"/>
+  <testcase name="testUpdateOk" classname="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="0.012"/>
+  <testcase name="testAddOK" classname="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="0.099"/>
+  <testcase name="testDeleteOk" classname="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="0.006"/>
+  <testcase name="testGetByIdOK" classname="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="0.002"/>
+  <testcase name="testDeleteResourceNotFpundExcetion" classname="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="0.005"/>
+  <testcase name="testGetAllNoContentToShowException" classname="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="0.002"/>
+  <testcase name="testGetByIdResourceNotFoundException" classname="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="0.003"/>
+  <testcase name="testUpdateResourceNotFoundException" classname="edu.utn.phones.Controller.BackOffice.RateBackofficeControllerTest" time="0.002"/>
 </testsuite>

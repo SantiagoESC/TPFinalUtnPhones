@@ -17,11 +17,11 @@ phones,edu.utn.phones.Controller.Model,PhoneLineController,0,4,0,0,0,2,0,1,0,1
 phones,edu.utn.phones.Controller.Model,UserController,0,11,0,0,0,3,0,2,0,2
 phones,edu.utn.phones.Controller.Web,CallWebController,0,45,1,3,0,13,1,3,0,2
 phones,edu.utn.phones.Controller.Web,BillWebController,0,45,1,3,0,13,1,3,0,2
-phones,edu.utn.phones.Controller.Antenna,AntennaController,17,0,0,0,5,0,2,0,2,0
+phones,edu.utn.phones.Controller.Antenna,AntennaController,0,17,0,0,0,5,0,2,0,2
 phones,edu.utn.phones.Controller.BackOffice,ProvinceBackofficeController,73,0,2,0,18,0,7,0,6,0
 phones,edu.utn.phones.Controller.BackOffice,CityBackofficeController,0,66,0,0,0,16,0,6,0,6
-phones,edu.utn.phones.Controller.BackOffice,PhoneLineBackofficeController,67,0,0,0,16,0,6,0,6,0
+phones,edu.utn.phones.Controller.BackOffice,PhoneLineBackofficeController,0,67,0,0,0,16,0,6,0,6
 phones,edu.utn.phones.Controller.BackOffice,CallBackofficeController,72,0,2,0,18,0,6,0,5,0
-phones,edu.utn.phones.Controller.BackOffice,RateBackofficeController,69,0,0,0,17,0,6,0,6,0
-phones,edu.utn.phones.Controller.BackOffice,UserBackofficeController,66,0,0,0,16,0,6,0,6,0
+phones,edu.utn.phones.Controller.BackOffice,RateBackofficeController,0,66,0,0,0,16,0,6,0,6
+phones,edu.utn.phones.Controller.BackOffice,UserBackofficeController,0,66,0,0,0,16,0,6,0,6
 phones,edu.utn.phones.Controller.BackOffice,BillBackofficeController,83,0,2,0,21,0,7,0,6,0

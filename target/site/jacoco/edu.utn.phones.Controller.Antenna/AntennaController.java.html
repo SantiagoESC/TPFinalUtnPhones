@@ -17,16 +17,16 @@ public class AntennaController {
     private final  CallController callController;
 
     @Autowired
-<span class="nc" id="L20">    public AntennaController(CallController callController) {</span>
-<span class="nc" id="L21">        this.callController = callController;</span>
-<span class="nc" id="L22">    }</span>
+<span class="fc" id="L20">    public AntennaController(CallController callController) {</span>
+<span class="fc" id="L21">        this.callController = callController;</span>
+<span class="fc" id="L22">    }</span>
 
     @PostMapping(&quot;/&quot;)
 
     public ResponseEntity add(@RequestBody Call newCall) {
-<span class="nc" id="L27">        Call ut = this.callController.add(newCall);</span>
+<span class="fc" id="L27">        Call ut = this.callController.add(newCall);</span>
 
-<span class="nc" id="L29">        return ResponseEntity.created(Configuration.getLocation(ut)).build();</span>
+<span class="fc" id="L29">        return ResponseEntity.created(Configuration.getLocation(ut)).build();</span>
 
 
     }
