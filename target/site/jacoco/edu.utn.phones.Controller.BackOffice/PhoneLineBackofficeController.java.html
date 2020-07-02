@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PhoneLineBackofficeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">phones</a> &gt; <a href="index.source.html" class="el_package">edu.utn.phones.Controller.BackOffice</a> &gt; <span class="el_source">PhoneLineBackofficeController.java</span></div><h1>PhoneLineBackofficeController.java</h1><pre class="source lang-java linenums">package edu.utn.phones.Controller.BackOffice;
+
+import edu.utn.phones.Configuration.Configuration;
+import edu.utn.phones.Controller.Model.PhoneLineController;
+import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
+import edu.utn.phones.Domain.PhoneLine;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+
+@RestController
+@RequestMapping(&quot;/api/backoffice/lines&quot;)
+public class PhoneLineBackofficeController {
+
+    private final PhoneLineController phoneLineController;
+
+    @Autowired
+<span class="nc" id="L21">    public PhoneLineBackofficeController(PhoneLineController phoneLineController) {</span>
+<span class="nc" id="L22">        this.phoneLineController = phoneLineController;</span>
+<span class="nc" id="L23">    }</span>
+
+    @PostMapping(&quot;/&quot;)
+
+    public ResponseEntity add(@RequestBody PhoneLine newPhoneLine) {
+
+
+<span class="nc" id="L30">        PhoneLine pl = this.phoneLineController.add(newPhoneLine);</span>
+
+<span class="nc" id="L32">        return ResponseEntity.created(Configuration.getLocation(pl)).build();</span>
+    }
+
+    @PutMapping(&quot;/{idPhoneLine}&quot;)
+    public ResponseEntity update(@RequestBody PhoneLine updatedPhoneLine, @PathVariable Integer idPhoneLine) throws ResourceNotFoundException {
+
+<span class="nc" id="L38">        PhoneLine line = this.phoneLineController.getById(idPhoneLine);</span>
+<span class="nc" id="L39">        updatedPhoneLine.setIdLine(line.getIdLine());</span>
+<span class="nc" id="L40">        PhoneLine pl = this.phoneLineController.update(updatedPhoneLine);</span>
+<span class="nc" id="L41">        return ResponseEntity.ok().build();</span>
+    }
+
+    @DeleteMapping(&quot;/{idPhoneLine}&quot;)
+
+    public ResponseEntity delete(@PathVariable Integer idPhoneLine) throws ResourceNotFoundException {
+
+<span class="nc" id="L48">        PhoneLine pl = this.phoneLineController.getById(idPhoneLine);</span>
+<span class="nc" id="L49">        this.phoneLineController.delete(pl);</span>
+<span class="nc" id="L50">        return ResponseEntity.ok().build();</span>
+    }
+
+    @GetMapping(&quot;/{idPhoneLine}&quot;)
+
+    public ResponseEntity&lt;PhoneLine&gt; getById(@PathVariable Integer id) throws ResourceNotFoundException {
+<span class="nc" id="L56">        PhoneLine pl = this.phoneLineController.getById(id);</span>
+<span class="nc" id="L57">        return ResponseEntity.ok().body(pl);</span>
+    }
+
+    @GetMapping(&quot;/&quot;)
+    public ResponseEntity&lt;List&lt;PhoneLine&gt;&gt; getAll() {
+<span class="nc" id="L62">        List&lt;PhoneLine&gt; list = this.phoneLineController.getAll();</span>
+<span class="nc" id="L63">        return ResponseEntity.ok().body(list);</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

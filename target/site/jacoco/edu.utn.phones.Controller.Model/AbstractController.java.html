@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">phones</a> &gt; <a href="index.source.html" class="el_package">edu.utn.phones.Controller.Model</a> &gt; <span class="el_source">AbstractController.java</span></div><h1>AbstractController.java</h1><pre class="source lang-java linenums">package edu.utn.phones.Controller.Model;
+
+import edu.utn.phones.Iterfaces.IAbstractCrud;
+import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
+import edu.utn.phones.Service.AbstractService;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+import java.util.List;
+
+public class AbstractController&lt;T, S extends   IAbstractCrud&lt;T&gt;&gt; implements IAbstractCrud&lt;T&gt;{
+
+    //region Atributes
+    protected final S service;
+    //endregion
+
+
+    //region Contructor
+<span class="fc" id="L19">    public AbstractController( S service) {</span>
+<span class="fc" id="L20">        this.service = service;</span>
+<span class="fc" id="L21">    }</span>
+    //endregion
+
+    @Override
+    public T add(T newT) {
+<span class="fc" id="L26">        return this.service.add(newT);</span>
+    }
+
+    @Override
+    public T update(T updatedT) {
+<span class="fc" id="L31">        return this.service.update(updatedT);</span>
+    }
+
+    @Override
+    public void delete(T ToDelete) {
+<span class="fc" id="L36">        this.service.delete(ToDelete);</span>
+<span class="fc" id="L37">    }</span>
+
+    @Override
+    public T getById(Integer id) throws ResourceNotFoundException {
+<span class="fc" id="L41">        return this.service.getById(id);</span>
+    }
+
+    @Override
+    public List&lt;T&gt; getAll() {
+<span class="fc" id="L46">        return this.service.getAll();</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

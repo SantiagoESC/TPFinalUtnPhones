@@ -26,6 +26,11 @@ public class UserControllerTest {
     }
 
     @Test
+    public void testConstructor(){
+        UserController u = new UserController(this.userService);
+    }
+
+    @Test
     public void loginOk() throws LoginException {
         User u = TestUtils.createUser();
         String username = "abulzomi";

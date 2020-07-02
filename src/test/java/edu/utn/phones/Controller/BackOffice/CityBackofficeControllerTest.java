@@ -20,6 +20,7 @@ import java.net.URI;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Configuration.class)
+@SuppressWarnings(value = "")
 public class CityBackofficeControllerTest {
 
     @Mock

@@ -8,6 +8,8 @@ grant select, insert, update, delete  on test.phoneLines to  'backoffice'@'%';
 
 grant select, insert, update, delete  on test.rates to  'backoffice'@'%';
 
+grant select on vCallReport to 'backoffice'@'%' ;
+
 
 #Infraestructura: insert de llamadas solamente
 
@@ -25,7 +27,7 @@ grant select(username,password) on test.users to 'cliente'@'%';
 
 grant select on test.bills to  'cliente'@'%';
 
-grant select on test.calls to  'cliente'@'%';
+grant select on vCallReport to 'backoffice'@'%' ;
 
 #tambien permitir acceso a la views necesarias
 

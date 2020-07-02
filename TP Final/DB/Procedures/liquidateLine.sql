@@ -1,7 +1,7 @@
 DROP PROCEDURE IF EXISTS pliquidateLine;
 
-#CREAR bill CURSORES
-DELIMITER / / CREATE PROCEDURE pliquidateLine (pIdline int) BEGIN DECLARE vTotal float;
+
+DELIMITER // CREATE PROCEDURE pliquidateLine (pIdline int) BEGIN DECLARE vTotal float;
 
 DECLARE vTotalCost float;
 
@@ -26,8 +26,9 @@ SELECT
     (costPerMinute * durationInSeconds / 60) AS costTotal
 FROM
     calls c
+    INNER JOIN phoneLines pl ON c.numberOrigin = pl.numberLine
 WHERE
-    idBill IS NULL & & c.idLineOrigin = pIdline
+    idBill IS NULL & & pl.idLine = pIdline
 GROUP BY
     idCall,
     priceTotal;
@@ -36,7 +37,7 @@ DECLARE CONTINUE HANDLER FOR NOT FOUND
 SET
     vFinished = 1;
 
-#Se inserta la bill pero en 0 asi se puede updatear luego
+
 INSERT INTO
     bills(idLine, dateBill, idUser, totalPrice)
 VALUES
@@ -52,7 +53,7 @@ FETCH curbill INTO vIdcall,
 vTotal,
 vTotalCost;
 
-WHILE (vFinished = 0) DO #se suman los datos de las calls
+WHILE (vFinished = 0) DO
 SET
     vSumaCost = vSumaCost + vTotalCost;
 
@@ -73,7 +74,7 @@ FETCH curbill INTO vIdcall,
 vTotal,
 vTotalCost;
 
-END while;
+END WHILE;
 
 UPDATE
     bills

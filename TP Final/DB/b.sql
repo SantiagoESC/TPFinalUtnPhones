@@ -11,3 +11,34 @@ inner join cities cd on ud.idCity = cd.idCity order by dateCall;
 
 
 /*Hacer el parse exception en la advice*/
+
+
+SELECT
+    idCall,
+    priceTotal,
+    (costPerMinute * durationInSeconds / 60) AS costTotal
+FROM
+    calls c
+    INNER JOIN phoneLines pl ON c.numberOrigin = pl.numberLine
+WHERE
+    idBill IS NULL && pl.idLine = 1
+GROUP BY
+    idCall,
+    priceTotal;
+
+
+    SELECT
+    idCall,
+    priceTotal,
+    (costPerMinute * durationInSeconds / 60) AS costTotal
+FROM
+    calls c
+    INNER JOIN phoneLines pl ON c.numberOrigin = pl.numberLine
+WHERE
+    idBill IS NULL && pl.idLine = 2
+GROUP BY
+    idCall,
+    priceTotal;
+
+
+    SELECT * FROM calls c INNER JOIN phoneLines pl ON pl.numberLine = c.numberOrigin WHERE idUser = 1;

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CallBackofficeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">phones</a> &gt; <a href="index.source.html" class="el_package">edu.utn.phones.Controller.BackOffice</a> &gt; <span class="el_source">CallBackofficeController.java</span></div><h1>CallBackofficeController.java</h1><pre class="source lang-java linenums">package edu.utn.phones.Controller.BackOffice;
+
+import edu.utn.phones.Configuration.Configuration;
+import edu.utn.phones.Controller.Model.CallController;
+import edu.utn.phones.Controller.Model.UserController;
+import edu.utn.phones.Domain.User;
+import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
+import edu.utn.phones.Domain.Call;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/api/backoffice/call&quot;)
+public class CallBackofficeController {
+
+    //region Atributes
+    private final CallController callController;
+    private final UserController userController;
+    //endregion
+
+    //region Constructor
+    @Autowired
+<span class="nc" id="L26">    public CallBackofficeController(CallController callController, UserController userController) {</span>
+<span class="nc" id="L27">        this.callController = callController;</span>
+<span class="nc" id="L28">        this.userController = userController;</span>
+<span class="nc" id="L29">    }</span>
+    //endregion
+
+    //region ABM
+
+
+    @PutMapping(&quot;/{idCall}&quot;)
+    public ResponseEntity update(@RequestBody Call updatedCall, @PathVariable Integer idCall) throws ResourceNotFoundException {
+
+<span class="nc" id="L38">        Call u = this.callController.getById(idCall);</span>
+<span class="nc" id="L39">        updatedCall.setIdCall(u.getIdCall());</span>
+<span class="nc" id="L40">        this.callController.update(updatedCall);</span>
+<span class="nc" id="L41">        return ResponseEntity.ok().build();</span>
+
+
+    }
+
+
+    @DeleteMapping(&quot;/{idCall}&quot;)
+    public ResponseEntity delete(@PathVariable Integer idCall) throws ResourceNotFoundException {
+<span class="nc" id="L49">        Call p = this.callController.getById(idCall);</span>
+<span class="nc" id="L50">        this.callController.delete(p);</span>
+<span class="nc" id="L51">        return ResponseEntity.ok().build();</span>
+
+    }
+    //endregion
+
+    //region GET
+    @GetMapping(&quot;/{idCall}&quot;)
+    public ResponseEntity&lt;Call&gt; getById(@PathVariable Integer idCall) throws ResourceNotFoundException {
+
+<span class="nc" id="L60">        Call ut = this.callController.getById(idCall);</span>
+<span class="nc" id="L61">        return ResponseEntity.ok().body(ut);</span>
+
+
+    }
+
+
+    @GetMapping(&quot;/&quot;)
+    public ResponseEntity&lt;List&lt;Call&gt;&gt; getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException {
+        List&lt;Call&gt; list;
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (idUser == null){</span>
+<span class="nc" id="L71">            list= this.callController.getAll();</span>
+        }else{
+<span class="nc" id="L73">            User u = this.userController.getById(idUser);</span>
+<span class="nc" id="L74">            list= this.callController.getAllByUser(u);</span>
+        }
+
+<span class="nc" id="L77">        return ResponseEntity.ok().body(list);</span>
+    }
+    //endregion
+
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
