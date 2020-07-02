@@ -17,6 +17,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.http.ResponseEntity;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -140,7 +141,9 @@ public class ProvinceBackofficeControllerTest {
 
     @Test(expected = NoContentToShowException.class)
     public void testGetAllNoContentToShowException() throws NoContentToShowException, ResourceNotFoundException {
-        when(this.provinceController.getAll()).thenThrow(new NoContentToShowException());
+
+        List<Province> list = new ArrayList<>();
+        when(this.provinceController.getAll()).thenReturn(list);
         ResponseEntity responseEntity = this.provinceBackofficeController.getAll();
     }
 

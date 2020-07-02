@@ -60,10 +60,10 @@ public class ProvinceBackofficeController  {
 
 <span class="fc" id="L61">        List&lt;Province&gt; provinces = this.provinceController.getAll();</span>
 
-<span class="pc bpc" id="L63" title="1 of 2 branches missed.">        if (provinces.size() &gt; 0)</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (provinces.size() &gt; 0)</span>
 <span class="fc" id="L64">            return ResponseEntity.ok().body(provinces);</span>
         else{
-<span class="nc" id="L66">            throw new NoContentToShowException();</span>
+<span class="fc" id="L66">            throw new NoContentToShowException();</span>
         }
 
 
