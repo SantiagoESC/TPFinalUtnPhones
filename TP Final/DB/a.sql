@@ -12,35 +12,36 @@ CREATE TABLE IF NOT EXISTS provinces (
     idProvince INTEGER AUTO_INCREMENT,
     nameProvince VARCHAR(50) NOT NULL,
     CONSTRAINT pk_provinces PRIMARY KEY (idProvince),
-    CONSTRAINT unq_name_province UNIQUE  (nameProvince)
+    CONSTRAINT unq_name_province UNIQUE (nameProvince)
 );
 
 
 
 DROP TABLE IF EXISTS cities;
-CREATE TABLE IF NOT EXISTS cities(
+CREATE TABLE IF NOT EXISTS cities (
     idCity INTEGER AUTO_INCREMENT,
     nameCity VARCHAR(50) NOT NULL,
     prefix VARCHAR(5) NOT NULL,
     idProvince INTEGER NOT NULL,
-
     CONSTRAINT pk_cities PRIMARY KEY (idCity),
-    CONSTRAINT unq_prefix_city UNIQUE(prefix),
-    CONSTRAINT fk_city_province FOREIGN KEY (idProvince) REFERENCES provinces (idProvince)
+    CONSTRAINT unq_prefix_city UNIQUE (prefix),
+    CONSTRAINT fk_city_province FOREIGN KEY (idProvince)
+        REFERENCES provinces (idProvince)
 );
 
 
 
 DROP TABLE IF EXISTS rates ;
-CREATE TABLE IF NOT EXISTS rates(
+CREATE TABLE IF NOT EXISTS rates (
     idRate INTEGER AUTO_INCREMENT,
     idCityOrigin INTEGER NOT NULL,
     idCityDestination INTEGER NOT NULL,
     pricePerMinute FLOAT NOT NULL,
-
-    CONSTRAINT pk_rates PRIMARY KEY(idRate),
-    CONSTRAINT fk_origin_cities FOREIGN KEY (idCityOrigin) REFERENCES cities(idCity), 
-    CONSTRAINT fk_destination_cities FOREIGN KEY (idCityDestination) REFERENCES cities(idCity)
+    CONSTRAINT pk_rates PRIMARY KEY (idRate),
+    CONSTRAINT fk_origin_cities FOREIGN KEY (idCityOrigin)
+        REFERENCES cities (idCity),
+    CONSTRAINT fk_destination_cities FOREIGN KEY (idCityDestination)
+        REFERENCES cities (idCity)
 );
 
 
@@ -53,15 +54,13 @@ CREATE TABLE IF NOT EXISTS users (
     firstName VARCHAR(25) NOT NULL,
     lastName VARCHAR(25) NOT NULL,
     dni VARCHAR(25) NOT NULL,
-    userType ENUM('CLIENT','EMPLOYEE') NOT NULL,
-    idCity INTEGER NOT NULL, 
-
-
+    userType ENUM('CLIENT', 'EMPLOYEE') NOT NULL,
+    idCity INTEGER NOT NULL,
     CONSTRAINT pk_users PRIMARY KEY (idUser),
-    CONSTRAINT unq_username UNIQUE(username),
-    CONSTRAINT unq_dni UNIQUE(dni),
-    CONSTRAINT fk_cities_rates FOREIGN KEY (idCity) REFERENCES cities(idCity)
-    
+    CONSTRAINT unq_username UNIQUE (username),
+    CONSTRAINT unq_dni UNIQUE (dni),
+    CONSTRAINT fk_cities_rates FOREIGN KEY (idCity)
+        REFERENCES cities (idCity)
 );
 
 
@@ -70,12 +69,12 @@ CREATE TABLE IF NOT EXISTS phoneLines (
     idLine INTEGER AUTO_INCREMENT,
     numberLine VARCHAR(50) NOT NULL,
     typeLine ENUM('RESIDENTIAL', 'MOVILE') NOT NULL DEFAULT 'MOVILE',
-    statusLine ENUM('ACTIVE', 'SUSPENDED') NOT NULL DEFAULT 'ACTIVE', 
+    statusLine ENUM('ACTIVE', 'SUSPENDED') NOT NULL DEFAULT 'ACTIVE',
     idUser INTEGER NOT NULL,
-
-    CONSTRAINT pk_phonelines PRIMARY KEY (idLine),      
+    CONSTRAINT pk_phonelines PRIMARY KEY (idLine),
     CONSTRAINT unq_numberLine UNIQUE (numberLine),
-    CONSTRAINT fk_user_phoneLines FOREIGN KEY (idUser) REFERENCES users(idUser)  
+    CONSTRAINT fk_user_phoneLines FOREIGN KEY (idUser)
+        REFERENCES users (idUser)
 );
 
 
@@ -102,10 +101,9 @@ CREATE TABLE IF NOT EXISTS bills (
 DROP TABLE IF EXISTS calls;
 CREATE TABLE IF NOT EXISTS calls (
     idCall INTEGER AUTO_INCREMENT,
-    idBill INTEGER ,
+    idBill INTEGER,
     numberOrigin VARCHAR(15) NOT NULL,
-    numberDestination  VARCHAR(15) NOT NULL,
-   
+    numberDestination VARCHAR(15) NOT NULL,
     idCityOrigin INTEGER NOT NULL,
     idCityDestination INTEGER NOT NULL,
     durationInSeconds INTEGER NOT NULL,
@@ -113,13 +111,13 @@ CREATE TABLE IF NOT EXISTS calls (
     costPerMinute FLOAT NOT NULL DEFAULT 0.5,
     priceTotal FLOAT NOT NULL,
     dateCall DATETIME NOT NULL DEFAULT NOW(),
-
     CONSTRAINT pk_calls PRIMARY KEY (idCall),
-    CONSTRAINT fk_bills_calls FOREIGN KEY (idBill) REFERENCES bills(idBill),
-    CONSTRAINT fk_origin_cities_calls FOREIGN KEY (idCityOrigin) REFERENCES cities(idCity),
-    CONSTRAINT fk_destination_cities_calls FOREIGN KEY (idCityDestination) REFERENCES cities(idCity)
-    
-
+    CONSTRAINT fk_bills_calls FOREIGN KEY (idBill)
+        REFERENCES bills (idBill),
+    CONSTRAINT fk_origin_cities_calls FOREIGN KEY (idCityOrigin)
+        REFERENCES cities (idCity),
+    CONSTRAINT fk_destination_cities_calls FOREIGN KEY (idCityDestination)
+        REFERENCES cities (idCity)
 );
 
 
@@ -282,7 +280,7 @@ DELIMITER ;
 
 
 CREATE INDEX idxPhoneLines ON
-phoneLines (numberLine ) USING HASH;
+phoneLines (numberLine, idUser ) USING HASH;
 
 
 CREATE  INDEX idxCallDate ON calls(dateCall) USING BTREE;
@@ -291,9 +289,11 @@ CREATE  INDEX idxCallDate ON calls(dateCall) USING BTREE;
 DROP PROCEDURE IF EXISTS pliquidateLine;
 
 
-DELIMITER// 
+DELIMITER // 
 
-CREATE PROCEDURE pliquidateLine (pIdline int) BEGIN DECLARE vTotal float;
+CREATE PROCEDURE pliquidateLine (pIdline int) 
+BEGIN 
+DECLARE vTotal float;
 
 DECLARE vTotalCost float;
 
@@ -320,7 +320,7 @@ FROM
     calls c
     INNER JOIN phoneLines pl ON c.numberOrigin = pl.numberLine
 WHERE
-    idBill IS NULL & & pl.idLine = pIdline
+    idBill IS NULL && pl.idLine = pIdline
 GROUP BY
     idCall,
     priceTotal;
@@ -355,9 +355,8 @@ SET
 SET
     vCant = vCant + 1;
 
-UPDATE
-    calls
-SET
+UPDATE calls 
+SET 
     idBill = vIdbill
 WHERE
     idCall = vIdcall;
@@ -368,9 +367,8 @@ vTotalCost;
 
 END WHILE;
 
-UPDATE
-    bills
-SET
+UPDATE bills 
+SET 
     quantityOfCalls = vCant,
     totalPrice = vSuma,
     totalCost = vSumaCost
@@ -380,11 +378,11 @@ WHERE
 CLOSE curbill;
 
 END // 
-DELIMITER;
+DELIMITER ;
 
 
 DROP PROCEDURE IF EXISTS pliquidateActiveLines;
-DELIMITER//
+DELIMITER //
 CREATE PROCEDURE  pliquidateActiveLines ()
 BEGIN
     
@@ -488,16 +486,36 @@ VALUES
 
 DROP VIEW  IF EXISTS vCallReport;
 CREATE VIEW vCallReport AS
-SELECT
-    ca.numberOrigin, co.nameCity as cityOrigin, ca.numberDestination, cd.nameCity as cityDestination,
-    ca.priceTotal, ca.durationInSeconds as DurationCall, ca.dateCall, pl.idUser
-FROM
-calls ca INNER JOIN cities co ON ca.idCityOrigin = co.idCity 
-    INNER JOIN cities cd ON ca.idCityDestination = cd.idCity
-    INNER JOIN phoneLines pl ON pl.numberLine = ca.numberOrigin
+    SELECT 
+        ca.numberOrigin,
+        co.nameCity AS cityOrigin,
+        ca.numberDestination,
+        cd.nameCity AS cityDestination,
+        ca.priceTotal,
+        ca.durationInSeconds AS DurationCall,
+        ca.dateCall,
+        pl.idUser
+    FROM
+        calls ca
+            INNER JOIN
+        cities co ON ca.idCityOrigin = co.idCity
+            INNER JOIN
+        cities cd ON ca.idCityDestination = cd.idCity
+            INNER JOIN
+        phoneLines pl ON pl.numberLine = ca.numberOrigin
 ;
 
+SET GLOBAL event_scheduler = ON;
+DROP EVENT IF EXISTS eLiquidateActiveLines ;
 
+CREATE EVENT eLiquidateActiveLines
+ON SCHEDULE EVERY 1 MONTH
+STARTS '2020-08-01'
+ENDS CURRENT_TIMESTAMP + INTERVAL 1 YEAR
+ON COMPLETION PRESERVE
+DO
+
+    call pliquidateActiveLines();
 
 
 
