@@ -19,34 +19,34 @@ public class ProvinceBackofficeController  {
 
     //region Constructor
     @Autowired
-<span class="nc" id="L22">    public ProvinceBackofficeController(ProvinceController provinceController) {</span>
-<span class="nc" id="L23">        this.provinceController = provinceController;</span>
-<span class="nc" id="L24">    }</span>
+<span class="fc" id="L22">    public ProvinceBackofficeController(ProvinceController provinceController) {</span>
+<span class="fc" id="L23">        this.provinceController = provinceController;</span>
+<span class="fc" id="L24">    }</span>
     //endregion
 
     //region ABM
     @PostMapping(&quot;/&quot;)
     public ResponseEntity add(@RequestBody Province newProvince){
 
-<span class="nc" id="L31">        Province p = this.provinceController.add(newProvince);</span>
-<span class="nc" id="L32">        return ResponseEntity.created(Configuration.getLocation(p)).build();</span>
+<span class="fc" id="L31">        Province p = this.provinceController.add(newProvince);</span>
+<span class="fc" id="L32">        return ResponseEntity.created(Configuration.getLocation(p)).build();</span>
 
     }
 
     @PutMapping(&quot;/{idProvince}&quot;)
     public ResponseEntity update(@RequestBody Province updatedProvince, @PathVariable Integer idProvince) throws ResourceNotFoundException {
-<span class="nc" id="L38">        Province p = this.provinceController.getById(idProvince);</span>
-<span class="nc" id="L39">        updatedProvince.setIdProvince(p.getIdProvince());</span>
-<span class="nc" id="L40">        this.provinceController.update(updatedProvince);</span>
-<span class="nc" id="L41">        return ResponseEntity.ok().build();</span>
+<span class="fc" id="L38">        Province p = this.provinceController.getById(idProvince);</span>
+<span class="fc" id="L39">        updatedProvince.setIdProvince(p.getIdProvince());</span>
+<span class="fc" id="L40">        this.provinceController.update(updatedProvince);</span>
+<span class="fc" id="L41">        return ResponseEntity.ok().build();</span>
     }
 
 
     @DeleteMapping(&quot;/{idProvince}&quot;)
     public ResponseEntity delete(@PathVariable Integer idProvince) throws ResourceNotFoundException {
-<span class="nc" id="L47">        Province p = this.provinceController.getById(idProvince);</span>
-<span class="nc" id="L48">        this.provinceController.delete(p);</span>
-<span class="nc" id="L49">        return ResponseEntity.ok().build();</span>
+<span class="fc" id="L47">        Province p = this.provinceController.getById(idProvince);</span>
+<span class="fc" id="L48">        this.provinceController.delete(p);</span>
+<span class="fc" id="L49">        return ResponseEntity.ok().build();</span>
 
     }
 
@@ -56,12 +56,12 @@ public class ProvinceBackofficeController  {
 
     //region GET
     @GetMapping(&quot;/&quot;)
-    public ResponseEntity&lt;List&lt;Province&gt;&gt; getAll(@RequestParam(required = false) String nameProvince) throws NoContentToShowException {
+    public ResponseEntity&lt;List&lt;Province&gt;&gt; getAll() throws NoContentToShowException {
 
-<span class="nc" id="L61">        List&lt;Province&gt; provinces = this.provinceController.getAll();</span>
+<span class="fc" id="L61">        List&lt;Province&gt; provinces = this.provinceController.getAll();</span>
 
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (provinces.size() &gt; 0)</span>
-<span class="nc" id="L64">            return ResponseEntity.ok().body(provinces);</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">        if (provinces.size() &gt; 0)</span>
+<span class="fc" id="L64">            return ResponseEntity.ok().body(provinces);</span>
         else{
 <span class="nc" id="L66">            throw new NoContentToShowException();</span>
         }
@@ -72,8 +72,8 @@ public class ProvinceBackofficeController  {
 
     @GetMapping(&quot;/{idProvince}&quot;)
     public ResponseEntity&lt;Province&gt; getById(@PathVariable Integer idProvince) throws ResourceNotFoundException {
-<span class="nc" id="L75">        Province p = this.provinceController.getById(idProvince);</span>
-<span class="nc" id="L76">        return ResponseEntity.ok().body(p);</span>
+<span class="fc" id="L75">        Province p = this.provinceController.getById(idProvince);</span>
+<span class="fc" id="L76">        return ResponseEntity.ok().body(p);</span>
     }
     //endregion
 

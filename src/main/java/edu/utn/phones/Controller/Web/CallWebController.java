@@ -4,6 +4,7 @@ import edu.utn.phones.Controller.Model.CallController;
 import edu.utn.phones.Domain.Call;
 import edu.utn.phones.Domain.User;
 import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
+import edu.utn.phones.Projetions.CallProjection;
 import edu.utn.phones.Session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +32,8 @@ public class CallWebController {
 
     /*Consulta de llamadas del usuario logueado por rango de fechas.*/
     @GetMapping("/")
-    public ResponseEntity<List<Call>> getCallsBetweenDates(@RequestHeader("Authorization") String token, @RequestParam(required = false, value = "from") String from, @RequestParam(required = false, value = "to") String to) throws ParseException, NoContentToShowException {
-        List<Call> calls;
+    public ResponseEntity<List<CallProjection>> getCallsBetweenDates(@RequestHeader("Authorization") String token, @RequestParam(required = false, value = "from") String from, @RequestParam(required = false, value = "to") String to) throws ParseException, NoContentToShowException {
+        List<CallProjection> calls;
 
         User loggedUser = this.sessionManager.getCurrentUser(token);
         if (from != null && to != null){
@@ -46,5 +47,12 @@ public class CallWebController {
 
 
         return ResponseEntity.ok(calls);
+    }
+
+    @GetMapping("/destinations/")
+    public ResponseEntity<List<CallProjection>> getTopDestinations(@RequestHeader("Authorization") String token){
+        User u = this.sessionManager.getCurrentUser(token);
+        List<CallProjection> list = this.callController.getTopDestinationsUser(u);
+        return  (list.size()==0)? ResponseEntity.noContent().build():ResponseEntity.ok(list);
     }
 }

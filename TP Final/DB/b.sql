@@ -10,7 +10,7 @@ inner join users ud on pd.idUser = ud.idUser
 inner join cities cd on ud.idCity = cd.idCity order by dateCall;
 
 
-/*Hacer el parse exception en la advice*/
+
 
 
 SELECT

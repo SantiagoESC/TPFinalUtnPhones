@@ -38,16 +38,6 @@ public class Call implements IUriInterface {
 
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "idLineOrigin")
-    PhoneLine lineOrigin;
-
-
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "idLineDestination")
-    PhoneLine lineDestination;
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "idCityOrigin")
     City cityOrigin;
 

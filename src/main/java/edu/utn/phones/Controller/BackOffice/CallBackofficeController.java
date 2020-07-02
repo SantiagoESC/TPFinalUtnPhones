@@ -7,6 +7,7 @@ import edu.utn.phones.Domain.User;
 import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
 import edu.utn.phones.Domain.Call;
+import edu.utn.phones.Projetions.CallProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,10 +67,10 @@ public class CallBackofficeController {
 
 
     @GetMapping("/")
-    public ResponseEntity<List<Call>> getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException, NoContentToShowException {
-        List<Call> list;
+    public ResponseEntity<List<CallProjection>> getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException, NoContentToShowException {
+        List<CallProjection> list;
         if (idUser == null){
-            list= this.callController.getAll();
+            list= this.callController.getAll2();
         }else{
             User u = this.userController.getById(idUser);
             list= this.callController.getAllByUser(u);

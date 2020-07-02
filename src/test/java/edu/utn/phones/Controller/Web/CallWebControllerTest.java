@@ -4,6 +4,7 @@ import edu.utn.phones.Controller.Model.CallController;
 import edu.utn.phones.Domain.Call;
 import edu.utn.phones.Domain.User;
 import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
+import edu.utn.phones.Projetions.CallProjection;
 import edu.utn.phones.Session.SessionManager;
 import edu.utn.phones.Utils.TestUtils;
 import org.junit.Before;
@@ -40,10 +41,10 @@ public class CallWebControllerTest {
     @Test
     public void getCallsBetweenDatesOkNoParameters() throws ParseException, NoContentToShowException {
         User test = TestUtils.createUser();
-        List<Call> listCall = TestUtils.createCallList();
+        List<CallProjection> listCall = TestUtils.createCallList();
         when(this.sessionManager.getCurrentUser(any())).thenReturn(test);
         when(this.callController.getAllByUser(test)).thenReturn(listCall);
-        ResponseEntity<List<Call>> responseEntity = this.callWebController.getCallsBetweenDates("Hola",null,null);
+        ResponseEntity<List<CallProjection>> responseEntity = this.callWebController.getCallsBetweenDates("Hola",null,null);
 
         assertEquals(ResponseEntity.ok(listCall),responseEntity);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -57,12 +58,12 @@ public class CallWebControllerTest {
     @Test
     public void getCallsBetweenDatesOkWithParameters() throws ParseException, NoContentToShowException {
         User user = TestUtils.createUser();
-        List<Call> listCall = TestUtils.createCallList();
+        List<CallProjection> listCall = TestUtils.createCallList();
         String from = "2020-10-10 00:00:00";
         String to = "2020-10-15 00:00:00";
         when(this.sessionManager.getCurrentUser(any())).thenReturn(user);
         when(this.callController.getAll(any(), any(),any())).thenReturn(listCall);
-        ResponseEntity<List<Call>> responseEntity = this.callWebController.getCallsBetweenDates("Hola",from,to);
+        ResponseEntity<List<CallProjection>> responseEntity = this.callWebController.getCallsBetweenDates("Hola",from,to);
 
         assertEquals(ResponseEntity.ok(listCall),responseEntity);
         verify(this.sessionManager,times(1)).getCurrentUser(any());

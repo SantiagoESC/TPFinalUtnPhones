@@ -3,8 +3,10 @@
 import edu.utn.phones.Domain.Call;
 import edu.utn.phones.Domain.User;
 import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
+import edu.utn.phones.Projetions.CallProjection;
 import edu.utn.phones.Service.CallService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
@@ -16,17 +18,26 @@ public class CallController extends AbstractController&lt;Call, CallService&gt; 
 
     @Autowired
     public CallController(CallService service) {
-<span class="fc" id="L19">        super(service);</span>
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L21">        super(service);</span>
+<span class="fc" id="L22">    }</span>
 
 
-    public List&lt;Call&gt; getAll(User loggedUser, LocalDateTime from, LocalDateTime to) throws NoContentToShowException {
 
-<span class="fc" id="L25">        return this.service.getAll( loggedUser,  from,  to);</span>
+    public List&lt;CallProjection&gt; getAll2() throws NoContentToShowException {
+<span class="nc" id="L27">        return this.service.getAll2() ;</span>
     }
 
-    public List&lt;Call&gt; getAllByUser(User u) throws NoContentToShowException {
-<span class="fc" id="L29">        return this.service.getAllByUser(u);</span>
+    public List&lt;CallProjection&gt; getAll(User loggedUser, LocalDateTime from, LocalDateTime to) throws NoContentToShowException {
+
+<span class="fc" id="L32">        return this.service.getAll( loggedUser,  from,  to);</span>
+    }
+
+    public List&lt;CallProjection&gt; getAllByUser(User u) throws NoContentToShowException {
+<span class="fc" id="L36">        return this.service.getAllByUser(u);</span>
+    }
+
+    public List&lt;CallProjection&gt; getTopDestinationsUser(User u) {
+<span class="nc" id="L40">        return this.service.getTopDestinationsUser(u);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

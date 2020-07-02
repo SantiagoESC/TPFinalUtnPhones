@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="edu.utn.phones.Controller.Model.AbstractControllerTest" time="0.176" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="edu.utn.phones.Controller.BackOffice.ProvinceBackofficeControllerTest" time="1.327" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -60,10 +60,13 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testAddOk" classname="edu.utn.phones.Controller.Model.AbstractControllerTest" time="0.17"/>
-  <testcase name="testGetByIdResourceNotFoundException" classname="edu.utn.phones.Controller.Model.AbstractControllerTest" time="0.001"/>
-  <testcase name="testGetByIdOk" classname="edu.utn.phones.Controller.Model.AbstractControllerTest" time="0.001"/>
-  <testcase name="testGetAll" classname="edu.utn.phones.Controller.Model.AbstractControllerTest" time="0"/>
-  <testcase name="testDeleteOk" classname="edu.utn.phones.Controller.Model.AbstractControllerTest" time="0.002"/>
-  <testcase name="testUpdateOk" classname="edu.utn.phones.Controller.Model.AbstractControllerTest" time="0.001"/>
+  <testcase name="testUpdateResourceNotFoundException" classname="edu.utn.phones.Controller.BackOffice.ProvinceBackofficeControllerTest" time="1.184"/>
+  <testcase name="testGetByIdResourceNotFoundException" classname="edu.utn.phones.Controller.BackOffice.ProvinceBackofficeControllerTest" time="0.001"/>
+  <testcase name="testGetAllNoContentToShowException" classname="edu.utn.phones.Controller.BackOffice.ProvinceBackofficeControllerTest" time="0.001"/>
+  <testcase name="testDeleteResourceNotFpundExcetion" classname="edu.utn.phones.Controller.BackOffice.ProvinceBackofficeControllerTest" time="0.001"/>
+  <testcase name="testUpdateOk" classname="edu.utn.phones.Controller.BackOffice.ProvinceBackofficeControllerTest" time="0.047"/>
+  <testcase name="testDeleteOk" classname="edu.utn.phones.Controller.BackOffice.ProvinceBackofficeControllerTest" time="0.004"/>
+  <testcase name="testGetByIdOK" classname="edu.utn.phones.Controller.BackOffice.ProvinceBackofficeControllerTest" time="0.001"/>
+  <testcase name="testGetAllOk" classname="edu.utn.phones.Controller.BackOffice.ProvinceBackofficeControllerTest" time="0.001"/>
+  <testcase name="testAddOK" classname="edu.utn.phones.Controller.BackOffice.ProvinceBackofficeControllerTest" time="0.079"/>
 </testsuite>

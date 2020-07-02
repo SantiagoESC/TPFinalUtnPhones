@@ -38,6 +38,7 @@ C:\Users\tinbu\Documents\GitHub\TPFinalUTNPhones\src\main\java\edu\utn\phones\Se
 C:\Users\tinbu\Documents\GitHub\TPFinalUTNPhones\src\main\java\edu\utn\phones\Controller\BackOffice\CityBackofficeController.java
 C:\Users\tinbu\Documents\GitHub\TPFinalUTNPhones\src\main\java\edu\utn\phones\Dto\LoginRequestDto.java
 C:\Users\tinbu\Documents\GitHub\TPFinalUTNPhones\src\main\java\edu\utn\phones\Repository\ICallRepository.java
+C:\Users\tinbu\Documents\GitHub\TPFinalUTNPhones\src\main\java\edu\utn\phones\Projetions\CallProjection.java
 C:\Users\tinbu\Documents\GitHub\TPFinalUTNPhones\src\main\java\edu\utn\phones\Controller\BackOffice\RateBackofficeController.java
 C:\Users\tinbu\Documents\GitHub\TPFinalUTNPhones\src\main\java\edu\utn\phones\Service\AbstractService.java
 C:\Users\tinbu\Documents\GitHub\TPFinalUTNPhones\src\main\java\edu\utn\phones\PhonesApplication.java

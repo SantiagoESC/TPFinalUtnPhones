@@ -4,6 +4,7 @@ import edu.utn.phones.Controller.Model.CallController;
 import edu.utn.phones.Domain.Call;
 import edu.utn.phones.Domain.User;
 import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
+import edu.utn.phones.Projetions.CallProjection;
 import edu.utn.phones.Session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,29 +24,36 @@ public class CallWebController {
     private final CallController callController;
 
     @Autowired
-<span class="fc" id="L26">    public CallWebController(SessionManager sessionManager, CallController callController) {</span>
-<span class="fc" id="L27">        this.sessionManager = sessionManager;</span>
-<span class="fc" id="L28">        this.callController = callController;</span>
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L27">    public CallWebController(SessionManager sessionManager, CallController callController) {</span>
+<span class="fc" id="L28">        this.sessionManager = sessionManager;</span>
+<span class="fc" id="L29">        this.callController = callController;</span>
+<span class="fc" id="L30">    }</span>
 
 
     /*Consulta de llamadas del usuario logueado por rango de fechas.*/
     @GetMapping(&quot;/&quot;)
-    public ResponseEntity&lt;List&lt;Call&gt;&gt; getCallsBetweenDates(@RequestHeader(&quot;Authorization&quot;) String token, @RequestParam(required = false, value = &quot;from&quot;) String from, @RequestParam(required = false, value = &quot;to&quot;) String to) throws ParseException, NoContentToShowException {
-        List&lt;Call&gt; calls;
+    public ResponseEntity&lt;List&lt;CallProjection&gt;&gt; getCallsBetweenDates(@RequestHeader(&quot;Authorization&quot;) String token, @RequestParam(required = false, value = &quot;from&quot;) String from, @RequestParam(required = false, value = &quot;to&quot;) String to) throws ParseException, NoContentToShowException {
+        List&lt;CallProjection&gt; calls;
 
-<span class="fc" id="L37">        User loggedUser = this.sessionManager.getCurrentUser(token);</span>
-<span class="pc bpc" id="L38" title="1 of 4 branches missed.">        if (from != null &amp;&amp; to != null){</span>
-<span class="fc" id="L39">            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
-<span class="fc" id="L40">            LocalDateTime fromDate = LocalDateTime.parse(from, formatter);</span>
-<span class="fc" id="L41">            LocalDateTime toDate = LocalDateTime.parse(to, formatter);</span>
-<span class="fc" id="L42">            calls = this.callController.getAll(loggedUser, fromDate,toDate);</span>
-<span class="fc" id="L43">        }else{</span>
-<span class="fc" id="L44">            calls = this.callController.getAllByUser(loggedUser);</span>
+<span class="fc" id="L38">        User loggedUser = this.sessionManager.getCurrentUser(token);</span>
+<span class="pc bpc" id="L39" title="1 of 4 branches missed.">        if (from != null &amp;&amp; to != null){</span>
+<span class="fc" id="L40">            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="fc" id="L41">            LocalDateTime fromDate = LocalDateTime.parse(from, formatter);</span>
+<span class="fc" id="L42">            LocalDateTime toDate = LocalDateTime.parse(to, formatter);</span>
+<span class="fc" id="L43">            calls = this.callController.getAll(loggedUser, fromDate,toDate);</span>
+<span class="fc" id="L44">        }else{</span>
+<span class="fc" id="L45">            calls = this.callController.getAllByUser(loggedUser);</span>
         }
 
 
-<span class="fc" id="L48">        return ResponseEntity.ok(calls);</span>
+<span class="fc" id="L49">        return ResponseEntity.ok(calls);</span>
+    }
+
+    @GetMapping(&quot;/destinations/&quot;)
+    public ResponseEntity&lt;List&lt;CallProjection&gt;&gt; getTopDestinations(@RequestHeader(&quot;Authorization&quot;) String token){
+<span class="nc" id="L54">        User u = this.sessionManager.getCurrentUser(token);</span>
+<span class="nc" id="L55">        List&lt;CallProjection&gt; list = this.callController.getTopDestinationsUser(u);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        return  (list.size()==0)? ResponseEntity.noContent().build():ResponseEntity.ok(list);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

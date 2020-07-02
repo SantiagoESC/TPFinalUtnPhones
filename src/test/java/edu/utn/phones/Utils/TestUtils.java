@@ -4,6 +4,7 @@ import edu.utn.phones.Domain.*;
 import edu.utn.phones.Domain.Enums.LineStatus;
 import edu.utn.phones.Domain.Enums.LineType;
 import edu.utn.phones.Domain.Enums.UserType;
+import edu.utn.phones.Projetions.CallProjection;
 
 import java.lang.reflect.Array;
 import java.time.LocalDate;
@@ -87,8 +88,8 @@ public class TestUtils {
     }
 
 
-    public static List<Call> createCallList(){
-        return new ArrayList<Call>();
+    public static List<CallProjection> createCallList(){
+        return new ArrayList<CallProjection>();
     }
 
 
@@ -199,5 +200,22 @@ public class TestUtils {
                 .numberOrigin("2235863214")
                 .priceTotal(new Random().nextFloat())
                 .build();
+    }
+
+    public static List<CallProjection> createCallProjectionList() {
+
+        return new ArrayList<CallProjection>();
+    }
+
+    public static Province createProvince2() {
+        Province p = Province.builder().nameProvince("Buenos Aires").idProvince(1).build();
+        return p;
+    }
+
+    public static List<Province> createProvinceList() {
+
+        List<Province> list =  new ArrayList<Province>();
+        list.add(createProvince());
+        return list;
     }
 }

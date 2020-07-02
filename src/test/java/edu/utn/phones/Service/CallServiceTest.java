@@ -5,9 +5,13 @@ import edu.utn.phones.Domain.City;
 import edu.utn.phones.Domain.Enums.UserType;
 import edu.utn.phones.Domain.User;
 import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
+import edu.utn.phones.Projetions.CallProjection;
 import edu.utn.phones.Repository.ICallRepository;
+import edu.utn.phones.Utils.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.projection.ProjectionFactory;
+import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,7 +29,7 @@ public class CallServiceTest {
 
     private ICallRepository callRepository;
     private CallService callService;
-    private List<Call> list;
+    private List<CallProjection> list;
     LocalDateTime from;
     LocalDateTime to;
 
@@ -45,59 +49,72 @@ public class CallServiceTest {
 
     @Test
     public void getAll() throws NoContentToShowException {
-        Call aux = new Call();
-        list.add(aux);
+        this.list = TestUtils.createCallProjectionList();
+        ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
+        CallProjection callProjection = factory.createProjection(CallProjection.class);
+        callProjection.setIdUser(1);
+
+        this.list.add(callProjection);
+
 
         User u = new User();
-        when(callRepository.findByLineOriginOwnerLine(u)).thenReturn(list);
-        List<Call> ans = callService.getAll(u,null,null);
+        when(callRepository.findByLineOriginOwnerLine(u.getId())).thenReturn(list);
+        List<CallProjection> ans = callService.getAll(u,null,null);
 
         assertEquals(ans,list);
         assertNotNull(ans);
-        verify(this.callRepository, times(1)).findByLineOriginOwnerLine(u);
+        verify(this.callRepository, times(1)).findByLineOriginOwnerLine(u.getId());
 
     }
 
     @Test
     public void getAllElse() throws NoContentToShowException {
-        Call aux = new Call();
-        list.add(aux);
-
+        this.list = TestUtils.createCallProjectionList();
+        ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
+        CallProjection callProjection = factory.createProjection(CallProjection.class);
+        callProjection.setIdUser(1);
+        list.add(callProjection);
         User u = new User();
-        when(callRepository.findByLineOriginOwnerLineAndDateCallBetween(u,from,to)).thenReturn(list);
-        List<Call> ans = callService.getAll(u,from,to);
+        when(callRepository.findByLineOriginOwnerLineAndDateCallBetween(u.getId(),from,to)).thenReturn(list);
+        List<CallProjection> ans = callService.getAll(u,from,to);
 
         assertEquals(ans,list);
         assertNotNull(ans);
-        verify(this.callRepository, times(1)).findByLineOriginOwnerLineAndDateCallBetween(u,from,to);
+        verify(this.callRepository, times(1)).findByLineOriginOwnerLineAndDateCallBetween(u.getId(),from,to);
 
     }
 
     @Test(expected = NoContentToShowException.class)
     public void getAllException() throws NoContentToShowException {
         User u = new User();
-        when(callRepository.findByLineOriginOwnerLineAndDateCallBetween(u,from,to)).thenReturn(list);
-        List<Call> ans = callService.getAll(u,from,to);
+        when(callRepository.findByLineOriginOwnerLineAndDateCallBetween(u.getId(),from,to)).thenReturn(list);
+        List<CallProjection> ans = callService.getAll(u,from,to);
     }
 
     @Test
     public void getAllByUser() throws NoContentToShowException {
         User u = new User(1,"asd","qwe","qwe","qwe","qwe", UserType.CLIENT,new City());
         Call aux = new Call();
-        list.add(aux);
-        when(callRepository.findByUser(1)).thenReturn(list);
-        List<Call> ans = callService.getAllByUser(u);
+        ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
+        CallProjection callProjection = factory.createProjection(CallProjection.class);
+
+
+        List<CallProjection> list2 = new ArrayList<CallProjection>();
+                list2.add(callProjection);
+        when(callRepository.findByLineOriginOwnerLine(1)).thenReturn(list2);
+        List<CallProjection> ans = callService.getAllByUser(u);
 
         assertNotNull(ans);
-        assertEquals(ans,list);
-        verify(this.callRepository, times(1)).findByUser(1);
+       assertEquals(ans,list2);
+        verify(this.callRepository, times(1)).findByLineOriginOwnerLine(1);
 
     }
 
     @Test(expected = NoContentToShowException.class)
     public void getAllByUserException() throws NoContentToShowException {
         User u = new User(1,"asd","qwe","qwe","qwe","qwe",UserType.CLIENT,new City());
-        when(callRepository.findByUser(1)).thenReturn(list);
-        List<Call> ans = callService.getAllByUser(u);
+        List<Call> as = new ArrayList<Call>();
+        when(callRepository.findByUser(1)).thenReturn(as);
+        List<CallProjection> ans = callService.getAllByUser(u);
     }
 }

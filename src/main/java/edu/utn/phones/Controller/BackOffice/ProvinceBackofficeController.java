@@ -56,7 +56,7 @@ public class ProvinceBackofficeController  {
 
     //region GET
     @GetMapping("/")
-    public ResponseEntity<List<Province>> getAll(@RequestParam(required = false) String nameProvince) throws NoContentToShowException {
+    public ResponseEntity<List<Province>> getAll() throws NoContentToShowException {
 
         List<Province> provinces = this.provinceController.getAll();
 
