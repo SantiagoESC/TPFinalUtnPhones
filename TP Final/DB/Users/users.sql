@@ -16,10 +16,12 @@ create user 'infraestructura'@'%' identified by 'infraestructura';
 grant insert  on test.calls to  'infraestructura'@'%';
 
 
-#cliente:  select de factura, llamadas 
+#cliente:  select de factura, llamadas, select limitado de users para logearse 
 
 
 create user 'cliente'@'%' identified by 'cliente';
+
+grant select(username,password) on test.users to 'cliente'@'%';
 
 grant select on test.bills to  'cliente'@'%';
 

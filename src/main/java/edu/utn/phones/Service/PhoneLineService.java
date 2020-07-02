@@ -1,6 +1,6 @@
 package edu.utn.phones.Service;
 
-import edu.utn.phones.Model.PhoneLine;
+import edu.utn.phones.Domain.PhoneLine;
 import edu.utn.phones.Repository.IPhoneLineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,8 @@
 package edu.utn.phones.Service;
 
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
-import edu.utn.phones.Model.Province;
+import edu.utn.phones.Domain.Province;
+import edu.utn.phones.Repository.IProvinceRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,7 @@ import static org.mockito.Mockito.*;
 
 public class AbstractServiceTest {
 
-    private AbstractService<Province, JpaRepository<Province,Integer>> abstractService;
+    private AbstractService<Province, IProvinceRepository> abstractService;
     private JpaRepository<Province,Integer> repository;
 
     @Before

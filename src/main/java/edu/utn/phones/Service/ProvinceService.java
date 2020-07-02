@@ -1,6 +1,6 @@
 package edu.utn.phones.Service;
 
-import edu.utn.phones.Model.Province;
+import edu.utn.phones.Domain.Province;
 import edu.utn.phones.Repository.IProvinceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

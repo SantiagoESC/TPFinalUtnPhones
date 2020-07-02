@@ -2,8 +2,10 @@ package edu.utn.phones.Controller.BackOffice;
 
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.CallController;
+import edu.utn.phones.Controller.Model.UserController;
+import edu.utn.phones.Domain.User;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
-import edu.utn.phones.Model.Call;
+import edu.utn.phones.Domain.Call;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,25 +18,19 @@ public class CallBackofficeController {
 
     //region Atributes
     private final CallController callController;
+    private final UserController userController;
     //endregion
 
     //region Constructor
     @Autowired
-    public CallBackofficeController(CallController callController) {
+    public CallBackofficeController(CallController callController, UserController userController) {
         this.callController = callController;
+        this.userController = userController;
     }
     //endregion
 
     //region ABM
-    @PostMapping("/")
 
-    public ResponseEntity add(@RequestBody Call newCall) {
-        Call ut = this.callController.add(newCall);
-
-        return ResponseEntity.created(Configuration.getLocation(ut)).build();
-
-
-    }
 
     @PutMapping("/{idCall}")
     public ResponseEntity update(@RequestBody Call updatedCall, @PathVariable Integer idCall) throws ResourceNotFoundException {
@@ -69,8 +65,15 @@ public class CallBackofficeController {
 
 
     @GetMapping("/")
-    public ResponseEntity<List<Call>> getAll(@RequestParam(required = false) String nameCall) {
-        List<Call> list = this.callController.getAll();
+    public ResponseEntity<List<Call>> getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException {
+        List<Call> list;
+        if (idUser == null){
+            list= this.callController.getAll();
+        }else{
+            User u = this.userController.getById(idUser);
+            list= this.callController.getAllByUser(u);
+        }
+
         return ResponseEntity.ok().body(list);
     }
     //endregion

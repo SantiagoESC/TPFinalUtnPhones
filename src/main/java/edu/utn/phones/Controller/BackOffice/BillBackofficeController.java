@@ -3,8 +3,10 @@ package edu.utn.phones.Controller.BackOffice;
 
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.BillController;
+import edu.utn.phones.Controller.Model.UserController;
+import edu.utn.phones.Domain.User;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
-import edu.utn.phones.Model.Bill;
+import edu.utn.phones.Domain.Bill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +19,14 @@ public class BillBackofficeController {
 
     //region Atributes
     private final BillController billController;
+    private final UserController userController;
     //endregion
 
     //region Constructor
     @Autowired
-    public BillBackofficeController(BillController billController) {
+    public BillBackofficeController(BillController billController, UserController userController) {
         this.billController = billController;
+        this.userController = userController;
     }
     //endregion
 
@@ -72,8 +76,15 @@ public class BillBackofficeController {
 
 
     @GetMapping("/")
-    public ResponseEntity<List<Bill>> getAll(@RequestParam(required = false) String nameBill){
-        List<Bill> list = this.billController.getAll();
+    public ResponseEntity<List<Bill>> getAll(@RequestParam(required = false) Integer idUser) throws ResourceNotFoundException {
+        List<Bill> list;
+        if (idUser == null){
+            User u = this.userController.getById(idUser);
+            list = this.billController.getAll(u);
+        }else {
+            list=this.billController.getAll();
+        }
+
         return ResponseEntity.ok().body(list);
     }
     //endregion

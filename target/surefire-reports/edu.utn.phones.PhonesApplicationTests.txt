@@ -1,4 +1,11 @@
 -------------------------------------------------------------------------------
 Test set: edu.utn.phones.PhonesApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.46 s - in edu.utn.phones.PhonesApplicationTests
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.829 s <<< FAILURE! - in edu.utn.phones.PhonesApplicationTests
+contextLoads  Time elapsed: 0.003 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'adviceController' defined in file [C:\Users\tinbu\Documents\GitHub\TPFinalUTNPhones\target\classes\edu\utn\phones\Controller\Advice\AdviceController.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [edu.utn.phones.Controller.Advice.AdviceController]: Constructor threw exception; nested exception is java.lang.NoClassDefFoundError: org/jacoco/agent/rt/internal_e6e56f0/Offline
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [edu.utn.phones.Controller.Advice.AdviceController]: Constructor threw exception; nested exception is java.lang.NoClassDefFoundError: org/jacoco/agent/rt/internal_e6e56f0/Offline
+Caused by: java.lang.NoClassDefFoundError: org/jacoco/agent/rt/internal_e6e56f0/Offline
+Caused by: java.lang.ClassNotFoundException: org.jacoco.agent.rt.internal_e6e56f0.Offline
+

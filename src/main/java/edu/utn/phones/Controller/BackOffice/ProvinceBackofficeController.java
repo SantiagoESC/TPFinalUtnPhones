@@ -4,7 +4,7 @@ import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.ProvinceController;
 import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
-import edu.utn.phones.Model.Province;
+import edu.utn.phones.Domain.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

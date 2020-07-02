@@ -2,7 +2,7 @@ package edu.utn.phones.Session;
 
 
 
-import edu.utn.phones.Model.User;
+import edu.utn.phones.Domain.User;
 
 import java.util.Date;
 

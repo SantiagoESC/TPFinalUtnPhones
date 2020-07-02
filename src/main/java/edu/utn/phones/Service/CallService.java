@@ -1,13 +1,12 @@
 package edu.utn.phones.Service;
 
 import edu.utn.phones.Exceptions.GeneralExceptions.NoContentToShowException;
-import edu.utn.phones.Model.Call;
-import edu.utn.phones.Model.User;
+import edu.utn.phones.Domain.Call;
+import edu.utn.phones.Domain.User;
 import edu.utn.phones.Repository.ICallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,6 +32,15 @@ public class CallService extends AbstractService<Call, ICallRepository> {
             throw new NoContentToShowException();
         }
 
+        return list;
+    }
+
+    public List<Call> getAllByUser(User u) {
+        List<Call> list= this.repository.findByUser(u.getIdUser());
+        if (list.size() == 0){
+            throw new NoContentToShowException();
+
+        }
         return list;
     }
 }

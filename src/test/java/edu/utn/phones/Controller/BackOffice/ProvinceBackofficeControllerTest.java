@@ -2,7 +2,7 @@ package edu.utn.phones.Controller.BackOffice;
 
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.ProvinceController;
-import edu.utn.phones.Model.Province;
+import edu.utn.phones.Domain.Province;
 import edu.utn.phones.Utils.TestUtils;
 import org.junit.Assert;
 import org.junit.Before;

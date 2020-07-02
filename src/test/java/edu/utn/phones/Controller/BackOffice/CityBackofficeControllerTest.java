@@ -2,7 +2,7 @@ package edu.utn.phones.Controller.BackOffice;
 
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.CityController;
-import edu.utn.phones.Model.City;
+import edu.utn.phones.Domain.City;
 import edu.utn.phones.Utils.TestUtils;
 import org.junit.Before;
 import org.junit.Test;

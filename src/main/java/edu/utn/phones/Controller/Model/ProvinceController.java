@@ -1,7 +1,7 @@
 package edu.utn.phones.Controller.Model;
 
 
-import edu.utn.phones.Model.Province;
+import edu.utn.phones.Domain.Province;
 import edu.utn.phones.Service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

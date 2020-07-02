@@ -1,12 +1,14 @@
 package edu.utn.phones.Utils;
 
-import edu.utn.phones.Iterfaces.IUriInterface;
-import edu.utn.phones.Model.City;
-import edu.utn.phones.Model.Province;
-import edu.utn.phones.Model.User;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import edu.utn.phones.Domain.Call;
+import edu.utn.phones.Domain.City;
+import edu.utn.phones.Domain.Enums.UserType;
+import edu.utn.phones.Domain.Province;
+import edu.utn.phones.Domain.User;
 
-import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class TestUtils {
 
@@ -36,8 +38,22 @@ public class TestUtils {
         return c;
     }
     public static User createUser(){
-       return   new User();
+       return   User.builder()
+               .idUser(1)
+               .firstName("Agustin").lastName("Bulzomi")
+               .username("abulzomi").password("1234")
+               .userType(UserType.EMPLOYEE)
+               .dni("42568712")
+               .city(createCity())
+               .build();
     }
+
+
+    public static List<Call> createCallList(){
+        return null;
+    }
+
+
 
 
 }

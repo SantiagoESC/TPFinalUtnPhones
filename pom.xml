@@ -69,7 +69,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -113,11 +113,11 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.5</version>
+				<version>0.7.2.201409121644</version>
 				<configuration>
 					<excludes>
 
-						<exclude>**/Model/**/*</exclude>
+						<exclude>**/Domain/**</exclude>
 						<exclude>**/Dto/**</exclude>
 						<exclude>**/Session/**</exclude>
 						<exclude>**/Configuration/**/*</exclude>
@@ -128,47 +128,23 @@
 				</configuration>
 				<executions>
 					<execution>
+						<id>default-instrument</id>
 						<goals>
-							<goal>prepare-agent</goal>
+							<goal>instrument</goal>
 						</goals>
 					</execution>
-					<!-- attached to Maven test phase -->
 					<execution>
-						<id>report</id>
-						<phase>test</phase>
+						<id>default-restore-instrumented-classes</id>
+						<goals>
+							<goal>restore-instrumented-classes</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
-					</execution>
-					<execution>
-						<id>jacoco-check</id>
-						<goals>
-							<goal>check</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<rule>
-									<element>BUNDLE</element>
-									<limits>
-										<limit>
-											<counter>INSTRUCTION</counter>
-											<value>COVEREDRATIO</value>
-											<minimum>0.01</minimum>
-										</limit>
-									</limits>
-								</rule>
-								<rule>
-									<element>BUNDLE</element>
-									<limits>
-										<limit>
-											<counter>BRANCH</counter>
-											<value>COVEREDRATIO</value>
-											<minimum>0.01</minimum>
-										</limit>
-									</limits>
-								</rule>
-							</rules>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>

@@ -1,7 +1,7 @@
 package edu.utn.phones.Controller.Model;
 
-import edu.utn.phones.Model.Call;
-import edu.utn.phones.Model.User;
+import edu.utn.phones.Domain.Call;
+import edu.utn.phones.Domain.User;
 import edu.utn.phones.Service.CallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,5 +22,9 @@ public class CallController extends AbstractController<Call, CallService> {
     public List<Call> getAll(User loggedUser, LocalDateTime from, LocalDateTime to) {
 
         return this.service.getAll( loggedUser,  from,  to);
+    }
+
+    public List<Call> getAllByUser(User u) {
+        return this.service.getAllByUser(u);
     }
 }

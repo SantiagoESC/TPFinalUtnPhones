@@ -1,6 +1,6 @@
 package edu.utn.phones.Session;
 
-import edu.utn.phones.Model.User;
+import edu.utn.phones.Domain.User;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -14,7 +14,7 @@ public class SessionManager {
 
         Map<String, Session> sessionMap = new Hashtable<>();
 
-        int sesionExpiration = 36000;
+        int sesionExpiration = 360000000;
 
         public String createSession(User user) {
             String token = UUID.randomUUID().toString();

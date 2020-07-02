@@ -1,7 +1,7 @@
 package edu.utn.phones.Controller.Model;
 
 
-import edu.utn.phones.Model.City;
+import edu.utn.phones.Domain.City;
 import edu.utn.phones.Service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

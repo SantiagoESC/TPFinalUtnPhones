@@ -1,9 +1,7 @@
 package edu.utn.phones.Service;
 
 import edu.utn.phones.Exceptions.GeneralExceptions.LoginException;
-import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
-import edu.utn.phones.Exceptions.ModelExceptions.UserNotExistsException;
-import edu.utn.phones.Model.User;
+import edu.utn.phones.Domain.User;
 import edu.utn.phones.Repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,9 @@
-edu\utn\phones\Controller\BackOffice\ProvinceWebControllerTest.class
 edu\utn\phones\PhonesApplicationTests.class
+edu\utn\phones\Controller\Web\CallWebControllerTest.class
+edu\utn\phones\Service\UserServiceTest.class
+edu\utn\phones\Controller\BackOffice\CityBackofficeControllerTest.class
+edu\utn\phones\Controller\BackOffice\ProvinceBackofficeControllerTest.class
+edu\utn\phones\Controller\Model\UserControllerTest.class
 edu\utn\phones\Utils\TestUtils.class
 edu\utn\phones\Service\AbstractServiceTest.class
-edu\utn\phones\Controller\Model\ProvinceControllerTest.class
 edu\utn\phones\Controller\Model\AbstractControllerTest.class

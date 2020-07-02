@@ -1,7 +1,7 @@
 package edu.utn.phones.Controller.Model;
 
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
-import edu.utn.phones.Model.Province;
+import edu.utn.phones.Domain.Province;
 import edu.utn.phones.Repository.IProvinceRepository;
 import edu.utn.phones.Service.AbstractService;
 import edu.utn.phones.Service.ProvinceService;

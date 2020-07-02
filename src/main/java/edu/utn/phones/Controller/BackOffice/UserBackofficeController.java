@@ -3,7 +3,7 @@ package edu.utn.phones.Controller.BackOffice;
 import edu.utn.phones.Configuration.Configuration;
 import edu.utn.phones.Controller.Model.UserController;
 import edu.utn.phones.Exceptions.GeneralExceptions.ResourceNotFoundException;
-import edu.utn.phones.Model.User;
+import edu.utn.phones.Domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
