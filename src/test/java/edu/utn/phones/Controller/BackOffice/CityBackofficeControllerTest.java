@@ -54,5 +54,12 @@ public class CityBackofficeControllerTest {
         CityBackofficeController c = new CityBackofficeController(mock(CityController.class));
     }
 
+    @Test
+    public void testUpdateOk(){
+        City c = TestUtils.createCity();
+
+
+    }
+
 
 }

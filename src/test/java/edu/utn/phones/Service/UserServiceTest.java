@@ -50,4 +50,9 @@ public class UserServiceTest {
 
 //        Mockito.verify(this.userRepository,Mockito.times(1)).findByUsernameAndPassword(any(),any());
     }
+
+    @Test
+    public void testContructor(){
+        UserService u = new UserService(mock(IUserRepository.class));
+    }
 }
