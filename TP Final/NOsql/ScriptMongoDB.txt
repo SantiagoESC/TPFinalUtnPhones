@@ -1,0 +1,292 @@
+
+db.createCollection('provinces')
+
+db.provinces.insert(
+{
+    idProvince: ObjectId("the object id"),
+    nameProvince: string
+})
+
+
+db.createCollection('cities')
+
+db.cities.insert(
+{
+    idCity: ObjectId("the object id"),
+    nameCity: string,
+    prefix: int,
+    idProvince: ObjectId("the object id"),
+    Province: {
+                  idProvince: ObjectId("the object id"),
+                  nameProvince: string
+              }
+})
+
+db.createCollection('rates')
+
+db.rates.insert(
+{
+    idRate: ObjectId("the object id"),
+    idCityOrigin: ObjectId("the object id"),
+    CityOrigin: {
+                    idCity: ObjectId("the object id"),
+                    nameCity: string,
+                    prefix: int,
+                    idProvince: ObjectId("the object id"),
+                    Province: {
+                                  idProvince: ObjectId("the object id"),
+                                  nameProvince: string
+                              }
+                },
+    idCityDestination: ObjectId("the object id"),
+    CityDestination: {
+                         idCity: ObjectId("the object id"),
+                         nameCity: string,
+                         prefix: int,
+                         idProvince: ObjectId("the object id"),
+                         Province: {
+                                       idProvince: ObjectId("the object id"),
+                                       nameProvince: string
+                                   }
+                     },
+    pricePerMinute: long
+})
+
+
+db.createCollection('users')
+
+db.users.insert(
+{
+    idUser: ObjectId("the object id"),
+    username: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    dni: string,
+    userType: ['CLIENT','EMPLOYEE'],
+    idCity: ObjectId("the object id"),
+    City: {
+               idCity: ObjectId("the object id"),
+               nameCity: string,
+               prefix: int,
+               idProvince: ObjectId("the object id"),
+               Province: {
+                             idProvince: ObjectId("the object id"),
+                             nameProvince: string
+                         }
+          }
+})
+
+
+db.createCollection('phoneLine')
+
+db.phoneLine.insert(
+{
+    idLine: ObjectId("the object id"),
+    numberLine: string,
+    typeLine: ['RESIDENTIAL', 'MOVILE'],
+    statusLine: string,
+    idUser: ObjectId("the object id"),
+    User: {
+               idUser: ObjectId("the object id"),
+               username: string,
+               password: string,
+               firstName: string,
+               lastName: string,
+               dni: string,
+               userType: ['CLIENT','EMPLOYEE'],
+               idCity: ObjectId("the object id"),
+               City: {
+                          idCity: ObjectId("the object id"),
+                          nameCity: string,
+                          prefix: int,
+                          idProvince: ObjectId("the object id"),
+                          Province: {
+                                        idProvince: ObjectId("the object id"),
+                                        nameProvince: string
+                                    }
+                     }
+          }
+})
+
+
+db.createCollection('bills')
+
+db.bills.insert(
+{
+    idBill: ObjectId("the object id"),
+    idUser: ObjectId("the object id"),
+    User: {
+               idUser: ObjectId("the object id"),
+               username: string,
+               password: string,
+               firstName: string,
+               lastName: string,
+               dni: string,
+               userType: ['CLIENT','EMPLOYEE'],
+               idCity: ObjectId("the object id"),
+               City: {
+                          idCity: ObjectId("the object id"),
+                          nameCity: string,
+                          prefix: int,
+                          idProvince: ObjectId("the object id"),
+                          Province: {
+                                        idProvince: ObjectId("the object id"),
+                                        nameProvince: string
+                                    }
+                     }
+          },
+    idPhoneLine: ObjectId("the object id"),
+    PhoneLine: {
+                    idLine: ObjectId("the object id"),
+                    numberLine: string,
+                    typeLine: ['RESIDENTIAL', 'MOVILE'],
+                    statusLine: string,
+                    idUser: ObjectId("the object id"),
+                    User: {
+                               idUser: ObjectId("the object id"),
+                               username: string,
+                               password: string,
+                               firstName: string,
+                               lastName: string,
+                               dni: string,
+                               userType: ['CLIENT','EMPLOYEE'],
+                               idCity: ObjectId("the object id"),
+                               City: {
+                                          idCity: ObjectId("the object id"),
+                                          nameCity: string,
+                                          prefix: int,
+                                          idProvince: ObjectId("the object id"),
+                                          Province: {
+                                                        idProvince: ObjectId("the object id"),
+                                                        nameProvince: string
+                                                    }
+                                     }
+                          }
+               },
+    quantityOfCalls: int,
+    totalCost: double,
+    totalPrice: double,
+    dateBill: new Date("<YYYY-mm-dd>"),
+    dateExpiration: new Date("<YYYY-mm-dd>"),
+    isPaidBill: Boolean
+})
+
+db.createCollection('calls')
+
+db.calls.insert(
+{
+    idCall: ObjectId("the object id"),
+    idBills: ObjectId("the object id"),
+    Bill: {
+           idBill: ObjectId("the object id"),
+               idUser: ObjectId("the object id"),
+               User: {
+                          idUser: ObjectId("the object id"),
+                          username: string,
+                          password: string,
+                          firstName: string,
+                          lastName: string,
+                          dni: string,
+                          userType: ['CLIENT','EMPLOYEE'],
+                          idCity: ObjectId("the object id"),
+                          City: {
+                                     idCity: ObjectId("the object id"),
+                                     nameCity: string,
+                                     prefix: int,
+                                     idProvince: ObjectId("the object id"),
+                                     Province: {
+                                                   idProvince: ObjectId("the object id"),
+                                                   nameProvince: string
+                                               }
+                                }
+                     },
+               idPhoneLine: ObjectId("the object id"),
+               PhoneLine: {
+                               idLine: ObjectId("the object id"),
+                               numberLine: string,
+                               typeLine: ['RESIDENTIAL', 'MOVILE'],
+                               statusLine: string,
+                               idUser: ObjectId("the object id"),
+                               User: {
+                                          idUser: ObjectId("the object id"),
+                                          username: string,
+                                          password: string,
+                                          firstName: string,
+                                          lastName: string,
+                                          dni: string,
+                                          userType: ['CLIENT','EMPLOYEE'],
+                                          idCity: ObjectId("the object id"),
+                                          City: {
+                                                     idCity: ObjectId("the object id"),
+                                                     nameCity: string,
+                                                     prefix: int,
+                                                     idProvince: ObjectId("the object id"),
+                                                     Province: {
+                                                                   idProvince: ObjectId("the object id"),
+                                                                   nameProvince: string
+                                                               }
+                                                }
+                                     }
+                          },
+               quantityOfCalls: int,
+               totalCost: double,
+               totalPrice: double,
+               dateBill: new Date("<YYYY-mm-dd>"),
+               dateExpiration: new Date("<YYYY-mm-dd>"),
+               isPaidBill: Boolean
+          },
+          numberOrigin: string,
+          numberDestination: string,
+          idCityOrigin: ObjectId("the object id"),
+          CityOrigin: {
+                           idCity: ObjectId("the object id"),
+                           nameCity: string,
+                           prefix: int,
+                           idProvince: ObjectId("the object id"),
+                           Province: {
+                                         idProvince: ObjectId("the object id"),
+                                         nameProvince: string
+                                     }
+                      },
+          idCityDestination: ObjectId("the object id"),
+          CityDestination: {
+                               idCity: ObjectId("the object id"),
+                               nameCity: string,
+                               prefix: int,
+                               idProvince: ObjectId("the object id"),
+                               Province: {
+                                             idProvince: ObjectId("the object id"),
+                                             nameProvince: string
+                                         }
+                           },
+          durationInSeconds: int,
+          pricePerMinute: double,
+          costPerMinute: double,
+          priceTotal: double,
+          dateCall: new Date("<YYYY-mm-dd>")
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
